@@ -1,0 +1,21 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'work-sans';
+  list-style-type: none;
+}
+
+html {
+  --pink-color: rgb(246, 65, 65);
+}
+
+@font-face {
+  font-family: 'work-sans';
+  src: url(../public/font/WorkSans-VariableFont_wght.ttf);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

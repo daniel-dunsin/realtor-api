@@ -1,0 +1,49 @@
+.custom-button {
+  padding: 12px 1.5rem;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 1rem;
+  border: none;
+  outline: none;
+  transition: background-color 300ms;
+  transition: color 300ms;
+  color: #333;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.round-button {
+  padding: 12px 2rem;
+  cursor: pointer;
+  border-radius: 20px;
+  text-align: center;
+  font-size: 1rem;
+  border: none;
+  outline: none;
+  transition: background-color 300ms;
+  transition: color 300ms;
+  color: #333;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-button:hover,
+.round-button:hover {
+  transform: scale(0.98);
+}
+
+.bg-pink {
+  background-color: var(--pink-color);
+  color: white;
+}
+
+.button-icon {
+  font-size: 1rem;
+  line-height: 1;
+  margin: 0 12px 0 0;
+}
