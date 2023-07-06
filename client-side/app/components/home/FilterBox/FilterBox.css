@@ -1,0 +1,38 @@
+.filter-box-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.8rem;
+  border-radius: 8px;
+  backdrop-filter: blur(2px);
+  background-color: rgba(165, 165, 165, 0.6);
+}
+
+.filter-box {
+  width: 100%;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 8px;
+  color: #333 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.filter-box > * {
+  width: 100%;
+  flex: 1;
+  max-width: 200px;
+}
+
+@media screen and (max-width: 700px) {
+  .filter-box {
+    flex-direction: column;
+  }
+  .filter-box > * {
+    max-width: 100%;
+    width: 100%;
+  }
+}

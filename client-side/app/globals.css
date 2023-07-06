@@ -8,6 +8,7 @@
 
 html {
   --pink-color: rgb(246, 65, 65);
+  --dark-blue-color: rgb(2, 33, 124);
 }
 
 @font-face {

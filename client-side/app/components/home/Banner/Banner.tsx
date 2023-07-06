@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from '../../ui/Button/Button';
 import Navbar from '../../ui/Navbar/Navbar';
+import FilterBox from '../FilterBox/FilterBox';
 import './Banner.css';
 
 const Banner = () => {
@@ -17,6 +18,10 @@ const Banner = () => {
           <div className='banner-buttons'>
             <Button text='Buy' />
             <Button text='Rent' bg='pink' />
+          </div>
+
+          <div className='filter-container'>
+            <FilterBox />
           </div>
         </div>
       </header>
