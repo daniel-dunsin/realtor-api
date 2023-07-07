@@ -1,0 +1,17 @@
+.title-container {
+  margin-bottom: 1rem;
+  padding-top: 1rem;
+}
+
+.title-container h1 {
+  color: #333;
+  margin-bottom: 0.4rem;
+  line-height: 1.1;
+  font-size: 1.8rem;
+  font-weight: 400;
+}
+
+.title-container p {
+  color: #333;
+  font-size: 0.95rem;
+}
