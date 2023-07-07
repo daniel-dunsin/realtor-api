@@ -22,3 +22,5 @@ export type IAmenities =
   | 'Washer'
   | 'Wi-fi'
   | 'Window Coverings';
+
+export type IOffer = 'Rent' | 'Sale';

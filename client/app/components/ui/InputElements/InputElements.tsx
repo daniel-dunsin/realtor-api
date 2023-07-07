@@ -1,11 +1,15 @@
 import { IAmenities } from '@/app/interfaces/constants.types';
+import { editSearch } from '@/app/redux/slices/searchSlice';
+import { RootState } from '@/app/redux/store';
 import React, {
+  ChangeEvent,
   InputHTMLAttributes,
   ReactElement,
   SelectHTMLAttributes,
   useState,
 } from 'react';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
+import { useDispatch, useSelector } from 'react-redux';
 
 import './InputElements.css';
 
@@ -34,13 +38,7 @@ export const Select = (props: SelectProps) => {
       <select className='custom-select' {...props}>
         <>
           {props.default && (
-            <option
-              value={props.default}
-              selected={
-                props.selected === props.default || props.selected === ''
-              }
-              disabled
-            >
+            <option value={props.default} disabled>
               {props.default}
             </option>
           )}
@@ -48,11 +46,7 @@ export const Select = (props: SelectProps) => {
 
         {props.options.map((option, index: number) => {
           return (
-            <option
-              value={option}
-              selected={props.selected === option}
-              key={index}
-            >
+            <option value={option} key={index}>
               {option}
             </option>
           );
@@ -71,6 +65,13 @@ export const PriceRange = (props: InputProps) => {
 
   const toggleSelector = () => setIsOpen(!isOpen);
 
+  const { price } = useSelector((state: RootState) => state.search);
+
+  const dispatch = useDispatch();
+
+  const editPrice = (e: ChangeEvent<HTMLInputElement>) =>
+    dispatch(editSearch({ key: 'price', value: e.target.value }));
+
   return (
     <div className='custom-price'>
       <div className='custom-input price-container' onClick={toggleSelector}>
@@ -81,12 +82,21 @@ export const PriceRange = (props: InputProps) => {
       <div className={`price-selector ${isOpen && 'isOpen'}`}>
         <div className='selector-container'>
           <header>
-            <p>$10000</p>
+            <p>$100</p>
 
             <p>$20000</p>
           </header>
 
-          <input type='range' />
+          <p>{price}</p>
+
+          <input
+            type='range'
+            value={price}
+            onChange={editPrice}
+            min={100}
+            max={20000}
+            step={10}
+          />
         </div>
       </div>
     </div>

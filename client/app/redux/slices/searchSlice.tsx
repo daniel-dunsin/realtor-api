@@ -3,6 +3,7 @@ import { ISearchSlice } from '@/app/interfaces/store.interface';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const initialState: ISearchSlice = {
+  offer: 'Sale',
   keyword: '',
   propertyType: '',
   location: '',
@@ -20,7 +21,7 @@ const searchSlice = createSlice({
   reducers: {
     editSearch: (
       state: ISearchSlice,
-      action: PayloadAction<{ key: string; value: string }>
+      action: PayloadAction<{ key: string; value: string | number }>
     ) => {
       state[action.payload.key as keyof ISearchSlice] = action.payload
         .value as never;

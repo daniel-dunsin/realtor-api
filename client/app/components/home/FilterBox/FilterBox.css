@@ -19,20 +19,44 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
+  position: relative;
 }
 
 .filter-box > * {
   width: 100%;
   flex: 1;
-  max-width: 200px;
+  max-width: 150px;
 }
 
-@media screen and (max-width: 700px) {
+.advanced-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 10px;
+  max-width: fit-content;
+  cursor: pointer;
+  position: relative;
+}
+
+.select-amenities {
+  display: none;
+}
+
+@media screen and (max-width: 900px) {
   .filter-box {
     flex-direction: column;
   }
   .filter-box > * {
     max-width: 100%;
     width: 100%;
+  }
+
+  .advanced-container i {
+    display: none;
+  }
+
+  .select-amenities {
+    display: block;
+    margin-right: auto;
   }
 }

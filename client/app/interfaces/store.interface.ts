@@ -1,6 +1,7 @@
-import { IAmenities, IPropertyType } from './constants.types';
+import { IAmenities, IOffer, IPropertyType } from './constants.types';
 
 export interface ISearchSlice {
+  offer: IOffer;
   keyword: string;
   propertyType: IPropertyType | '';
   location: string;
