@@ -1,0 +1,160 @@
+.single-property {
+  min-width: 33%;
+  max-height: 450px;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.single-property:hover {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.property-image-container {
+  width: 100%;
+  height: 50%;
+  position: relative;
+}
+
+.property-image {
+  width: 100%;
+  height: 100%;
+}
+
+.property-image img {
+  object-fit: cover;
+  object-position: center;
+  max-height: 100%;
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.property-hover-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(45, 45, 45, 0.202);
+  z-index: 6;
+  color: white;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.buttons-container {
+  display: flex;
+  align-items: center;
+}
+
+.buttons-container > * {
+  margin-right: 10px;
+  font-size: 0.8rem;
+  color: white;
+  padding: 4px 7px;
+  border-radius: 4px;
+
+  cursor: pointer;
+}
+
+.buttons-container .featured {
+  background-color: var(--blue-color);
+}
+
+.buttons-container .offer {
+  background-color: var(--pink-color);
+}
+
+.property-hover-text .price {
+  position: absolute;
+  bottom: 10px;
+  left: 1rem;
+  font-size: 1.3rem;
+}
+
+.property-hover-text .price span {
+  font-size: 0.8rem;
+}
+
+.property-hover-text .actions {
+  position: absolute;
+  bottom: 10px;
+  right: 1rem;
+  display: flex;
+  flex-direction: row;
+}
+
+.property-hover-text .actions span {
+  background-color: rgba(0, 0, 0, 0.486);
+  padding: 6px 10px;
+  font-size: 1rem;
+  border-radius: 6px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.property-details {
+  padding: 0.5rem 0;
+}
+
+.property-details .property-type {
+  color: var(--pink-color);
+  font-size: 0.95rem;
+  margin-bottom: 0.4rem;
+}
+
+.property-details h3 {
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 0.6rem;
+}
+
+.property-location span {
+  vertical-align: middle;
+  margin-right: 5px;
+
+  color: #333;
+}
+
+.property-details .rooms {
+  display: flex;
+  gap: 8px;
+  margin-top: 0.6rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1.5px solid #333;
+}
+
+.property-owner {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  color: #333;
+}
+
+.property-owner .user-image {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+.property-owner .user-image img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+}
+
+@media screen and (max-width: 900px) {
+  .single-property {
+    min-width: 47%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .single-property {
+    min-width: 96%;
+  }
+}

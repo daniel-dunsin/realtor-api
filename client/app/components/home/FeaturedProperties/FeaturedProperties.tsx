@@ -14,7 +14,7 @@ const FeaturedProperties = () => {
           align='center'
         />
 
-        <div className='grid-container'>
+        <div className='scroll-container'>
           <SingleProperty />
           <SingleProperty />
           <SingleProperty />

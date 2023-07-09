@@ -9,6 +9,7 @@
 html {
   --pink-color: rgb(246, 65, 65);
   --dark-blue-color: rgb(2, 33, 124);
+  --blue-color: rgb(32, 44, 79);
   --gray-color: rgba(244, 238, 238, 0.842);
 }
 
@@ -40,6 +41,16 @@ a {
   gap: 2rem;
 }
 
+.scroll-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: scroll;
+  gap: 1rem;
+  padding-bottom: 1rem;
+}
+
 @media screen and (max-width: 1400px) {
   .grid-container {
     display: grid;
@@ -57,6 +68,6 @@ a {
 @media screen and (max-width: 500px) {
   .grid-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(1, 1fr);
   }
 }

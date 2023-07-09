@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   padding: 1rem;
-  z-index: 5;
+  z-index: 10000;
   background-color: transparent;
   transition: 300ms;
 }
