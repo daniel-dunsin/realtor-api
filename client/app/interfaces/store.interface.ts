@@ -12,3 +12,7 @@ export interface ISearchSlice {
   yearBuilt: number;
   area: number;
 }
+
+export interface IHandler {
+  width: number;
+}

@@ -68,14 +68,7 @@ const SingleProperty = () => {
 
       <div className='property-owner'>
         <div className='user-image'>
-          <Image
-            src={'/home.jpg'}
-            alt='user'
-            width={100}
-            height={100}
-            objectFit='cover'
-            objectPosition='center'
-          />
+          <Image src={'/home.jpg'} alt='user' width={100} height={100} />
           <p>Ali turfan</p>
         </div>
 

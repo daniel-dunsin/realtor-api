@@ -82,9 +82,9 @@ const Amenities = () => {
       <div className='extra-filters'>
         <Select
           options={['1', '2', '3', '4', '5', '6', '7', '8']}
-          selected={bathrooms.toString() || ''}
+          selected={bathrooms.toString()}
           default={'Bathrooms'}
-          value={bathrooms}
+          value={bathrooms || 'Bathrooms'}
           name='bathrooms'
           onChange={select}
         />
@@ -93,7 +93,7 @@ const Amenities = () => {
           options={['1', '2', '3', '4', '5', '6', '7', '8']}
           selected={bedrooms.toString() || ''}
           default={'Bedrooms'}
-          value={bedrooms}
+          value={bedrooms || 'Bedrooms'}
           name='bedrooms'
           onChange={select}
         />
@@ -102,7 +102,7 @@ const Amenities = () => {
           options={years}
           selected={yearBuilt.toString() || ''}
           default={'Year Built'}
-          value={yearBuilt}
+          value={yearBuilt || 'Year Built'}
           name='yearBuilt'
           onChange={select}
         />

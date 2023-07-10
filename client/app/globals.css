@@ -30,6 +30,10 @@ a {
   min-height: 500px;
 }
 
+.container.light-container {
+  background-color: #f8f8f8;
+}
+
 .container > div {
   max-width: 1200px;
   margin: 0 auto;
