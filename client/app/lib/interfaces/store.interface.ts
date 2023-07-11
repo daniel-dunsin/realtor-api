@@ -1,4 +1,9 @@
+import { ReactElement, ReactNode } from 'react';
 import { IAmenities, IOffer, IPropertyType } from './constants.types';
+
+export interface IDefaultProps {
+  children?: ReactElement | ReactNode | ReactElement[];
+}
 
 export interface ISearchSlice {
   offer: IOffer;

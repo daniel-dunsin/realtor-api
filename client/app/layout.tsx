@@ -1,4 +1,5 @@
 import './globals.css';
+import { IDefaultProps } from './lib/interfaces/store.interface';
 import { ReduxProvider } from './lib/redux/provider';
 
 export const metadata = {
@@ -6,11 +7,7 @@ export const metadata = {
   description: 'Real Estate Website',
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: IDefaultProps) {
   return (
     <html lang='en'>
       <ReduxProvider>

@@ -2,11 +2,8 @@
 import { store } from './store';
 import { Provider } from 'react-redux';
 import { ReactElement } from 'react';
+import { IDefaultProps } from '../interfaces/store.interface';
 
-interface Props {
-  children: ReactElement | ReactElement[];
-}
-
-export const ReduxProvider = (props: Props) => {
+export const ReduxProvider = (props: IDefaultProps) => {
   return <Provider store={store}>{props.children}</Provider>;
 };

@@ -11,7 +11,7 @@ const SingleProperty = () => {
       <div className='property-image-container'>
         <div className='property-image'>
           <Image
-            src={'/home.jpg'}
+            src={'/images/home.jpg'}
             alt='single-property'
             width={400}
             height={400}
@@ -68,7 +68,7 @@ const SingleProperty = () => {
 
       <div className='property-owner'>
         <div className='user-image'>
-          <Image src={'/home.jpg'} alt='user' width={100} height={100} />
+          <Image src={'/images/home.jpg'} alt='user' width={100} height={100} />
           <p>Ali turfan</p>
         </div>
 

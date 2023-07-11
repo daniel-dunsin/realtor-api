@@ -47,7 +47,7 @@ const Navbar = () => {
       <div className='navbar-container'>
         <div className='navbar-brand'>
           <Image
-            src={!isActive ? '/logo-white.png' : '/logo-pink.png'}
+            src={!isActive ? '/images/logo-white.png' : '/images/logo-pink.png'}
             width={30}
             height={30}
             alt='logo'
@@ -67,8 +67,9 @@ const Navbar = () => {
                 </li>
               );
             })}
-
-            <RoundButton bg='pink' text='Login/Register' icon={<FiUser />} />
+            <Link href={'/register'}>
+              <RoundButton bg='pink' text='Join Now' icon={<FiUser />} />
+            </Link>{' '}
           </ul>
         </div>
         <i className='navbar-menu' onClick={toggleNav}>

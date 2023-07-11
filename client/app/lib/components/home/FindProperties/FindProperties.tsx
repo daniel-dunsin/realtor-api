@@ -10,20 +10,20 @@ import './FindProperties.css';
 const locations = [
   {
     text: 'Los Angeles',
-    picture: '/home.jpg',
+    picture: '/images/home.jpg',
   },
 
   {
     text: 'Miami',
-    picture: '/home.jpg',
+    picture: '/images/home.jpg',
   },
   {
     text: 'New York',
-    picture: '/home.jpg',
+    picture: '/images/home.jpg',
   },
   {
     text: 'Florida',
-    picture: '/home.jpg',
+    picture: '/images/home.jpg',
   },
 ];
 

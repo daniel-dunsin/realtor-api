@@ -9,7 +9,7 @@ const SingleArticle = () => {
       <div className='article-image-container'>
         <div className='article-image'>
           <Image
-            src={'/home.jpg'}
+            src={'/images/home.jpg'}
             alt='single-article'
             width={400}
             height={400}
@@ -25,7 +25,7 @@ const SingleArticle = () => {
 
       <div className='article-owner'>
         <div className='user-image'>
-          <Image src={'/home.jpg'} alt='user' width={100} height={100} />
+          <Image src={'/images/home.jpg'} alt='user' width={100} height={100} />
           <p>Ali turfan</p>
         </div>
 
