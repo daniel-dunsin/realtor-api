@@ -1,8 +1,8 @@
 'use client';
 
-import { IOffer } from '@/app/interfaces/constants.types';
-import { editSearch } from '@/app/redux/slices/searchSlice';
-import { RootState } from '@/app/redux/store';
+import { IOffer } from '@/app/lib/interfaces/constants.types';
+import { editSearch } from '@/app/lib/redux/slices/searchSlice';
+import { RootState } from '@/app/lib/redux/store';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '../../ui/Button/Button';

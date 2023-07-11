@@ -69,4 +69,15 @@
   .single-location {
     min-width: 98%;
   }
+
+  .locations-container {
+    all: unset;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: scroll;
+    gap: 1rem;
+    padding-bottom: 1rem;
+  }
 }

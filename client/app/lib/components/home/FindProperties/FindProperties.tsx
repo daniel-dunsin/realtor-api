@@ -1,6 +1,6 @@
 'use client';
-import { RootState } from '@/app/redux/store';
-import useWidth from '@/app/utils/useWidth';
+import { RootState } from '@/app/lib/redux/store';
+import useWidth from '@/app/lib/utils/useWidth';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -35,11 +35,7 @@ const FindProperties = () => {
       <div>
         <Title title='Find Properties in These Cities' align='center' />
 
-        <div
-          className={`${
-            width < 900 ? 'scroll-container' : 'locations-container'
-          } `}
-        >
+        <div className={`locations-container`}>
           {' '}
           {locations.map((location, index: number) => {
             return (

@@ -52,7 +52,9 @@ const Navbar = () => {
             height={30}
             alt='logo'
           />
-          <h2>Realtor</h2>
+          <h2>
+            <Link href={'/'}>Realtor</Link>
+          </h2>
         </div>
         <div className={`navbar-links-container ${isOpen && 'nav-open'}`}>
           <ul className='navbar-links'>

@@ -1,6 +1,6 @@
 'use client';
 
-import { RootState } from '@/app/redux/store';
+import { RootState } from '@/app/lib/redux/store';
 import React, { ChangeEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -13,8 +13,8 @@ import { BiDotsVertical, BiMapPin } from 'react-icons/bi';
 import './FilterBox.css';
 import { Button } from '../../ui/Button/Button';
 import Amenities from '../Amenities/Amenities';
-import { editSearch } from '@/app/redux/slices/searchSlice';
-import { propertyTypes } from '@/app/data';
+import { editSearch } from '@/app/lib/redux/slices/searchSlice';
+import { propertyTypes } from '@/app/lib/data';
 
 const FilterBox = () => {
   const search = useSelector((state: RootState) => state.search);

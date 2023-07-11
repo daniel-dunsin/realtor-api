@@ -1,10 +1,10 @@
-import { IAmenities } from '@/app/interfaces/constants.types';
+import { IAmenities } from '@/app/lib/interfaces/constants.types';
 import {
   addAmenity,
   editSearch,
   removeAmenity,
-} from '@/app/redux/slices/searchSlice';
-import { RootState } from '@/app/redux/store';
+} from '@/app/lib/redux/slices/searchSlice';
+import { RootState } from '@/app/lib/redux/store';
 import React, {
   ChangeEvent,
   ChangeEventHandler,
@@ -13,7 +13,7 @@ import React, {
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Input, Select } from '../../ui/InputElements/InputElements';
-import { amenitiesList } from '@/app/data';
+import { amenitiesList } from '@/app/lib/data';
 import './Amenities.css';
 
 const Amenities = () => {
@@ -26,7 +26,7 @@ const Amenities = () => {
 
   // To check if it has been selected
   const checkAmenity = (amenity: IAmenities) =>
-    amenities.find((ame) => ame === amenity) ? true : false;
+    amenities.find((ame: IAmenities) => ame === amenity) ? true : false;
 
   const add = (amenity: IAmenities) => dispatch(addAmenity(amenity));
 

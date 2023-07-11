@@ -1,9 +1,8 @@
-import Image from 'next/image';
-import Articles from './components/home/Articles/Articles';
-import Banner from './components/home/Banner/Banner';
-import FeaturedProperties from './components/home/FeaturedProperties/FeaturedProperties';
-import FindProperties from './components/home/FindProperties/FindProperties';
-import styles from './page.module.css';
+import Articles from './lib/components/home/Articles/Articles';
+import Banner from './lib/components/home/Banner/Banner';
+import FeaturedProperties from './lib/components/home/FeaturedProperties/FeaturedProperties';
+import FindProperties from './lib/components/home/FindProperties/FindProperties';
+import Footer from './lib/components/ui/Footer/Footer';
 
 export default function Home() {
   return (
@@ -12,6 +11,7 @@ export default function Home() {
       <FeaturedProperties />
       <FindProperties />
       <Articles />
+      <Footer />
     </>
   );
 }

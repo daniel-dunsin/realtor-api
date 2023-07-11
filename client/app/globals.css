@@ -8,9 +8,10 @@
 
 html {
   --pink-color: rgb(246, 65, 65);
-  --dark-blue-color: rgb(2, 33, 124);
+  --light-blue-color: rgb(2, 33, 124);
   --blue-color: rgb(32, 44, 79);
   --gray-color: rgba(244, 238, 238, 0.842);
+  --dark-blue-color: rgba(0, 10, 39, 0.885);
 }
 
 @font-face {

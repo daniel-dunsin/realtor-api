@@ -1,6 +1,6 @@
-import { IAmenities } from '@/app/interfaces/constants.types';
-import { editSearch } from '@/app/redux/slices/searchSlice';
-import { RootState } from '@/app/redux/store';
+import { IAmenities } from '@/app/lib/interfaces/constants.types';
+import { editSearch } from '@/app/lib/redux/slices/searchSlice';
+import { RootState } from '@/app/lib/redux/store';
 import React, {
   ChangeEvent,
   InputHTMLAttributes,

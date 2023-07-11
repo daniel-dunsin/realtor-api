@@ -1,10 +1,5 @@
 import './globals.css';
-import { Inter, Poppins } from 'next/font/google';
-import { ReduxProvider } from './redux/provider';
-const poppins = Inter({
-  weight: ['400', '200', '600'],
-  subsets: ['latin'],
-});
+import { ReduxProvider } from './lib/redux/provider';
 
 export const metadata = {
   title: 'Realtor',
@@ -19,7 +14,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <ReduxProvider>
-        <body className={poppins.className}>{children}</body>
+        <body>{children}</body>
       </ReduxProvider>
     </html>
   );
