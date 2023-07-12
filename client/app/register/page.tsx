@@ -45,6 +45,11 @@ const Register = () => {
           />
         </div>
 
+        <div className='input-checkbox'>
+          <input type='checkbox' />
+          <label htmlFor='agent'>Register as agent</label>
+        </div>
+
         <Button bg='pink' text='Create Account' />
 
         <p className='alternative'>
