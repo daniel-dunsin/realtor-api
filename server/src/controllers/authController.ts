@@ -31,7 +31,7 @@ export const register = expressAsyncHandler(
     const user = new User({
       email,
       username,
-      hashedPassword,
+      password: hashedPassword,
       role: isAgent ? 'agent' : 'client',
     });
 

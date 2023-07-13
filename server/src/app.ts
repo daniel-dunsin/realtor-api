@@ -6,6 +6,7 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import { config } from 'dotenv';
 import { errorHandler, notFound } from './utils/errorHandlers';
+import authRoutes from './routes/authRoutes';
 
 config();
 
@@ -34,6 +35,8 @@ app.get('/', (req: express.Request, res: express.Response) => {
   res.status(200).json({ message: 'Welcome to realtor API' });
 });
 
+app.use('/auth', authRoutes);
+
 /**
  * Error Handlers
  */
@@ -44,7 +47,7 @@ app.all('*', notFound);
  * Connection
  */
 
-const port: string | number | undefined = process.env.PORT || 5000;
+const port: string | number | undefined = process.env.PORT || 3001;
 
 mongoose
   .connect(process.env.DB_URL as string)

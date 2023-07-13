@@ -21,3 +21,10 @@ export interface ISearchSlice {
 export interface IHandler {
   width: number;
 }
+
+export interface IUserSlice {
+  email: string;
+  username: string;
+  password: string;
+  role: 'client' | 'admin' | 'agent' | '';
+}

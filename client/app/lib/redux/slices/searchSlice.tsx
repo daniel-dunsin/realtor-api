@@ -1,5 +1,5 @@
-import { IAmenities } from '@/app/interfaces/constants.types';
-import { ISearchSlice } from '@/app/interfaces/store.interface';
+import { IAmenities } from '@/app/lib/interfaces/constants.types';
+import { ISearchSlice } from '@/app/lib/interfaces/store.interface';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const initialState: ISearchSlice = {
