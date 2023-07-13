@@ -8,6 +8,8 @@ import { FiMenu, FiUser } from 'react-icons/fi';
 import { MdClose } from 'react-icons/md';
 
 import './Navbar.css';
+import { getUserStorage } from '@/app/lib/utils/localStorage';
+import { BiUser } from 'react-icons/bi';
 
 interface ILinks {
   title: string;
@@ -21,6 +23,8 @@ const links: ILinks[] = [
 ];
 
 const Navbar = () => {
+  const user = getUserStorage();
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isActive, setIsActive] = useState<boolean>(false);
 
@@ -67,9 +71,23 @@ const Navbar = () => {
                 </li>
               );
             })}
-            <Link href={'/register'}>
-              <RoundButton bg='pink' text='Join Now' icon={<FiUser />} />
-            </Link>{' '}
+
+            {user ? (
+              <div className='navbar-user'>
+                <span>
+                  <BiUser />
+                </span>
+                {user?.username}
+              </div>
+            ) : (
+              <Link href={'/register'}>
+                <RoundButton bg='pink' text='Join Now' icon={<FiUser />} />
+              </Link>
+            )}
+
+            {user.role === 'client' && (
+              <RoundButton bg='pink' text='Become An Agent' />
+            )}
           </ul>
         </div>
         <i className='navbar-menu' onClick={toggleNav}>

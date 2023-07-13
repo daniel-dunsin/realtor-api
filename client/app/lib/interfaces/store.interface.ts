@@ -23,6 +23,7 @@ export interface IHandler {
 }
 
 export interface IUserSlice {
+  _id: string;
   email: string;
   username: string;
   password: string;

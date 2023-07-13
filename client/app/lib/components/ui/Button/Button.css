@@ -47,3 +47,21 @@
   line-height: 1;
   margin: 0 12px 0 0;
 }
+
+button.loading {
+  background-color: rgba(246, 65, 65, 0.755);
+  font-size: 1.1rem;
+}
+
+button.loading svg {
+  animation: spin 1000ms linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

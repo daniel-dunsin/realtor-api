@@ -66,6 +66,26 @@
   color: var(--pink-color);
 }
 
+.navbar-user {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.navbar-user span {
+  display: inline-block;
+  margin-right: 6px;
+  font-size: 0.95rem;
+  color: white;
+  width: 30px;
+  height: 30px;
+  background-color: var(--pink-color);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media screen and (max-width: 800px) {
   .navbar-container {
     padding: 1rem 1.5rem;
@@ -88,7 +108,7 @@
   }
 
   .navbar-links-container.nav-open {
-    height: 200px;
+    height: 250px;
     transform: translate(0);
   }
 

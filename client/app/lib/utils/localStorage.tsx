@@ -1,3 +1,4 @@
+'use client';
 import { IUserSlice } from '../interfaces/store.interface';
 
 export const setUserStorage = (user: IUserSlice) => {

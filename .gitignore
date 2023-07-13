@@ -3,35 +3,35 @@ server/.env
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-client-side/node_modules
-client-side/.pnp
+client/node_modules
+client/.pnp
 .pnp.js
 
 # testing
-client-side/coverage
+client/coverage
 
 # next.js
-client-side/.next/
-client-side/out/
+client/.next/
+client/out/
 
 # production
-client-side/build
+client/build
 
 # misc
-client-side/.DS_Store
-client-side/*.pem
+client/.DS_Store
+client/*.pem
 
 # debug
-client-side/npm-debug.log*
-client-side/yarn-debug.log*
-client-side/yarn-error.log*
+client/npm-debug.log*
+client/yarn-debug.log*
+client/yarn-error.log*
 
 # local env files
-client-side/.env*.local
+client/.env*.local
 
 # vercel
-client-side/.vercel
+client/.vercel
 
 # typescript
-client-side/*.tsbuildinfo
-client-side/next-env.d.ts
+client/*.tsbuildinfo
+client/next-env.d.ts

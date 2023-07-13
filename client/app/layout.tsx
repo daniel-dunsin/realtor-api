@@ -12,7 +12,10 @@ export default function RootLayout({ children }: IDefaultProps) {
   return (
     <html lang='en'>
       <ReduxProvider>
-        <Toaster />
+        <Toaster
+          position='top-center'
+          toastOptions={{ style: { minWidth: '250px' } }}
+        />
         <body>{children}</body>
       </ReduxProvider>
     </html>
