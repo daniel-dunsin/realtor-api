@@ -48,3 +48,33 @@ export const register = expressAsyncHandler(
     });
   }
 );
+
+export const login = expressAsyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { credential, password } = req.body;
+
+    if (!credential || !password) {
+      return next(new CustomError('Provide email/username and password', 400));
+    }
+
+    const user = await User.findOne({
+      $or: [{ username: credential }, { email: credential }],
+    });
+
+    if (!user) {
+      return next(new CustomError('User does not exist', 404));
+    }
+
+    const isPasswordMatch = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordMatch) {
+      return next(new CustomError('Password is incorrect', 400));
+    }
+
+    const token = await user.createJWT();
+
+    const { password: pass, ...rest } = user.toObject();
+
+    res.status(200).json({ message: 'Log in Successful', user: rest, token });
+  }
+);

@@ -15,9 +15,9 @@ interface UserMethods {
   createJWT: () => Promise<string>;
 }
 
-type userModel = Model<User, {}, UserMethods>;
+type UserModel = Model<User, {}, UserMethods>;
 
-const UserSchema = new mongoose.Schema<User, userModel, UserMethods>(
+const UserSchema = new mongoose.Schema<User, UserModel, UserMethods>(
   {
     email: {
       type: String,
