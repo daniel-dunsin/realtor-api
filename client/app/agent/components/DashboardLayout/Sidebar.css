@@ -1,0 +1,82 @@
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 1.2rem 1rem;
+}
+
+.sidebar-header .brand {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  cursor: pointer;
+}
+
+.sidebar-header .brand h3 {
+  font-weight: 500;
+  font-size: 1.8rem;
+}
+
+.sidebar-header i {
+  font-size: 25px;
+  align-self: center;
+  cursor: pointer;
+  display: none;
+}
+
+.links-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin-top: 3rem;
+}
+
+.links h4 {
+  margin-bottom: 0.2rem;
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.links ul {
+  display: flex;
+  flex-direction: column;
+}
+
+.links li a,
+.extras p {
+  display: block;
+  padding: 0.8rem 1rem;
+  cursor: pointer;
+  color: #e1e0e0;
+}
+
+.links li i,
+.extras i {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+
+.links li p {
+  display: inline-block;
+}
+
+.links li:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+}
+
+.links li.isActive {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+@media screen and (max-width: 800px) {
+  .sidebar-header .brand h3 {
+    font-size: 1.1rem;
+  }
+
+  .sidebar-header i {
+    display: inline-block;
+  }
+}

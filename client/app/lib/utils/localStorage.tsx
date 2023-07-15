@@ -13,5 +13,5 @@ export const getUserStorage = (): IUserSlice => {
   return JSON.parse(localStorage.getItem('user') as string) as IUserSlice;
 };
 
-export const getTokenStorage = (): string =>
-  localStorage.getItem('token') as string;
+export const getTokenStorage = (): string | false =>
+  typeof window !== 'undefined' && (localStorage.getItem('token') as string);
