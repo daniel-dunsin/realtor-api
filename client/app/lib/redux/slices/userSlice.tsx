@@ -13,8 +13,15 @@ const initialState: IUserSlice = {
 
 const userSlice = createSlice({
   name: 'userSlice',
+
   initialState,
-  reducers: {},
+
+  reducers: {
+    updateUser: (state: IUserSlice, action: PayloadAction<IUserSlice>) => {
+      return action.payload;
+    },
+  },
+
   extraReducers: (builder) => {
     builder
       .addCase(register.fulfilled, (state: IUserSlice, action) => {
@@ -32,4 +39,5 @@ const userSlice = createSlice({
 });
 
 export const userReducer = userSlice.reducer;
-export const {} = userSlice.actions;
+
+export const { updateUser } = userSlice.actions;

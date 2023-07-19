@@ -10,6 +10,8 @@ import { MdClose } from 'react-icons/md';
 import './Navbar.css';
 import { getUserStorage } from '@/app/lib/utils/localStorage';
 import { BiUser } from 'react-icons/bi';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/app/lib/redux/store';
 
 interface ILinks {
   title: string;
@@ -23,7 +25,7 @@ const links: ILinks[] = [
 ];
 
 const Navbar = () => {
-  const user = getUserStorage();
+  const user = useSelector((state: RootState) => state.user);
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isActive, setIsActive] = useState<boolean>(false);
@@ -72,7 +74,7 @@ const Navbar = () => {
               );
             })}
 
-            {user ? (
+            {user?._id ? (
               <div className='navbar-user'>
                 <span>
                   <BiUser />
@@ -85,7 +87,7 @@ const Navbar = () => {
               </Link>
             )}
 
-            {user.role === 'client' && (
+            {user?.role === 'client' && (
               <RoundButton bg='pink' text='Become An Agent' />
             )}
           </ul>

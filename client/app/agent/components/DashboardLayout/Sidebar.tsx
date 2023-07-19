@@ -1,5 +1,7 @@
+'use client';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React, { Dispatch, ReactElement, SetStateAction } from 'react';
 import { BiComment, BiLogOut, BiMessage, BiSearch } from 'react-icons/bi';
 import { FiPlus, FiSettings } from 'react-icons/fi';
@@ -47,6 +49,8 @@ interface SidebarProps {
 }
 
 const Sidebar = (props: SidebarProps) => {
+  const router = useRouter();
+
   return (
     <div className='sidebar'>
       <header className='sidebar-header'>
@@ -78,12 +82,7 @@ const Sidebar = (props: SidebarProps) => {
               <ul>
                 {linkCategory?.links?.map((link, index) => {
                   return (
-                    <li
-                      key={index}
-                      className={`${
-                        window.location.pathname === link?.href && 'isActive'
-                      }`}
-                    >
+                    <li key={index}>
                       <Link href={link?.href}>
                         <i>{link?.icon}</i>
                         <p>{link?.text}</p>

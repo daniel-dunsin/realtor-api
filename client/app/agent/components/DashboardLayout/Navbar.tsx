@@ -1,3 +1,5 @@
+'use client';
+
 import { RoundButton } from '@/app/lib/components/ui/Button/Button';
 import Image from 'next/image';
 import React, { Dispatch, SetStateAction } from 'react';

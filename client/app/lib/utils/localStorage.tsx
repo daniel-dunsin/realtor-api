@@ -9,8 +9,11 @@ export const setTokenStorage = (token: string) => {
   localStorage.setItem('token', token);
 };
 
-export const getUserStorage = (): IUserSlice => {
-  return JSON.parse(localStorage.getItem('user') as string) as IUserSlice;
+export const getUserStorage = (): IUserSlice | false => {
+  return (
+    typeof window !== 'undefined' &&
+    (JSON.parse(localStorage.getItem('user') as string) as IUserSlice)
+  );
 };
 
 export const getTokenStorage = (): string | false =>

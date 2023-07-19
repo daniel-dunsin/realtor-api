@@ -18,6 +18,7 @@ const DashboardLayout = (props: IDefaultProps) => {
 
       <div className='right-container container light-container'>
         <Navbar setSidebarOpened={setSidebarOpened} />
+        {props?.children}
       </div>
     </section>
   );
