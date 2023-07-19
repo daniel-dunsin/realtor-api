@@ -21,7 +21,7 @@ import {
 import './Dashboard.css';
 import SmallBox from './SmallBox';
 
-export const areaChartData = [
+const areaChartData = [
   {
     day: 'Jan',
     amt: 72,
@@ -78,7 +78,7 @@ const Dashboard = () => {
       <div>
         <header className='username'>
           <h2>Howdy, Daniel Adejare</h2>
-          <p>We're glad to see you again</p>
+          <p>{"We're"} glad to see you again</p>
         </header>
 
         <div className='features-container'>

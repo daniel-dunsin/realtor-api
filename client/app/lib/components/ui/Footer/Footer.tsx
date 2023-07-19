@@ -13,8 +13,8 @@ const Footer = () => {
           <div className='footer-about-us'>
             <h2>About Us</h2>
             <p>
-              We're are reimagining how you buy sell and rent. It's now easier
-              to get a place you love. So let's do this together.
+              {"We're"} are reimagining how you buy sell and rent. {"It's"} now
+              easier to get a place you love. So {"let's"} do this together.
             </p>
           </div>
 
