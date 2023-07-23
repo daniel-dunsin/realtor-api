@@ -19,9 +19,26 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 export const Input = (props: InputProps) => {
   return (
-    <div className='custom-input-container'>
+    <div className={`custom-input-container`}>
       <input {...props} className='custom-input' />
       {props.icon && <i>{props.icon}</i>}
+    </div>
+  );
+};
+
+export interface TextareaProps
+  extends InputHTMLAttributes<HTMLTextAreaElement> {
+  height?: number;
+}
+
+export const Textarea = (props: TextareaProps) => {
+  return (
+    <div className={`custom-input-container`}>
+      <textarea
+        {...props}
+        style={{ height: props.height || '150px' }}
+        className='custom-input'
+      />
     </div>
   );
 };

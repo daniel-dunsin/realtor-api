@@ -1,4 +1,9 @@
-import { IAmenities, IPropertyType } from '../interfaces/constants.types';
+import {
+  IAmenities,
+  IPropertyType,
+  IOffer,
+  ISizeSuffix,
+} from '../interfaces/constants.types';
 
 export const propertyTypes: IPropertyType[] = [
   'Apartment',
@@ -26,3 +31,7 @@ export const amenitiesList: IAmenities[] = [
   'Wi-fi',
   'Window Coverings',
 ];
+
+export const propertyStatus: IOffer[] = ['Sale', 'Rent'];
+
+export const sizeSuffix: ISizeSuffix[] = ['sq. m', 'acre'];

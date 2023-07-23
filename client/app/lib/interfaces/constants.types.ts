@@ -24,3 +24,5 @@ export type IAmenities =
   | 'Window Coverings';
 
 export type IOffer = 'Rent' | 'Sale';
+
+export type ISizeSuffix = 'sq. m' | 'acre';

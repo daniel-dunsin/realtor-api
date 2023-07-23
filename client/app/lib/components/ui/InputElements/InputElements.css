@@ -13,6 +13,11 @@
   width: 100%;
 }
 
+textarea.custom-input {
+  height: 150px;
+  resize: none;
+}
+
 .select-container {
   border-radius: 6px;
   border: 1.5px solid lightgray;

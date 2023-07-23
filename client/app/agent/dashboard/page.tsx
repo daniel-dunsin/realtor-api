@@ -18,8 +18,9 @@ import {
   Legend,
 } from 'recharts';
 
-import './Dashboard.css';
+import './page.css';
 import SmallBox from './SmallBox';
+import Title from '../components/Title/Title';
 
 const areaChartData = [
   {
@@ -76,10 +77,10 @@ const Dashboard = () => {
   return (
     <DashboardLayout>
       <div>
-        <header className='username'>
-          <h2>Howdy, Daniel Adejare</h2>
-          <p>{"We're"} glad to see you again</p>
-        </header>
+        <Title
+          subtitle="We're glad to see your again"
+          title='Howdy, Daniel Adejare'
+        />
 
         <div className='features-container'>
           <SmallBox
