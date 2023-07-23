@@ -53,7 +53,7 @@ const Media = () => {
       >
         {files?.map((file, index) => {
           return (
-            <article>
+            <article key={index}>
               <img src={URL.createObjectURL(file.file)} alt='' />
               <footer>
                 <p>

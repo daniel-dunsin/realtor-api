@@ -11,19 +11,19 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
   bg?: string;
   icon?: ReactElement;
-  isLoading?: boolean;
+  isloading?: boolean;
 }
 
-export const Button = (props: ButtonProps) => {
+export const Button = ({ isloading, ...props }: ButtonProps) => {
   return (
     <button
       {...props}
-      disabled={props.isLoading}
+      disabled={isloading}
       className={`custom-button bg-${props.bg} ${props.className} ${
-        props.isLoading && 'loading'
+        isloading && 'loading'
       }`}
     >
-      {props.isLoading ? (
+      {isloading ? (
         <>
           <BiLoader />
         </>
@@ -38,14 +38,14 @@ export const Button = (props: ButtonProps) => {
   );
 };
 
-export const RoundButton = (props: ButtonProps) => {
+export const RoundButton = ({ isloading, ...props }: ButtonProps) => {
   return (
     <button
-      className={`round-button bg-${props?.bg} ${props.isLoading && 'loading'}`}
-      disabled={props.isLoading}
+      className={`round-button bg-${props?.bg} ${isloading && 'loading'}`}
+      disabled={isloading}
       {...props}
     >
-      {props?.isLoading ? (
+      {isloading ? (
         <>
           <BiLoader />
         </>

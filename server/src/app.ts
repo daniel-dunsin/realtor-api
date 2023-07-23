@@ -4,11 +4,9 @@ import helmet from 'helmet';
 import rateLimiter from 'express-rate-limit';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
-import { config } from 'dotenv';
-import { errorHandler, notFound } from './utils/errorHandlers';
-import authRoutes from './routes/authRoutes';
-
-config();
+import { errorHandler, notFound } from './handlers/errorHandlers';
+import { settings } from './constants/settings';
+import routes from './routes';
 
 const app: express.Application = express();
 
@@ -35,7 +33,7 @@ app.get('/', (req: express.Request, res: express.Response) => {
   res.status(200).json({ message: 'Welcome to realtor API' });
 });
 
-app.use('/auth', authRoutes);
+app.use('/auth', routes.auth);
 
 /**
  * Error Handlers
@@ -47,10 +45,10 @@ app.all('*', notFound);
  * Connection
  */
 
-const port: string | number | undefined = process.env.PORT || 3001;
+const port: string | number | undefined = settings.port || 3001;
 
 mongoose
-  .connect(process.env.DB_URL as string)
+  .connect(settings.mongo.url as string)
   .then(() => {
     app.listen(port, () => {
       console.log(`Server is listening on port ${port}`);

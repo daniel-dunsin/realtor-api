@@ -18,15 +18,15 @@ const Register = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [isAgent, setIsAgent] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isloading, setisloading] = useState<boolean>(false);
 
   const registerUser = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsLoading(true);
+    setisloading(true);
     const data = await dispatch(
       register({ username, email, password, isAgent })
     );
-    setIsLoading(false);
+    setisloading(false);
 
     if (!data?.error) {
       router.push('/');
@@ -91,7 +91,7 @@ const Register = () => {
           type='submit'
           bg='pink'
           text='Create Account'
-          isLoading={isLoading}
+          isloading={isloading}
         />
 
         <p className='alternative'>

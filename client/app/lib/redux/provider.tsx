@@ -7,7 +7,7 @@ import { IDefaultProps } from '../interfaces/store.interface';
 export const ReduxProvider = (props: IDefaultProps) => {
   return (
     <Provider store={store}>
-      <div>{props.children}</div>
+      <body>{props.children}</body>
     </Provider>
   );
 };

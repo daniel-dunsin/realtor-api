@@ -1,10 +1,12 @@
 import { Request, Response, NextFunction } from 'express';
 
 export class CustomError extends Error {
+  code: number;
+
   constructor(message: string, statusCode: number) {
     super(message);
     this.message = message;
-    (this as any).code = statusCode;
+    this.code = statusCode;
   }
 }
 

@@ -15,16 +15,16 @@ const Login = () => {
 
   const [credential, setCredential] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isloading, setisloading] = useState<boolean>(false);
 
   const loginUser = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    setIsLoading(true);
+    setisloading(true);
 
     const data = await dispatch(login({ credential, password }));
 
-    setIsLoading(false);
+    setisloading(false);
 
     if (!data?.error) {
       router.push('/');
@@ -62,7 +62,7 @@ const Login = () => {
           />
         </div>
 
-        <Button type='submit' isLoading={isLoading} bg='pink' text='Log in' />
+        <Button type='submit' isloading={isloading} bg='pink' text='Log in' />
 
         <p className='alternative'>
           Do not have an account?{' '}
