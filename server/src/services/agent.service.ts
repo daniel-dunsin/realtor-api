@@ -8,7 +8,7 @@ import { IAgent } from '../interfaces/schema/agent';
 import Agent from '../models/agent';
 import { checkUser } from './auth.service';
 
-export const becomeAgent = async (id: string): Promise<BecomeAgentRes> => {
+const createAgent = async (id: string): Promise<BecomeAgentRes> => {
   const user = await checkUser(id);
 
   if (!user) {
@@ -21,6 +21,8 @@ export const becomeAgent = async (id: string): Promise<BecomeAgentRes> => {
 
   user.role = Role.agent;
 
+  await Agent.create({ email: user.email, userId: user._id });
+
   const result = await user.save();
 
   return {
@@ -28,22 +30,25 @@ export const becomeAgent = async (id: string): Promise<BecomeAgentRes> => {
   };
 };
 
-export const updateAgent = async (data: IAgent): Promise<UpdateProfileRes> => {
-  const agent = await Agent.findOne({ userId: data?.userId });
-
-  let result;
+const updateAgent = async (data: IAgent): Promise<UpdateProfileRes> => {
+  const agent = await Agent.findOneAndUpdate({ userId: data?.userId }, data, {
+    new: true,
+    runValidators: true,
+  });
 
   if (!agent) {
-    result = await Agent.create({ ...data, email: data.email });
-  } else {
-    result = await Agent.findByIdAndUpdate(agent?._id, data, {
-      new: true,
-      runValidators: true,
-    });
+    throw new NotFoundError('Agent does not exist');
   }
 
   return {
     message: 'Profile Updated',
-    agent: result as IAgent,
+    agent: agent,
   };
 };
+
+const agentService = {
+  updateAgent,
+  createAgent,
+};
+
+export default agentService;

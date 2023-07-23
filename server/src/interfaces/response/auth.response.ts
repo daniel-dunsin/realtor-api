@@ -1,13 +1,13 @@
-import { IUser } from '../user';
+import { IUserSchema } from '../schema/auth';
 
 export interface LoginResponse {
-  user: IUser;
+  user: IUserSchema;
   token: string;
   message: string;
 }
 
 export interface SignupResponse {
-  user: IUser;
+  user: IUserSchema;
   token: string;
   message: string;
 }

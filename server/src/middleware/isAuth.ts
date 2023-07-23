@@ -3,9 +3,13 @@ import { UnAuthorizedError } from '../handlers/responseHandlers';
 import Jwt from 'jsonwebtoken';
 import { settings } from '../constants/settings';
 import { IRequest } from '../interfaces/IRequest';
-import { IUser } from '../interfaces/user';
+import { IUserSchema } from '../interfaces/schema/auth';
 
-const isAuth = async (req: IRequest, res: Response, next: NextFunction) => {
+export const isAuth = async (
+  req: IRequest,
+  res: Response,
+  next: NextFunction
+) => {
   const authHeader = req.headers['authorization'];
 
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -18,7 +22,10 @@ const isAuth = async (req: IRequest, res: Response, next: NextFunction) => {
     throw new UnAuthorizedError('Unauthorized request');
   }
 
-  const user: IUser = Jwt.verify(token, settings.jwt.secret as string) as IUser;
+  const user: IUserSchema = Jwt.verify(
+    token,
+    settings.jwt.secret as string
+  ) as IUserSchema;
 
   if (!user) {
     throw new UnAuthorizedError('Token has expired');

@@ -34,6 +34,7 @@ app.get('/', (req: express.Request, res: express.Response) => {
 });
 
 app.use('/auth', routes.auth);
+app.use('/agent', routes.agent);
 
 /**
  * Error Handlers

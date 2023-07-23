@@ -1,4 +1,4 @@
-import { NextFunction, Request } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { Role } from '../constants/role';
 import { UnAuthorizedError } from '../handlers/responseHandlers';
 import { IRequest } from '../interfaces/IRequest';
@@ -9,13 +9,13 @@ export const isAgent = async (
   res: Response,
   next: NextFunction
 ) => {
-  const user = await checkUser(req.user.email);
+  const user = await checkUser(req?.user?.email as string);
 
   if (user?.role !== Role.agent) {
     throw new UnAuthorizedError('Only agent can access this route');
   }
 
-  req.user.isAgent = true;
+  (req as any).user.isAgent = true;
 
   next();
 };

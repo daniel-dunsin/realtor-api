@@ -2,22 +2,19 @@ import { NextFunction, Request, Response } from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import { IRequest } from '../interfaces/IRequest';
 import { IAgent } from '../interfaces/schema/agent';
-import { becomeAgent, updateAgent } from '../services/agent.service';
+import agentService from '../services/agent.service';
 
-export const becomeAnAgent = expressAsyncHandler(
+export const createAgent = expressAsyncHandler(
   async (req: IRequest, res: Response, next: NextFunction) => {
-    const { id } = req.params;
+    const response = await agentService.createAgent(req?.user?._id as string);
 
-    const response = await becomeAgent(id);
-
-    res.status(200).json(response);
+    res.status(201).json(response);
   }
 );
 
 export const updateAgentProfile = expressAsyncHandler(
   async (req: IRequest, res: Response, next: NextFunction) => {
     const userId = req.user?._id as string;
-    const email = req.user?.email as string;
 
     const {
       firstname,
@@ -32,9 +29,8 @@ export const updateAgentProfile = expressAsyncHandler(
       socialMedia,
     } = req.body as IAgent;
 
-    const response = await updateAgent({
+    const response = await agentService.updateAgent({
       userId,
-      email,
       firstname,
       lastname,
       position,

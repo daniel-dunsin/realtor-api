@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 export interface IAgent {
   firstname: string;
   lastname: string;
-  email: string;
+  email?: string;
   position: string;
   license: string;
   taxNumber: number;

@@ -61,6 +61,25 @@ a {
   min-height: 100vh;
 }
 
+.modal-overlay {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-overlay .modal {
+  width: 100%;
+  max-width: 500px;
+  background-color: #f2f2f2;
+  padding: 1.4rem;
+}
+
 @media screen and (max-width: 1400px) {
   .grid-container {
     display: grid;

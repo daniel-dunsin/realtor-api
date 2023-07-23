@@ -4,12 +4,6 @@ import { IAgent } from '../interfaces/schema/agent';
 
 const agentSchema = new Schema<IAgent>(
   {
-    username: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-
     email: {
       type: String,
       required: true,
@@ -22,22 +16,22 @@ const agentSchema = new Schema<IAgent>(
 
     firstname: {
       type: String,
-      required: true,
+
       trim: true,
     },
     lastname: {
       type: String,
-      required: true,
+
       trim: true,
     },
     position: {
       type: String,
-      required: true,
+
       trim: true,
     },
     license: {
       type: String,
-      required: true,
+
       trim: true,
     },
     companyName: {
@@ -46,22 +40,22 @@ const agentSchema = new Schema<IAgent>(
     },
     address: {
       type: String,
-      required: true,
+
       trim: true,
     },
     taxNumber: {
       type: Number,
-      required: true,
+
       trim: true,
     },
     phone: {
       type: Number,
-      required: true,
+
       trim: true,
     },
     description: {
       type: String,
-      required: true,
+
       trim: true,
       minlength: [50, 'Provide at least 50 characters'],
     },
