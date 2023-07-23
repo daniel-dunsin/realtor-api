@@ -1,4 +1,4 @@
-import { Role } from '../constants/role';
+import { Role } from '../../constants/role';
 
 export interface IUserSchema {
   username: string;

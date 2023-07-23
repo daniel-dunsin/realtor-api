@@ -1,6 +1,6 @@
 import mongoose, { Model, Schema } from 'mongoose';
 import { settings } from '../constants/settings';
-import { IUserAuthSchema } from '../interfaces/schema';
+import { IUserAuthSchema } from '../interfaces/schema/auth';
 import jwt from 'jsonwebtoken';
 
 interface AuthMethods {
@@ -15,8 +15,10 @@ const userAuthSchema = new Schema<IUserAuthSchema, AuthModel, AuthMethods>(
       type: String,
       unique: true,
       required: true,
-      match:
+      match: [
         /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+        'Provide a valid email',
+      ],
     },
 
     password: {

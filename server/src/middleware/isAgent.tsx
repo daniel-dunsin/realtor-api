@@ -2,7 +2,7 @@ import { NextFunction, Request } from 'express';
 import { Role } from '../constants/role';
 import { UnAuthorizedError } from '../handlers/responseHandlers';
 import { IRequest } from '../interfaces/IRequest';
-import { checkUser } from '../services/auth';
+import { checkUser } from '../services/auth.service';
 
 export const isAgent = async (
   req: IRequest,

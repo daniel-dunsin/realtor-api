@@ -4,7 +4,7 @@ import expressAsyncHandler from 'express-async-handler';
 import { Request, Response, NextFunction } from 'express';
 import { CustomError } from '../handlers/errorHandlers';
 import bcrypt from 'bcryptjs';
-import { checkUser, loginUser, registerUser } from '../services/auth';
+import { checkUser, loginUser, registerUser } from '../services/auth.service';
 
 export const register = expressAsyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {

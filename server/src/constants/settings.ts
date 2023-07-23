@@ -11,6 +11,7 @@ export const settings = {
     collections: {
       user: collections.user,
       auth: collections.auth,
+      agent: collections.agent,
     },
   },
 

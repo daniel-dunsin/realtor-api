@@ -1,5 +1,8 @@
-import { LoginResponse, SignupResponse } from '../interfaces/response';
-import { LoginBody, SingupBody } from '../interfaces/services';
+import {
+  LoginResponse,
+  SignupResponse,
+} from '../interfaces/response/auth.response';
+import { LoginBody, SingupBody } from '../interfaces/services/auth';
 import { IUser } from '../interfaces/user';
 import User from '../models/user';
 import UserAuth from '../models/user.auth';
@@ -9,7 +12,7 @@ import { Role } from '../constants/role';
 
 export const checkUser = async (credential: string): Promise<IUser | null> => {
   const user = await User.findOne({
-    $or: [{ email: credential }, { username: credential }],
+    $or: [{ email: credential }, { username: credential }, { _id: credential }],
   });
 
   return user;
