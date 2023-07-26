@@ -18,7 +18,7 @@ export default function RootLayout({ children }: IDefaultProps) {
             position='top-center'
             toastOptions={{ style: { minWidth: '250px' } }}
           />
-          <body>{children}</body>
+          {children}
         </AppContainer>
       </ReduxProvider>
     </html>

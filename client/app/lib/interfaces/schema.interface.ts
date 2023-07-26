@@ -1,16 +1,16 @@
-import mongoose from 'mongoose';
+import { IUserSlice } from './store.interface';
 
 export interface IAgent {
   username?: string;
   firstname: string;
   lastname: string;
   email?: string;
+  imageUrl?: string;
   position: string;
   license: string;
   taxNumber: number;
   phone: number;
   companyName: string;
-  imageUrl: string;
   address: string;
   description: string;
   socialMedia: {
@@ -23,7 +23,7 @@ export interface IAgent {
     youtube: string;
     linkedin: string;
   };
-  userId?: mongoose.Types.ObjectId | string;
+  userId?: string | IUserSlice;
   createdAt?: Date;
   updatedAt?: Date;
 }

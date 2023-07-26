@@ -4,11 +4,16 @@ import { IAgent } from '../interfaces/schema/agent';
 
 const agentSchema = new Schema<IAgent>(
   {
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     email: {
       type: String,
       required: true,
       unique: true,
-      mathch: [
+      match: [
         /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
         'Provide a valid email',
       ],
@@ -41,6 +46,10 @@ const agentSchema = new Schema<IAgent>(
     address: {
       type: String,
 
+      trim: true,
+    },
+    imageUrl: {
+      type: String,
       trim: true,
     },
     taxNumber: {

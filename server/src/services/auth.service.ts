@@ -10,13 +10,20 @@ import { BadRequestError, NotFoundError } from '../handlers/responseHandlers';
 import { Role } from '../constants/role';
 import { IUserSchema } from '../interfaces/schema/auth';
 import agentService from './agent.service';
+import Agent from '../models/agent';
 
 export const checkUser = async (
   credential: string
 ): Promise<IUserSchema | null> => {
   const user = await User.findOne({
-    $or: [{ email: credential }, { username: credential }, { _id: credential }],
+    $or: [{ email: credential }, { username: credential }],
   });
+
+  return user;
+};
+
+export const getUserById = async (id: string): Promise<IUserSchema | null> => {
+  const user = await User.findById(id);
 
   return user;
 };
@@ -89,7 +96,11 @@ export const registerUser = async ({
   // if isAgent, create an agent profile
 
   if (isAgent) {
-    await agentService.createAgent(user._id);
+    const agent = await Agent.create({
+      email: user.email,
+      userId: user._id,
+      username: user.username,
+    });
   }
 
   const token = userAuthInstance.createJWT();

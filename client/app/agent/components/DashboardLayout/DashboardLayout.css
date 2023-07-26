@@ -9,6 +9,7 @@
   max-width: 300px;
   background-color: var(--blue-color);
   min-height: 100vh;
+  max-height: 100vh;
   color: white;
   overflow-y: scroll;
   position: fixed;

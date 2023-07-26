@@ -17,7 +17,7 @@ const AppContainer = (props: IDefaultProps) => {
     }
   }, [user]);
 
-  return props.children;
+  return <>{props.children}</>;
 };
 
 export default AppContainer;

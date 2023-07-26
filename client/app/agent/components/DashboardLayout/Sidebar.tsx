@@ -3,7 +3,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { Dispatch, ReactElement, SetStateAction } from 'react';
-import { BiComment, BiLogOut, BiMessage, BiSearch } from 'react-icons/bi';
+import {
+  BiComment,
+  BiLogOut,
+  BiMessage,
+  BiSearch,
+  BiUserCircle,
+} from 'react-icons/bi';
 import { FiPlus, FiSettings } from 'react-icons/fi';
 import { MdCancel, MdClose, MdDashboard, MdHouse } from 'react-icons/md';
 
@@ -31,6 +37,7 @@ const links: ILinkCat[] = [
         icon: <FiPlus />,
       },
       { href: '/agent/message', text: 'Message', icon: <BiMessage /> },
+      { href: '/agent/profile', text: 'Edit Profile', icon: <BiUserCircle /> },
     ],
   },
 

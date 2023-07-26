@@ -1,12 +1,21 @@
 import { NextFunction, Request, Response } from 'express';
 import expressAsyncHandler from 'express-async-handler';
+import { uploadToCloud } from '../config/cloudinary.config';
 import { IRequest } from '../interfaces/IRequest';
 import { IAgent } from '../interfaces/schema/agent';
 import agentService from '../services/agent.service';
 
+export const getProfile = expressAsyncHandler(
+  async (req: IRequest, res: Response, next: NextFunction) => {
+    const response = await agentService.getProfile(req?.user?._id as string);
+
+    res.status(200).json({ agent: response });
+  }
+);
+
 export const createAgent = expressAsyncHandler(
   async (req: IRequest, res: Response, next: NextFunction) => {
-    const response = await agentService.createAgent(req?.user?._id as string);
+    const response = await agentService.createAgent(req?.user?.email as string);
 
     res.status(201).json(response);
   }
@@ -16,31 +25,16 @@ export const updateAgentProfile = expressAsyncHandler(
   async (req: IRequest, res: Response, next: NextFunction) => {
     const userId = req.user?._id as string;
 
-    const {
-      firstname,
-      lastname,
-      position,
-      license,
-      companyName,
-      address,
-      taxNumber,
-      phone,
-      description,
-      socialMedia,
-    } = req.body as IAgent;
+    const path = (req as any)?.file?.path;
+
+    const imageUrl = await uploadToCloud(path);
+
+    const body = req.body as IAgent;
 
     const response = await agentService.updateAgent({
       userId,
-      firstname,
-      lastname,
-      position,
-      license,
-      companyName,
-      address,
-      taxNumber,
-      phone,
-      description,
-      socialMedia,
+      ...body,
+      imageUrl,
     });
 
     res.status(200).json(response);

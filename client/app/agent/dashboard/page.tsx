@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BiHeart, BiHome } from 'react-icons/bi';
 import { FiEye } from 'react-icons/fi';
 import DashboardLayout from '../components/DashboardLayout/DashboardLayout';
@@ -21,6 +21,10 @@ import {
 import './page.css';
 import SmallBox from './SmallBox';
 import Title from '../components/Title/Title';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/app/lib/redux/store';
+import { getUserStorage } from '@/app/lib/utils/localStorage';
+import { getProfile } from '@/app/lib/redux/thunks/agentThunk';
 
 const areaChartData = [
   {
@@ -74,12 +78,17 @@ const areaChartData = [
 ];
 
 const Dashboard = () => {
+  const agent = useSelector((state: RootState) => state.agent);
+  const user = getUserStorage();
+
   return (
     <DashboardLayout>
       <div>
         <Title
           subtitle="We're glad to see your again"
-          title='Howdy, Daniel Adejare'
+          title={`Howdy${
+            agent?.firstname ? `, ${agent?.firstname} ${agent.lastname}` : ''
+          }`}
         />
 
         <div className='features-container'>

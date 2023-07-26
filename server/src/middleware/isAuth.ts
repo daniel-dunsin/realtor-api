@@ -4,6 +4,7 @@ import Jwt from 'jsonwebtoken';
 import { settings } from '../constants/settings';
 import { IRequest } from '../interfaces/IRequest';
 import { IUserSchema } from '../interfaces/schema/auth';
+import User from '../models/user';
 
 export const isAuth = async (
   req: IRequest,
@@ -13,13 +14,15 @@ export const isAuth = async (
   const authHeader = req.headers['authorization'];
 
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    throw new UnAuthorizedError('Invalid token format. Use `Bearer {token}`');
+    return next(
+      new UnAuthorizedError('Invalid token format. Use `Bearer {token}`')
+    );
   }
 
   const token = authHeader.split(' ')[1];
 
   if (!token) {
-    throw new UnAuthorizedError('Unauthorized request');
+    return next(new UnAuthorizedError('Unauthorized request'));
   }
 
   const user: IUserSchema = Jwt.verify(
@@ -28,11 +31,15 @@ export const isAuth = async (
   ) as IUserSchema;
 
   if (!user) {
-    throw new UnAuthorizedError('Token has expired');
+    return next(new UnAuthorizedError('Token has expired'));
   }
 
+  const mainUserInfo: IUserSchema = (await User.findOne({
+    email: user.email,
+  })) as IUserSchema;
+
   req.user = {
-    _id: user._id,
+    _id: mainUserInfo?._id as string,
     email: user.email,
   };
 

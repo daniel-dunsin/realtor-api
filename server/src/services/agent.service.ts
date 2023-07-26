@@ -6,13 +6,19 @@ import {
 } from '../interfaces/response/agent.response';
 import { IAgent } from '../interfaces/schema/agent';
 import Agent from '../models/agent';
-import { checkUser } from './auth.service';
+import { checkUser, getUserById } from './auth.service';
 
-const createAgent = async (id: string): Promise<BecomeAgentRes> => {
-  const user = await checkUser(id);
+const getProfile = async (id: string): Promise<IAgent> => {
+  const agent = await Agent.findOne({ userId: id });
+
+  return agent as IAgent;
+};
+
+const createAgent = async (email: string): Promise<BecomeAgentRes> => {
+  const user = await checkUser(email);
 
   if (!user) {
-    throw new NotFoundError('User does not exists');
+    throw new NotFoundError('User does not exist');
   }
 
   if (user.role === Role.agent) {
@@ -21,7 +27,13 @@ const createAgent = async (id: string): Promise<BecomeAgentRes> => {
 
   user.role = Role.agent;
 
-  await Agent.create({ email: user.email, userId: user._id });
+  const agent = await Agent.create({
+    email: user.email,
+    userId: user._id,
+    username: user.username,
+  });
+
+  console.log(agent);
 
   const result = await user.save();
 
@@ -49,6 +61,7 @@ const updateAgent = async (data: IAgent): Promise<UpdateProfileRes> => {
 const agentService = {
   updateAgent,
   createAgent,
+  getProfile,
 };
 
 export default agentService;
