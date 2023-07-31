@@ -41,9 +41,11 @@ export const Button = ({ isloading, ...props }: ButtonProps) => {
 export const RoundButton = ({ isloading, ...props }: ButtonProps) => {
   return (
     <button
-      className={`round-button bg-${props?.bg} ${isloading && 'loading'}`}
-      disabled={isloading}
       {...props}
+      className={`round-button bg-${props?.bg} ${isloading && 'loading'} ${
+        props.className
+      }`}
+      disabled={isloading}
     >
       {isloading ? (
         <>

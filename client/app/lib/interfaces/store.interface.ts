@@ -34,3 +34,12 @@ export interface IUserSlice {
 }
 
 export interface IAgentSlice extends IAgent {}
+
+export interface IHandlersSlice {
+  confirmationModal: {
+    text: string;
+    isOpen: boolean;
+    subtitle?: string;
+    confirm(): void;
+  };
+}

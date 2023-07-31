@@ -11,7 +11,13 @@ import {
   BiUserCircle,
 } from 'react-icons/bi';
 import { FiPlus, FiSettings } from 'react-icons/fi';
-import { MdCancel, MdClose, MdDashboard, MdHouse } from 'react-icons/md';
+import {
+  MdCancel,
+  MdClose,
+  MdCreate,
+  MdDashboard,
+  MdHouse,
+} from 'react-icons/md';
 
 import './Sidebar.css';
 
@@ -45,6 +51,7 @@ const links: ILinkCat[] = [
     category: 'Manage Listings',
     links: [
       { href: '/agent/properties', text: 'My Properties', icon: <MdHouse /> },
+      { href: '/agent/listings', text: 'My Listings', icon: <MdCreate /> },
       { href: '/agent/reviews', text: 'My Reviews', icon: <BiComment /> },
       { href: '/agent/favourites', text: 'My Favourites', icon: <BiSearch /> },
     ],

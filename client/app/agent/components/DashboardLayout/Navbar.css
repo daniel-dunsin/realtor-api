@@ -30,7 +30,7 @@
 }
 
 @media screen and (max-width: 800px) {
-  button {
+  .listing-button {
     display: none !important;
   }
 

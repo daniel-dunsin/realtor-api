@@ -2,6 +2,7 @@
 
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import ConfirmationModal from './components/ui/ConfirmationModal/ConfirmationModal';
 import { IDefaultProps, IUserSlice } from './interfaces/store.interface';
 import { updateUser } from './redux/slices/userSlice';
 import { getUserStorage } from './utils/localStorage';
@@ -17,7 +18,12 @@ const AppContainer = (props: IDefaultProps) => {
     }
   }, [user]);
 
-  return <>{props.children}</>;
+  return (
+    <>
+      <ConfirmationModal />
+      {props.children}
+    </>
+  );
 };
 
 export default AppContainer;

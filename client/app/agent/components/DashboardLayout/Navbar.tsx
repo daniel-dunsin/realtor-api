@@ -4,6 +4,7 @@ import { RoundButton } from '@/app/lib/components/ui/Button/Button';
 import { IUserSlice } from '@/app/lib/interfaces/store.interface';
 import { getUserStorage } from '@/app/lib/utils/localStorage';
 import Image from 'next/image';
+import Link from 'next/link';
 import React, { Dispatch, SetStateAction } from 'react';
 import { BiMenu, BiPlus } from 'react-icons/bi';
 
@@ -23,7 +24,14 @@ const Navbar = (props: NavbarProps) => {
         <h3>{user?.username}</h3>
       </div>
 
-      <RoundButton text='Create Listing' icon={<BiPlus />} bg='pink' />
+      <Link href={'/agent/create-listing'}>
+        <RoundButton
+          text='Create Listing'
+          className='listing-button'
+          icon={<BiPlus />}
+          bg='pink'
+        />
+      </Link>
 
       <div className='menu' onClick={() => props.setSidebarOpened(true)}>
         <BiMenu />
