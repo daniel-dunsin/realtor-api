@@ -7,6 +7,10 @@
   justify-content: center;
 }
 
+.properties-container .buttons-container {
+  gap: 0rem;
+}
+
 .properties-container .single-property {
   max-width: 350px !important;
 }

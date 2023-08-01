@@ -43,3 +43,8 @@ export interface IHandlersSlice {
     confirm(): void;
   };
 }
+
+export interface IListingSlice {
+  lisitings: [];
+  search: {};
+}

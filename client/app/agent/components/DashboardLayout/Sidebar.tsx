@@ -53,7 +53,6 @@ const links: ILinkCat[] = [
       { href: '/agent/properties', text: 'My Properties', icon: <MdHouse /> },
       { href: '/agent/listings', text: 'My Listings', icon: <MdCreate /> },
       { href: '/agent/reviews', text: 'My Reviews', icon: <BiComment /> },
-      { href: '/agent/favourites', text: 'My Favourites', icon: <BiSearch /> },
     ],
   },
 ];
