@@ -1,4 +1,4 @@
-import { NotFoundError } from "../handlers/responseHandlers";
+import { BadRequestError, NotFoundError } from "../handlers/responseHandlers";
 import { paginate } from "../helpers/paginate";
 import {
   ICreateListingRes,
@@ -127,12 +127,45 @@ const deleteListing = async (owner: string, _id: string): Promise<void> => {
   }
 };
 
+const compareProperties = async (ids: string[]): Promise<any> => {
+  if (ids?.length < 2) {
+    throw new BadRequestError("Provide more than one property for comparison");
+  }
+
+  const query = ids?.map((id) => ({ _id: id }));
+
+  const listings = await Property.find({ $or: query });
+
+  if (!listings || listings?.length < 2) {
+    throw new NotFoundError("Some properties do not exist");
+  }
+
+  const keys: string[] = [];
+
+  Object.keys(listings[0].toObject()).forEach((key) => keys.push(key));
+  console.log(keys);
+
+  const comparison: any = {};
+
+  // intialize comparison
+  keys.forEach((key) => (comparison[key] = []));
+
+  listings.forEach((listing) => {
+    keys.forEach((key: string) => {
+      comparison[key].push(listing?.[key as keyof typeof listing]);
+    });
+  });
+
+  return comparison;
+};
+
 const listingService = {
   createListing,
   getListings,
   getSingleListing,
   updateListing,
   deleteListing,
+  compareProperties,
 };
 
 export default listingService;

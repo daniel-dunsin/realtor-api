@@ -7,3 +7,9 @@ export interface ICreateArticleBody {
   author?: string;
   tags: string[];
 }
+
+export interface ICreateArticleCommentBody {
+  text: string;
+  article: string;
+  writer: string;
+}

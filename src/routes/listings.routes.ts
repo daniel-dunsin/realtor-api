@@ -2,6 +2,7 @@ import { Router } from "express";
 import { isAuth } from "../middleware/isAuth";
 import { isAgent } from "../middleware/isAgent";
 import {
+  compareProperties,
   createListing,
   deleteListing,
   getAllListings,
@@ -26,5 +27,7 @@ router
 router.route("/").get(getAllListings);
 
 router.route("/:id").get(getSingleListing);
+
+router.route("/compare").post(compareProperties);
 
 export default router;

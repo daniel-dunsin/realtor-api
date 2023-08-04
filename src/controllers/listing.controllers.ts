@@ -204,3 +204,13 @@ export const getSingleListing = expressAsyncHandler(
       .json({ message: "Listing fetched successfully", data: listing });
   }
 );
+
+export const compareProperties = expressAsyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { ids } = req.body;
+
+    const result = await listingService.compareProperties(ids);
+
+    res.status(200).json({ message: "Comparison successful", data: result });
+  }
+);
