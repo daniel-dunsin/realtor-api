@@ -13,6 +13,8 @@ export const settings = {
       auth: collections.auth,
       agent: collections.agent,
       property: collections.property,
+      article: collections.article,
+      comment: collections.comment,
     },
   },
 

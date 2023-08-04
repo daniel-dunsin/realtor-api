@@ -26,3 +26,9 @@ export type IPropertyAmenity =
   | "Window Coverings";
 
 export type IAreaSuffix = "sq.m" | "acre";
+
+export type IArticleCategory =
+  | "construction"
+  | "business"
+  | "apartment"
+  | "sales";

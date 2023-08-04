@@ -38,6 +38,8 @@ app.get("/", (req: express.Request, res: express.Response) => {
 app.use("/auth", routes.auth);
 app.use("/agent", routes.agent);
 app.use("/listing", routes.listings);
+app.use("/article", routes.articles);
+app.use("/comment", routes.comments);
 
 /**
  * Error Handlers

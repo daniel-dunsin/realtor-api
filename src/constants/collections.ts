@@ -3,4 +3,6 @@ export enum collections {
   user = "user",
   agent = "agent",
   property = "property",
+  article = "article",
+  comment = "comment",
 }

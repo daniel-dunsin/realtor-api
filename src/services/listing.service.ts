@@ -68,7 +68,7 @@ const getSingleListing = async (
     throw new NotFoundError("Property does not exists");
   }
 
-  if (property.owner._id.toString() !== viewer) {
+  if (property.owner?._id.toString() !== viewer) {
     property.views += 1;
     await property.save();
   }

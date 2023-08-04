@@ -95,10 +95,10 @@ export const updateListing = expressAsyncHandler(
 
 export const deleteListing = expressAsyncHandler(
   async (req: IRequest, res: Response, next: NextFunction) => {
-    const owner = req.user?._id as string;
+    const owner = await agentService.getProfile(req.user?._id);
     const _id = req.params.id;
 
-    await listingService.deleteListing(owner, _id);
+    await listingService.deleteListing(owner._id as string, _id);
 
     res.status(200).json({ message: "Listing deleted successfully" });
   }
@@ -170,6 +170,11 @@ export const getAllListings = expressAsyncHandler(
 
     if (status && (status === "rent" || status === "sale")) {
       query.status = (status as string).toLowerCase();
+    }
+
+    if (amenities) {
+      const allAmenities = (amenities as string).split(",");
+      query.amenities = { $in: allAmenities };
     }
 
     const listings = await listingService.getListings(
