@@ -1,7 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 import { settings } from "../constants/settings";
 import { Role } from "../constants/role";
-import { IUserSchema } from "../interfaces/schema/auth";
+import { IUserSchema } from "../interfaces/schema/auth.schema";
 
 const UserSchema = new Schema<IUserSchema>(
   {

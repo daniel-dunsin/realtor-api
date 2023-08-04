@@ -1,6 +1,6 @@
 import mongoose, { Schema, Types } from "mongoose";
 import { settings } from "../constants/settings";
-import { IAgent } from "../interfaces/schema/agent";
+import { IAgent } from "../interfaces/schema/agent.schema";
 
 const agentSchema = new Schema<IAgent>(
   {

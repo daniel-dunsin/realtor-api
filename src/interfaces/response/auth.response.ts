@@ -1,4 +1,4 @@
-import { IUserSchema } from '../schema/auth';
+import { IUserSchema } from "../schema/auth.schema";
 
 export interface LoginResponse {
   user: IUserSchema;

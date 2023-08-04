@@ -1,5 +1,5 @@
 import mongoose, { Types } from "mongoose";
-import { IProperty } from "../interfaces/schema/property";
+import { IProperty } from "../interfaces/schema/property.schema";
 import { IPropertyAmenity } from "../interfaces/constant";
 import { settings } from "../constants/settings";
 

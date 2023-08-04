@@ -4,8 +4,8 @@ import {
   BecomeAgentRes,
   UpdateProfileRes,
 } from "../interfaces/response/agent.response";
-import { IAgent } from "../interfaces/schema/agent";
-import Agent from "../models/agent";
+import { IAgent } from "../interfaces/schema/agent.schema";
+import Agent from "../models/agent.model";
 import { checkUser, getUserById } from "./auth.service";
 
 const getProfile = async (id?: string): Promise<IAgent> => {

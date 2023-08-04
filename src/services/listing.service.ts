@@ -4,9 +4,9 @@ import {
   ICreateListingRes,
   IGetListingsRes,
 } from "../interfaces/response/listing.response";
-import { IProperty } from "../interfaces/schema/property";
-import { CreateListingBody } from "../interfaces/services/listing";
-import Property from "../models/property";
+import { IProperty } from "../interfaces/schema/property.schema";
+import { CreateListingBody } from "../interfaces/services/listing.body";
+import Property from "../models/property.model";
 
 const createListing = async (
   body: CreateListingBody

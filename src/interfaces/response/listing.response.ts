@@ -1,4 +1,4 @@
-import { IProperty } from "../schema/property";
+import { IProperty } from "../schema/property.schema";
 
 export interface ICreateListingRes {
   message: "Property listing created successully";

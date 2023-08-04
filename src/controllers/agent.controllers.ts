@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import expressAsyncHandler from "express-async-handler";
 import { uploadToCloud } from "../config/cloudinary.config";
 import { IRequest } from "../interfaces/IRequest";
-import { IAgent } from "../interfaces/schema/agent";
+import { IAgent } from "../interfaces/schema/agent.schema";
 import agentService from "../services/agent.service";
 
 export const getProfile = expressAsyncHandler(

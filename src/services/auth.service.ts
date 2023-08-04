@@ -2,15 +2,15 @@ import {
   LoginResponse,
   SignupResponse,
 } from "../interfaces/response/auth.response";
-import { LoginBody, SingupBody } from "../interfaces/services/auth";
-import User from "../models/user";
-import UserAuth from "../models/user.auth";
+import { LoginBody, SingupBody } from "../interfaces/services/auth.body";
+import User from "../models/user.model";
+import UserAuth from "../models/user.auth.model";
 import bcrypt from "bcryptjs";
 import { BadRequestError, NotFoundError } from "../handlers/responseHandlers";
 import { Role } from "../constants/role";
-import { IUserSchema } from "../interfaces/schema/auth";
+import { IUserSchema } from "../interfaces/schema/auth.schema";
 import agentService from "./agent.service";
-import Agent from "../models/agent";
+import Agent from "../models/agent.model";
 
 export const checkUser = async (
   credential: string
