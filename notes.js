@@ -1,1 +1,1 @@
-// work on reviews, biddings and articles
+// work on reviews, and client dashboards endpoints

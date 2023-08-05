@@ -29,6 +29,7 @@ export interface IProperty {
   };
   amenities: IPropertyAmenity[];
   images: string[];
+  isAvailable: boolean;
   owner: any;
   views: 0;
   createdAt?: Date;

@@ -126,7 +126,7 @@ export const getAllListings = expressAsyncHandler(
     const minPrice = parseInt(min_price as string) || 0;
     const maxPrice = parseInt(max_price as string);
 
-    const query: any = {};
+    const query: any = { isAvailable: true };
 
     if (keyword) {
       query.title = { $regex: keyword, $options: "i" };

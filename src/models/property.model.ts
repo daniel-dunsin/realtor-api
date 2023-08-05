@@ -54,7 +54,7 @@ export const PropertySchema = new mongoose.Schema<IProperty>(
       garages: { type: Number, default: 0 },
       yearBuilt: { type: String, required: true },
     },
-
+    isAvailable: { type: Boolean, default: true },
     amenities: [{ type: String, enum: amenities }],
     images: { type: [{ type: String }], minlength: 1 },
     views: { type: Number, default: 0 },

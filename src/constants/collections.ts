@@ -5,4 +5,5 @@ export enum collections {
   property = "property",
   article = "article",
   comment = "comment",
+  review = "review",
 }

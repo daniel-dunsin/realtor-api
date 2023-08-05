@@ -15,6 +15,7 @@ export const settings = {
       property: collections.property,
       article: collections.article,
       comment: collections.comment,
+      review: collections.review,
     },
   },
 
