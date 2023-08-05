@@ -120,3 +120,11 @@ export const registerUser = async ({
     token,
   };
 };
+
+export const getUser = async (id: string): Promise<IUserSchema> => {
+  const user = await User.findById(id);
+
+  if (!user) throw new NotFoundError("user does not exist");
+
+  return user;
+};

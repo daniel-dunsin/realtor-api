@@ -16,6 +16,8 @@ export const settings = {
       article: collections.article,
       comment: collections.comment,
       review: collections.review,
+      chat: collections.chat,
+      message: collections.message,
     },
   },
 

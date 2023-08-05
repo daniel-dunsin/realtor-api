@@ -6,4 +6,6 @@ export enum collections {
   article = "article",
   comment = "comment",
   review = "review",
+  chat = "chat",
+  message = "message",
 }

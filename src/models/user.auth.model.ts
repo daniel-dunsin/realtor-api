@@ -3,13 +3,11 @@ import { settings } from "../constants/settings";
 import { IUserAuthSchema } from "../interfaces/schema/auth.schema";
 import jwt from "jsonwebtoken";
 
-interface AuthMethods {
+interface IUserAuth extends Document, IUserAuthSchema {
   createJWT(): string;
 }
 
-type AuthModel = Model<IUserAuthSchema, {}, AuthMethods>;
-
-const userAuthSchema = new Schema<IUserAuthSchema, AuthModel, AuthMethods>(
+const userAuthSchema = new Schema<IUserAuth>(
   {
     email: {
       type: String,

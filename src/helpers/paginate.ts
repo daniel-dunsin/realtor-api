@@ -9,10 +9,7 @@ export const paginate = async (
   page = parseInt(page as string) || 1;
   hits = parseInt(hits as string) || 10;
 
-  const result = await model
-    .sort("createdAt")
-    .limit(hits)
-    .skip((page - 1) * hits);
+  const result = await model.limit(hits).skip((page - 1) * hits);
 
   return { page, hitsPerPage: hits, result };
 };

@@ -41,6 +41,9 @@ app.use("/listing", routes.listings);
 app.use("/article", routes.articles);
 app.use("/comment", routes.comments);
 app.use("/review", routes.reviews);
+app.use("/chat", routes.chats);
+app.use("/message", routes.messages);
+
 /**
  * Error Handlers
  */

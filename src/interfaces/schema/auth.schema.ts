@@ -2,6 +2,7 @@ import { Document } from "mongoose";
 import { Role } from "../../constants/role";
 
 export interface IUserSchema extends Document {
+  _id: string;
   username: string;
   email: string;
   firstname: string;
