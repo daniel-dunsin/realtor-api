@@ -7,6 +7,7 @@ import listingService from "../services/listing.service";
 import { IRequest } from "../interfaces/IRequest";
 import agentService from "../services/agent.service";
 import { IAgent } from "../interfaces/schema/agent.schema";
+import reviewService from "../services/review.service";
 
 // ===== AGENT REQUESTS
 
@@ -212,5 +213,67 @@ export const compareProperties = expressAsyncHandler(
     const result = await listingService.compareProperties(ids);
 
     res.status(200).json({ message: "Comparison successful", data: result });
+  }
+);
+
+// ============ listing reviews
+export const addReview = expressAsyncHandler(
+  async (req: IRequest, res: Response, next: NextFunction) => {
+    const { stars, text } = req.body;
+    const author = req.user?._id as string;
+    const listing = req.params.id;
+
+    const response = await reviewService.addReview({
+      stars,
+      text,
+      author,
+      listing,
+    });
+
+    res
+      .status(201)
+      .json({ message: "Review Added successfully", data: response });
+  }
+);
+
+export const getPropertyReviews = expressAsyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const property = req.params.id;
+
+    const response = await reviewService.getPropertyReviews(property);
+
+    res
+      .status(200)
+      .json({ message: "Reviews fetched successfully", data: response });
+  }
+);
+
+export const updatePropertyReview = expressAsyncHandler(
+  async (req: IRequest, res: Response, next: NextFunction) => {
+    const id = req.params.id;
+    const { text, stars } = req.body;
+    const author = req.user?._id as string;
+
+    const response = await reviewService.updateReview({
+      text,
+      stars,
+      _id: id,
+      author,
+    });
+
+    res
+      .status(200)
+      .json({ message: "Review updated successfully", data: response });
+  }
+);
+
+export const deletePropertyReview = expressAsyncHandler(
+  async (req: IRequest, res: Response, next: NextFunction) => {
+    const id = req.params.id;
+    const author = req.user?._id as string;
+
+    await reviewService.deleteReview(author, id);
+
+    res.status(200).json({ message: "Review deleted successfully" });
   }
 );

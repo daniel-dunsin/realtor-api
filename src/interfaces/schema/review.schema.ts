@@ -5,7 +5,7 @@ import { IProperty } from "./property.schema";
 export interface IReview {
   stars: number;
   author: ObjectId | IUserSchema;
-  property: ObjectId | IProperty;
+  listing: ObjectId | IProperty;
   text: string;
   createdAt: Date;
   updatedAt: Date;

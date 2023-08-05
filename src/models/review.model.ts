@@ -6,12 +6,12 @@ const ReviewSchema = new mongoose.Schema<IReview>({
   text: { type: String, required: true },
   stars: { type: Number, require: true, min: 0, max: 5 },
   author: {
-    type: Types.ObjectId,
+    type: mongoose.Types.ObjectId,
     ref: settings.mongo.collections.user,
     required: true,
   },
-  property: {
-    types: Types.ObjectId,
+  listing: {
+    type: mongoose.Types.ObjectId,
     ref: settings.mongo.collections.property,
     required: true,
   },

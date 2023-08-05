@@ -40,7 +40,7 @@ app.use("/agent", routes.agent);
 app.use("/listing", routes.listings);
 app.use("/article", routes.articles);
 app.use("/comment", routes.comments);
-
+app.use("/review", routes.reviews);
 /**
  * Error Handlers
  */
