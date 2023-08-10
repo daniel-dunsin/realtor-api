@@ -4,8 +4,9 @@ import listings from "./listings.routes";
 import articles from "./article.routes";
 import comments from "./comment.routes";
 import reviews from "./reviews.routes";
-import chats from "./chat.route";
-import messages from "./message.route";
+import chats from "./chat.routes";
+import messages from "./message.routes";
+import bidding from "./bidding.routes";
 
 const routes = {
   auth,
@@ -16,6 +17,7 @@ const routes = {
   reviews,
   chats,
   messages,
+  bidding,
 };
 
 export default routes;

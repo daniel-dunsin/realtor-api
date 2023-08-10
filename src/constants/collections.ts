@@ -8,4 +8,5 @@ export enum collections {
   review = "review",
   chat = "chat",
   message = "message",
+  bidding = "bidding",
 }

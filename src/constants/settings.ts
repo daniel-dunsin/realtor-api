@@ -18,6 +18,7 @@ export const settings = {
       review: collections.review,
       chat: collections.chat,
       message: collections.message,
+      bidding: collections.bidding,
     },
   },
 

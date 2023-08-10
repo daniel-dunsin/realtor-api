@@ -18,6 +18,16 @@ const getProfile = async (id?: string): Promise<IAgent> => {
   return agent as IAgent;
 };
 
+const getAgentById = async (id?: string): Promise<IAgent> => {
+  const agent = await Agent.findById(id);
+
+  if (!agent) {
+    throw new NotFoundError("Agent profile not found");
+  }
+
+  return agent as IAgent;
+};
+
 const createAgent = async (email: string): Promise<BecomeAgentRes> => {
   const user = await checkUser(email);
 
@@ -66,6 +76,7 @@ const agentService = {
   updateAgent,
   createAgent,
   getProfile,
+  getAgentById,
 };
 
 export default agentService;

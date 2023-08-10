@@ -43,6 +43,7 @@ app.use("/comment", routes.comments);
 app.use("/review", routes.reviews);
 app.use("/chat", routes.chats);
 app.use("/message", routes.messages);
+app.use("/bidding", routes.bidding);
 
 /**
  * Error Handlers
