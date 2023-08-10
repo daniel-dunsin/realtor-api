@@ -17,10 +17,10 @@ router
   .get(isAuth, isAgent, getPropertyBiddings)
   .post(isAuth, createBidding);
 
-router.get("/received/property/:id", isAuth, isAgent, getReceivedBiddings);
+router.get("/received", isAuth, isAgent, getReceivedBiddings);
 
 // for any user
-router.get("/sent/property/:id", isAuth, getSentOutBiddings);
+router.get("/sent", isAuth, getSentOutBiddings);
 
 router
   .route("/:id")

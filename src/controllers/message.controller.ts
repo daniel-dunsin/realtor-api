@@ -2,6 +2,7 @@ import expressAsyncHandler from "express-async-handler";
 import { IRequest } from "../interfaces/IRequest";
 import { NextFunction, Response } from "express";
 import chatService from "../services/message.service";
+import { uploadToCloud } from "../config/cloudinary.config";
 
 export const createChat = expressAsyncHandler(
   async (req: IRequest, res: Response, next: NextFunction) => {
@@ -41,7 +42,25 @@ export const sendMessage = expressAsyncHandler(
     const sender = req.user?._id as string;
     const chat = req.params.id;
 
-    const response = await chatService.sendMessage({ sender, chat, text });
+    const imagesFile: any = req.files;
+
+    let images: string[] = [];
+
+    if (imagesFile?.length > 0) {
+      images = await Promise.all(
+        imagesFile?.map(async (file: any, index: number) => {
+          const url = await uploadToCloud(file.path);
+          return url;
+        })
+      );
+    }
+
+    const response = await chatService.sendMessage({
+      sender,
+      chat,
+      text,
+      images,
+    });
 
     res
       .status(201)

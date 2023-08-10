@@ -78,7 +78,9 @@ export const getSentOutBiddings = expressAsyncHandler(
 
     res.status(200).json({
       message: "Buyer biddings fetched successfully",
-      data: response,
+      data: response.biddings,
+      page: response.page,
+      hitsPerPage: response.hitsPerPage,
     });
   }
 );
@@ -95,9 +97,12 @@ export const deleteBidding = expressAsyncHandler(
 
 export const editBiddingStatus = expressAsyncHandler(
   async (req: IRequest, res: Response, next: NextFunction) => {
-    const status: IBiddingStatus = req.body.isAccepted
-      ? "accepted"
-      : "rejected";
+    const status: IBiddingStatus =
+      req.body.isAccepted === true
+        ? "accepted"
+        : req.body.isAccepted === false
+        ? "rejected"
+        : "";
     const id = req.params.id;
     const owner = (await agentService.getProfile(req.user?._id as string))
       ?._id as string;

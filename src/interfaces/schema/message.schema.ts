@@ -10,10 +10,10 @@ export interface IChat {
 }
 
 export interface IMessage {
-  chat: mongoose.Types.ObjectId | IChat;
+  chat: mongoose.Types.ObjectId | IChat | string;
   _id?: string;
   text: string;
-  image?: string;
+  images?: string;
   sender: mongoose.Types.ObjectId | IUserSchema;
   receiver: mongoose.Types.ObjectId | IUserSchema;
   createdAt: Date;

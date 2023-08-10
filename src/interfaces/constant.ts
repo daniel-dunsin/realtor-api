@@ -33,4 +33,4 @@ export type IArticleCategory =
   | "apartment"
   | "sales";
 
-export type IBiddingStatus = "rejected" | "accepted" | "pending";
+export type IBiddingStatus = "rejected" | "accepted" | "pending" | "";

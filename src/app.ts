@@ -8,6 +8,7 @@ import { errorHandler, notFound } from "./handlers/errorHandlers";
 import { settings } from "./constants/settings";
 import routes from "./routes";
 import { setCache } from "./helpers/cache";
+import socketImplementation from "./services/socket.service";
 
 const app: express.Application = express();
 
@@ -60,9 +61,11 @@ const port: string | number | undefined = settings.port || 3001;
 mongoose
   .connect(settings.mongo.url as string, { socketTimeoutMS: 100000 })
   .then(() => {
-    app.listen(port, () => {
+    const server = app.listen(port, () => {
       console.log(`Server is listening on port ${port}`);
     });
+
+    socketImplementation(server);
   })
   .catch((error) => {
     console.log(error);

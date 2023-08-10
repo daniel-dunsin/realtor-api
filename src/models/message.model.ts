@@ -5,7 +5,7 @@ import { settings } from "../constants/settings";
 const MessageSchema = new mongoose.Schema<IMessage>(
   {
     text: { type: String, required: true },
-    image: { type: String, default: "" },
+    images: { type: [{ type: String, default: "" }], default: [] },
     chat: {
       type: Types.ObjectId,
       ref: settings.mongo.collections.chat,

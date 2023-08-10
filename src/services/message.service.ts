@@ -70,7 +70,7 @@ const getAllChats = async (user: string): Promise<IChat[]> => {
 
 //messages
 const sendMessage = async (props: ISendMessageBody): Promise<IMessage> => {
-  const { text, image, chat, sender } = props;
+  const { text, images, chat, sender } = props;
 
   if (!text || !chat || !sender)
     throw new BadRequestError("Provide text, chat, sender, receiver");
@@ -92,6 +92,7 @@ const sendMessage = async (props: ISendMessageBody): Promise<IMessage> => {
     chat,
     sender: xsender._id,
     receiver,
+    images,
     xhat: xchat._id,
   });
 
@@ -143,7 +144,15 @@ const getChatMessages = async (id: string) => {
   return messages;
 };
 
-const getMessageById = () => {};
+const getMessageById = async (id: string): Promise<IMessage> => {
+  const message = await Message.findById(id);
+
+  if (!message) {
+    throw new NotFoundError("Message not found");
+  }
+
+  return message;
+};
 
 const editMessage = async (
   user: string,

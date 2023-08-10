@@ -20,9 +20,8 @@ const getPropertyBiddings = async (
   propertyId: string
 ): Promise<IBiddingRes> => {
   const property = await listingService.getSingleListing(owner, propertyId);
-  console.log(owner, property?.owner);
 
-  if (!property || property?.owner?.toString() !== owner) {
+  if (!property || property?.owner?._id?.toString() !== owner.toString()) {
     throw new ForbiddenError("Property does not belong to you");
   }
 
@@ -128,7 +127,7 @@ const deleteBidding = async (_id: string) => {
   const bidding = await Bidding.findByIdAndDelete(_id);
 
   if (!bidding) {
-    throw new NotFoundError("Bidding deleted");
+    throw new NotFoundError("Bidding not found");
   }
 };
 
@@ -145,7 +144,7 @@ const editBiddingStatus = async (
     throw new BadRequestError("Provide owner");
   }
 
-  const bidding = await Bidding.findOne({ _id: id, owner })
+  const bidding = await Bidding.findOne({ _id: id, seller: owner })
     .populate("seller")
     .populate("proposedBuyer")
     .populate("property");
@@ -158,7 +157,7 @@ const editBiddingStatus = async (
 
   if (bidding.status !== "pending") {
     throw new BadRequestError(
-      "You can not update a bidding that is n ot pending"
+      "You can not update a bidding that is not pending"
     );
   }
 
