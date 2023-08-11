@@ -7,6 +7,7 @@ import reviews from "./reviews.routes";
 import chats from "./chat.routes";
 import messages from "./message.routes";
 import bidding from "./bidding.routes";
+import wallet from "./wallet.routes";
 
 const routes = {
   auth,
@@ -18,6 +19,7 @@ const routes = {
   chats,
   messages,
   bidding,
+  wallet,
 };
 
 export default routes;

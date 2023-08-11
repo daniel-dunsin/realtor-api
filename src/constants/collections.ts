@@ -9,4 +9,6 @@ export enum collections {
   chat = "chat",
   message = "message",
   bidding = "bidding",
+  wallet = "wallet",
+  transaction = "transaction",
 }

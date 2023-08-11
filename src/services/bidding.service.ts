@@ -45,7 +45,7 @@ const getSellerBiddings = async (
   hitsPerPage: string,
   seller: string
 ): Promise<IBiddingRes> => {
-  const query = Bidding.find({ seller })
+  const query = Bidding.find({ seller, status: "pending" })
     .populate("seller")
     .populate("proposedBuyer")
     .populate("property");
@@ -165,7 +165,33 @@ const editBiddingStatus = async (
 
   const res = await bidding.save();
 
+  // If it is accepted, set others to rejected
+  if (status === "accepted") {
+    await Bidding.updateMany(
+      {
+        $or: [{ status: "pending" }, { status: "rejected" }],
+        property: bidding.property,
+      },
+      { status: "rejected" }
+    );
+  }
+
   return res;
+};
+
+export const getBiddingByBuyer = async (
+  buyer: string,
+  property: string
+): Promise<IBidding> => {
+  const bidding = await Bidding.findOne({ proposedBuyer: buyer, property });
+
+  if (!bidding) {
+    throw new NotFoundError(
+      "Bidding with you anlisted as buyer does not exist"
+    );
+  }
+
+  return bidding;
 };
 
 const biddingService = {

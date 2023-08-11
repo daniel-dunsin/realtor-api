@@ -34,3 +34,7 @@ export type IArticleCategory =
   | "sales";
 
 export type IBiddingStatus = "rejected" | "accepted" | "pending" | "";
+
+export type ITransactionStatus = "success" | "failed" | "pending";
+
+export type ITransactionType = "payment" | "withdrawal";

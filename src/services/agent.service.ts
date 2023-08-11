@@ -53,6 +53,7 @@ const createAgent = async (email: string): Promise<BecomeAgentRes> => {
 
   return {
     message: "You are now an agent",
+    agent: agent,
   };
 };
 

@@ -4,6 +4,7 @@ import { uploadToCloud } from "../config/cloudinary.config";
 import { IRequest } from "../interfaces/IRequest";
 import { IAgent } from "../interfaces/schema/agent.schema";
 import agentService from "../services/agent.service";
+import walletService from "../services/wallet.service";
 
 export const getProfile = expressAsyncHandler(
   async (req: IRequest, res: Response, next: NextFunction) => {
@@ -16,6 +17,8 @@ export const getProfile = expressAsyncHandler(
 export const createAgent = expressAsyncHandler(
   async (req: IRequest, res: Response, next: NextFunction) => {
     const response = await agentService.createAgent(req?.user?.email as string);
+
+    await walletService.createWallet(response.agent?._id as string);
 
     res.status(201).json(response);
   }

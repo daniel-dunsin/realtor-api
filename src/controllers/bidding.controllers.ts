@@ -17,7 +17,7 @@ export const createBidding = expressAsyncHandler(
     });
 
     res
-      .status(200)
+      .status(201)
       .json({ message: "Property bidding created", data: response });
   }
 );

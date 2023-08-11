@@ -45,6 +45,7 @@ app.use("/review", routes.reviews);
 app.use("/chat", routes.chats);
 app.use("/message", routes.messages);
 app.use("/bidding", routes.bidding);
+app.use("/wallet", routes.wallet);
 
 /**
  * Error Handlers

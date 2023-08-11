@@ -19,6 +19,8 @@ export const settings = {
       chat: collections.chat,
       message: collections.message,
       bidding: collections.bidding,
+      transaction: collections.transaction,
+      wallet: collections.wallet,
     },
   },
 
@@ -30,5 +32,9 @@ export const settings = {
     cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.API_KEY,
     api_secret: process.env.API_SECRET,
+  },
+
+  paystack: {
+    test: process.env.PAYSTACK_TEST,
   },
 };
