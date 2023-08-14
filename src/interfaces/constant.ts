@@ -38,3 +38,9 @@ export type IBiddingStatus = "rejected" | "accepted" | "pending" | "";
 export type ITransactionStatus = "success" | "failed" | "pending";
 
 export type ITransactionType = "payment" | "withdrawal";
+
+export type IPaystackEvents =
+  | "charge.success"
+  | "charge.failed"
+  | "transfer.success"
+  | "transfer.failed";

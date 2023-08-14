@@ -36,7 +36,7 @@ const updateTransactionStatus = (id, success) => __awaiter(void 0, void 0, void 
     if (transaction.status !== "pending") {
         throw new responseHandlers_1.BadRequestError("Transaction is not pending");
     }
-    transaction.status = status ? "success" : "failed";
+    transaction.status = success ? "success" : "failed";
     const result = yield transaction.save();
     return result;
 });
@@ -53,8 +53,17 @@ const findById = (_id) => __awaiter(void 0, void 0, void 0, function* () {
     }
     return transaction;
 });
+const findByReference = (reference) => __awaiter(void 0, void 0, void 0, function* () {
+    const transaction = yield transaction_model_1.default.findOne({ reference })
+        .populate("bidding")
+        .populate("property");
+    if (!transaction)
+        throw new responseHandlers_1.NotFoundError("Transaction does not exist");
+    return transaction;
+});
 const transactionService = {
     findById,
+    findByReference,
     createTransaction,
     updateTransactionStatus,
     deleteTransaction,

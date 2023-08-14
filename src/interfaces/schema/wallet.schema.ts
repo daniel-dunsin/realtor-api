@@ -14,6 +14,7 @@ export interface IWallet {
 }
 
 export interface ITransaction {
+  _id: string;
   reference: string;
   status: ITransactionStatus;
   currency: "NGN";

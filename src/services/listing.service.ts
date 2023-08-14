@@ -212,6 +212,26 @@ const getMyProperties = async (userId: string): Promise<IProperty[]> => {
   return properties;
 };
 
+const updatePropertyOwner = async (
+  property: string,
+  buyer: string
+): Promise<IProperty> => {
+  const response = await Property.findByIdAndUpdate(
+    property,
+    {
+      isAvailable: false,
+      owner: buyer,
+    },
+    { new: true, runValidators: true }
+  );
+
+  if (!response) {
+    throw new NotFoundError("Property does not exist");
+  }
+
+  return response;
+};
+
 const listingService = {
   createListing,
   getListings,
@@ -221,6 +241,7 @@ const listingService = {
   compareProperties,
   sellMyProperty,
   getMyProperties,
+  updatePropertyOwner,
 };
 
 export default listingService;

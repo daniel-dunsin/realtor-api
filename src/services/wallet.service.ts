@@ -4,6 +4,7 @@ import {
   NotFoundError,
 } from "../handlers/responseHandlers";
 import payment from "../helpers/payment";
+import { IInitiatePaymentRes } from "../interfaces/response/payment.response";
 import { IUserSchema } from "../interfaces/schema/auth.schema";
 import { IProperty } from "../interfaces/schema/property.schema";
 import { IWallet } from "../interfaces/schema/wallet.schema";
@@ -106,13 +107,9 @@ const purchasePropertyFromWallet = async (
   });
 
   // update the owner of the property
-  const response = await Property.findByIdAndUpdate(
-    property?._id,
-    {
-      isAvailable: false,
-      owner: buyer,
-    },
-    { new: true, runValidators: true }
+  const response = await listingService.updatePropertyOwner(
+    property._id as string,
+    buyer
   );
 
   await updateWalletBalance(
@@ -133,7 +130,7 @@ const purchasePropertyFromWallet = async (
 const purchasePropertyWithTransfer = async (
   propertyId: string,
   buyer: string
-) => {
+): Promise<IInitiatePaymentRes> => {
   const property = await listingService.getSingleListing(buyer, propertyId);
 
   if (!property) {
@@ -160,16 +157,26 @@ const purchasePropertyWithTransfer = async (
     property.price
   );
 
-  console.log(response);
-};
+  await transactionService.createTransaction({
+    reference: response.data.reference,
+    amount: property.price,
+    description: `Payment for ${property.title}`,
+    status: "pending",
+    type: "payment",
+    payment_gateway: "card",
+    property: property._id as string,
+    bidding: bidding._id,
+  });
 
-const initializeTransaction = async (data: IInitializeTransactionBody) => {};
+  return response;
+};
 
 const walletService = {
   createWallet,
   getWallet,
   purchasePropertyFromWallet,
   purchasePropertyWithTransfer,
+  updateWalletBalance,
 };
 
 export default walletService;

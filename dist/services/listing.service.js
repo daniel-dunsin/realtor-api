@@ -150,6 +150,16 @@ const getMyProperties = (userId) => __awaiter(void 0, void 0, void 0, function* 
     }
     return properties;
 });
+const updatePropertyOwner = (property, buyer) => __awaiter(void 0, void 0, void 0, function* () {
+    const response = yield property_model_1.default.findByIdAndUpdate(property, {
+        isAvailable: false,
+        owner: buyer,
+    }, { new: true, runValidators: true });
+    if (!response) {
+        throw new responseHandlers_1.NotFoundError("Property does not exist");
+    }
+    return response;
+});
 const listingService = {
     createListing,
     getListings,
@@ -159,5 +169,6 @@ const listingService = {
     compareProperties,
     sellMyProperty,
     getMyProperties,
+    updatePropertyOwner,
 };
 exports.default = listingService;

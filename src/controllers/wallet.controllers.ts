@@ -1,8 +1,11 @@
 import expressAsyncHandler from "express-async-handler";
 import { IRequest } from "../interfaces/IRequest";
-import { NextFunction, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import agentService from "../services/agent.service";
 import walletService from "../services/wallet.service";
+import payment from "../helpers/payment";
+import { ForbiddenError } from "../handlers/responseHandlers";
+import { IWebhookData } from "../interfaces/response/payment.response";
 
 export const getWalletInfo = expressAsyncHandler(
   async (req: IRequest, res: Response, next: NextFunction) => {
@@ -42,10 +45,38 @@ export const purchaseWithTransfer = expressAsyncHandler(
     const property = req.params.id as string;
     const buyer = req.user?._id as string;
 
-    await walletService.purchasePropertyWithTransfer(property, buyer);
+    const response = await walletService.purchasePropertyWithTransfer(
+      property,
+      buyer
+    );
 
     res.status(200).json({
-      message: "Yoooo",
+      message: response.message,
+      data: {
+        authorization_url: response.data.authorization_url,
+        access_code: response.data.access_code,
+        reference: response.data.reference,
+      },
     });
+  }
+);
+
+export const handlePaystackWebhook = expressAsyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const signature = req.headers["x-paystack-signature"];
+
+    const isValid = payment.validateSignature(req.body, signature as string);
+
+    if (!isValid) {
+      throw new ForbiddenError("Signature is invalid");
+    }
+
+    const event = req.body.event;
+
+    const data: IWebhookData = req.body.data;
+
+    await payment.queryPaystackEvent(event, data);
+
+    res.status(200).json({ message: "✅" });
   }
 );

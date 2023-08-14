@@ -36,7 +36,7 @@ const updateTransactionStatus = async (
     throw new BadRequestError("Transaction is not pending");
   }
 
-  transaction.status = status ? "success" : "failed";
+  transaction.status = success ? "success" : "failed";
 
   const result = await transaction.save();
 
@@ -61,8 +61,19 @@ const findById = async (_id: string): Promise<ITransaction> => {
   return transaction;
 };
 
+const findByReference = async (reference: string): Promise<ITransaction> => {
+  const transaction = await Transaction.findOne({ reference })
+    .populate("bidding")
+    .populate("property");
+
+  if (!transaction) throw new NotFoundError("Transaction does not exist");
+
+  return transaction;
+};
+
 const transactionService = {
   findById,
+  findByReference,
   createTransaction,
   updateTransactionStatus,
   deleteTransaction,

@@ -14,7 +14,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const responseHandlers_1 = require("../handlers/responseHandlers");
 const payment_1 = __importDefault(require("../helpers/payment"));
-const property_model_1 = __importDefault(require("../models/property.model"));
 const wallet_model_1 = __importDefault(require("../models/wallet.model"));
 const agent_service_1 = __importDefault(require("./agent.service"));
 const bidding_service_1 = __importDefault(require("./bidding.service"));
@@ -75,10 +74,7 @@ const purchasePropertyFromWallet = (propertyId, buyer) => __awaiter(void 0, void
         bidding: bidding._id,
     });
     // update the owner of the property
-    const response = yield property_model_1.default.findByIdAndUpdate(property === null || property === void 0 ? void 0 : property._id, {
-        isAvailable: false,
-        owner: buyer,
-    }, { new: true, runValidators: true });
+    const response = yield listing_service_1.default.updatePropertyOwner(property._id, buyer);
     yield updateWalletBalance(wallet === null || wallet === void 0 ? void 0 : wallet._id, wallet.available_balance - property.price);
     yield updateWalletBalance(sellerWallet === null || sellerWallet === void 0 ? void 0 : sellerWallet._id, sellerWallet.available_balance + property.price);
     yield bidding_service_1.default.deleteBidding(bidding._id);
@@ -98,13 +94,23 @@ const purchasePropertyWithTransfer = (propertyId, buyer) => __awaiter(void 0, vo
         throw new responseHandlers_1.ForbiddenError("Your bidding for this property has not been accepted");
     }
     const response = yield payment_1.default.initiatePayment(bidding.proposedBuyer.email, property.price);
-    console.log(response);
+    yield transaction_service_1.default.createTransaction({
+        reference: response.data.reference,
+        amount: property.price,
+        description: `Payment for ${property.title}`,
+        status: "pending",
+        type: "payment",
+        payment_gateway: "card",
+        property: property._id,
+        bidding: bidding._id,
+    });
+    return response;
 });
-const initializeTransaction = (data) => __awaiter(void 0, void 0, void 0, function* () { });
 const walletService = {
     createWallet,
     getWallet,
     purchasePropertyFromWallet,
     purchasePropertyWithTransfer,
+    updateWalletBalance,
 };
 exports.default = walletService;
