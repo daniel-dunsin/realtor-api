@@ -16,3 +16,23 @@ export const getWalletInfo = expressAsyncHandler(
     });
   }
 );
+
+export const getPurcahseSession = expressAsyncHandler(
+  async (req: IRequest, res: Response, next: NextFunction) => {
+    const userId = req.user?._id as string;
+  }
+);
+
+export const purchaseWithWallet = expressAsyncHandler(
+  async (req: IRequest, res: Response, next: NextFunction) => {
+    const property = req.params?.id as string;
+    const buyer = req.user?._id as string;
+
+    const response = await walletService.purchasePropertyFromWallet(
+      property,
+      buyer
+    );
+
+    res.status(200).json({ message: "Property now belongs to you", property });
+  }
+);

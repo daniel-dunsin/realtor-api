@@ -5,6 +5,7 @@ import { IAgent } from "./agent.schema";
 import { IBiddingStatus } from "../constant";
 
 export interface IBidding {
+  _id: string;
   property: mongoose.Types.ObjectId | string | IProperty;
   proposedBuyer: mongoose.Types.ObjectId | string | IUserSchema;
   seller: mongoose.Types.ObjectId | string | IAgent;

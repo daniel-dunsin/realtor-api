@@ -4,6 +4,7 @@ import { ITransactionStatus, ITransactionType } from "../constant";
 import { IProperty } from "./property.schema";
 
 export interface IWallet {
+  _id?: string;
   agent: mongoose.Types.ObjectId | string | IAgent;
   available_balance: number;
   currency: "NGN";
@@ -19,4 +20,5 @@ export interface ITransaction {
   amount: number;
   type: ITransactionType;
   property?: IProperty | mongoose.Types.ObjectId | string;
+  payment_gateway: "wallet" | "card";
 }

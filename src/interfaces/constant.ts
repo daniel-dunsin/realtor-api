@@ -6,7 +6,7 @@ export type IPropertyType =
   | "Land"
   | "Single Family";
 
-export type IPropertyStatus = "rent" | "sale";
+export type IPropertyStatus = "sale";
 
 export type IPropertyAmenity =
   | "Air Conditioning"

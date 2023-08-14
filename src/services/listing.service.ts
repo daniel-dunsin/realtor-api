@@ -1,4 +1,10 @@
-import { BadRequestError, NotFoundError } from "../handlers/responseHandlers";
+import { settings } from "../constants/settings";
+import {
+  BadRequestError,
+  ForbiddenError,
+  NotFoundError,
+  UnAuthorizedError,
+} from "../handlers/responseHandlers";
 import { paginate } from "../helpers/paginate";
 import {
   ICreateListingRes,
@@ -7,6 +13,7 @@ import {
 import { IProperty } from "../interfaces/schema/property.schema";
 import { CreateListingBody } from "../interfaces/services/listing.body";
 import Property from "../models/property.model";
+import agentService from "./agent.service";
 
 const createListing = async (
   body: CreateListingBody
@@ -47,7 +54,9 @@ const getListings = async (
   page: string,
   hits: string
 ): Promise<IGetListingsRes> => {
-  let listing = Property.find(query).populate("owner");
+  let listing = Property.find(query)
+    .populate(settings.mongo.collections.agent)
+    .populate(settings.mongo.collections.user);
 
   const {
     result,
@@ -62,16 +71,17 @@ const getSingleListing = async (
   viewer: string,
   id: string
 ): Promise<IProperty> => {
-  const property = await Property.findById(id).populate("owner");
+  const property = await Property.findById(id)
+    .populate("owner")
+    .populate(settings.mongo.collections.agent)
+    .populate(settings.mongo.collections.agent);
 
   if (!property) {
     throw new NotFoundError("Property does not exists");
   }
 
-  if (property.owner?._id.toString() !== viewer) {
-    property.views += 1;
-    await property.save();
-  }
+  property.views += 1;
+  await property.save();
 
   return property;
 };
@@ -143,7 +153,6 @@ const compareProperties = async (ids: string[]): Promise<any> => {
   const keys: string[] = [];
 
   Object.keys(listings[0].toObject()).forEach((key) => keys.push(key));
-  console.log(keys);
 
   const comparison: any = {};
 
@@ -159,6 +168,50 @@ const compareProperties = async (ids: string[]): Promise<any> => {
   return comparison;
 };
 
+const sellMyProperty = async (
+  id: string,
+  owner: string
+): Promise<IProperty> => {
+  const agent = await agentService.getProfile(owner as string);
+
+  if (!agent) {
+    throw new UnAuthorizedError("Only agents can put up properties for sale");
+  }
+
+  const property = await Property.findOne({ _id: id, owner: owner });
+
+  if (!property) {
+    throw new NotFoundError(
+      "This property does not exist or does not belong to you"
+    );
+  }
+
+  if (property.isAvailable) {
+    throw new ForbiddenError("Property is already available for sale");
+  }
+
+  property.owner = agent._id;
+  property.isAvailable = true;
+
+  const result = await property.save();
+
+  return result;
+};
+
+// properties that are not for sale
+const getMyProperties = async (userId: string): Promise<IProperty[]> => {
+  const properties = await Property.find({
+    owner: userId,
+    isAvailable: false,
+  }).populate("owner");
+
+  if (!properties || properties.length === 0) {
+    throw new NotFoundError("You do not own any property");
+  }
+
+  return properties;
+};
+
 const listingService = {
   createListing,
   getListings,
@@ -166,6 +219,8 @@ const listingService = {
   updateListing,
   deleteListing,
   compareProperties,
+  sellMyProperty,
+  getMyProperties,
 };
 
 export default listingService;

@@ -105,6 +105,20 @@ export const deleteListing = expressAsyncHandler(
   }
 );
 
+export const sellMyProperty = expressAsyncHandler(
+  async (req: IRequest, res: Response, next: NextFunction) => {
+    const owner = req.user?._id as string;
+
+    const property = req.params.id;
+
+    const response = await listingService.sellMyProperty(property, owner);
+
+    res
+      .status(200)
+      .json({ message: "Property is now available for sale", data: response });
+  }
+);
+
 // ==== public
 export const getAllListings = expressAsyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -169,10 +183,6 @@ export const getAllListings = expressAsyncHandler(
       query["info.area"] = parseInt(area as string);
     }
 
-    if (status && (status === "rent" || status === "sale")) {
-      query.status = (status as string).toLowerCase();
-    }
-
     if (amenities) {
       const allAmenities = (amenities as string).split(",");
       query.amenities = { $in: allAmenities };
@@ -213,6 +223,18 @@ export const compareProperties = expressAsyncHandler(
     const result = await listingService.compareProperties(ids);
 
     res.status(200).json({ message: "Comparison successful", data: result });
+  }
+);
+
+export const getMyProperties = expressAsyncHandler(
+  async (req: IRequest, res: Response, next: NextFunction) => {
+    const owner = req.user?._id as string;
+
+    const response = await listingService.getMyProperties(owner);
+
+    res
+      .status(200)
+      .json({ message: "Properties fecthed successfully", data: response });
   }
 );
 

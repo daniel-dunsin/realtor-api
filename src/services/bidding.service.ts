@@ -21,7 +21,7 @@ const getPropertyBiddings = async (
 ): Promise<IBiddingRes> => {
   const property = await listingService.getSingleListing(owner, propertyId);
 
-  if (!property || property?.owner?._id?.toString() !== owner.toString()) {
+  if (!property || property?.agent?._id?.toString() !== owner?.toString()) {
     throw new ForbiddenError("Property does not belong to you");
   }
 
@@ -68,7 +68,7 @@ const getBuyerBiddings = async (
   hitsPerPage: string,
   proposedBuyer: string
 ): Promise<IBiddingRes> => {
-  const query = Bidding.find({ proposedBuyer })
+  const query = Bidding.find({ proposedBuyer, status: "pending" })
     .populate("seller")
     .populate("proposedBuyer")
     .populate("property");
@@ -101,7 +101,10 @@ const createBidding = async (body: ICreateBiddingBody): Promise<IBidding> => {
   }
 
   //   we need to get the user id of the agent to ensure it isn't the owner that's trying to buy the property
-  const sellerUserId = await getUser(property.owner.userId);
+
+  const sellerUserId = await getUser(
+    (property?.agent?.userId as string) || (property?.user?._id as string)
+  );
 
   if (body.proposedBuyer.toString() === sellerUserId._id.toString()) {
     throw new ForbiddenError("You can not buy your property");
@@ -111,14 +114,18 @@ const createBidding = async (body: ICreateBiddingBody): Promise<IBidding> => {
   const biddingInDb = await Bidding.findOne({
     property: body.property,
     proposedBuyer: body.proposedBuyer,
-    seller: property.owner._id,
+    seller: property?.agent?._id,
+    $or: [{ status: "pending" }, { status: "accepted" }],
   });
 
   if (biddingInDb) {
     throw new BadRequestError("Bidding already exist");
   }
 
-  const bidding = await Bidding.create({ ...body, seller: property.owner._id });
+  const bidding = await Bidding.create({
+    ...body,
+    seller: property?.agent?._id as string,
+  });
 
   return bidding;
 };
@@ -183,11 +190,15 @@ export const getBiddingByBuyer = async (
   buyer: string,
   property: string
 ): Promise<IBidding> => {
-  const bidding = await Bidding.findOne({ proposedBuyer: buyer, property });
+  const bidding = await Bidding.findOne({
+    proposedBuyer: buyer,
+    property,
+    $or: [{ status: "pending" }, { status: "accepted" }],
+  });
 
   if (!bidding) {
     throw new NotFoundError(
-      "Bidding with you anlisted as buyer does not exist"
+      "Bidding with you enlisted as buyer does not exist"
     );
   }
 
@@ -201,6 +212,7 @@ const biddingService = {
   deleteBidding,
   createBidding,
   editBiddingStatus,
+  getBiddingByBuyer,
 };
 
 export default biddingService;

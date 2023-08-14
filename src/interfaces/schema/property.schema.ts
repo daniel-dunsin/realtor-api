@@ -5,8 +5,11 @@ import {
   IPropertyStatus,
   IPropertyType,
 } from "../constant";
+import { IAgent } from "./agent.schema";
+import { IUserSchema } from "./auth.schema";
 
 export interface IProperty {
+  _id?: string;
   title: string;
   description: string;
   type: IPropertyType;
@@ -34,4 +37,8 @@ export interface IProperty {
   views: 0;
   createdAt?: Date;
   updatedAt?: Date;
+  rentStartDate?: Date;
+  rentIsActive?: boolean;
+  agent?: IAgent;
+  user?: IUserSchema;
 }

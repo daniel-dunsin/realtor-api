@@ -3,7 +3,7 @@ import { ITransaction } from "../interfaces/schema/wallet.schema";
 import { settings } from "../constants/settings";
 
 const TransactionSchema = new mongoose.Schema<ITransaction>({
-  reference: { type: String, required: true },
+  reference: { type: String },
   status: {
     type: String,
     enum: ["success", "failed", "pending"],
@@ -17,6 +17,7 @@ const TransactionSchema = new mongoose.Schema<ITransaction>({
   description: { type: String },
   amount: { type: Number, default: 0 },
   type: { type: String, required: true, enum: ["payment", "withdrawal"] },
+  payment_gateway: { type: String, enum: ["card", "wallet"] },
   property: {
     type: mongoose.Types.ObjectId,
     ref: settings.mongo.collections.property,
