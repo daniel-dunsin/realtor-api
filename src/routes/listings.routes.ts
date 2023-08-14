@@ -13,7 +13,10 @@ import {
   updateListing,
 } from "../controllers/listing.controllers";
 import { uploader } from "../config/multer.config";
-import { purchaseWithWallet } from "../controllers/wallet.controllers";
+import {
+  purchaseWithTransfer,
+  purchaseWithWallet,
+} from "../controllers/wallet.controllers";
 
 const router = Router();
 
@@ -39,5 +42,11 @@ router.route("/compare").post(compareProperties);
 
 // payment
 router.post("/buy/wallet/property/:id", isAuth, isAgent, purchaseWithWallet);
+router.post(
+  "/buy/transfer/property/:id",
+  isAuth,
+  isAgent,
+  purchaseWithTransfer
+);
 
 export default router;

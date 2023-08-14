@@ -194,7 +194,9 @@ export const getBiddingByBuyer = async (
     proposedBuyer: buyer,
     property,
     $or: [{ status: "pending" }, { status: "accepted" }],
-  });
+  })
+    .populate("proposedBuyer")
+    .populate("seller");
 
   if (!bidding) {
     throw new NotFoundError(

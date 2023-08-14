@@ -18,6 +18,10 @@ const TransactionSchema = new mongoose.Schema<ITransaction>({
   amount: { type: Number, default: 0 },
   type: { type: String, required: true, enum: ["payment", "withdrawal"] },
   payment_gateway: { type: String, enum: ["card", "wallet"] },
+  bidding: {
+    type: mongoose.Types.ObjectId,
+    ref: settings.mongo.collections.bidding,
+  },
   property: {
     type: mongoose.Types.ObjectId,
     ref: settings.mongo.collections.property,

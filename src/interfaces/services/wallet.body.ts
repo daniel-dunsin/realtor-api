@@ -13,4 +13,5 @@ export interface ICreateTransactionBody {
   type: ITransactionType;
   payment_gateway: "card" | "wallet";
   property: string;
+  bidding: string;
 }

@@ -36,3 +36,16 @@ export const purchaseWithWallet = expressAsyncHandler(
     res.status(200).json({ message: "Property now belongs to you", property });
   }
 );
+
+export const purchaseWithTransfer = expressAsyncHandler(
+  async (req: IRequest, res: Response, next: NextFunction) => {
+    const property = req.params.id as string;
+    const buyer = req.user?._id as string;
+
+    await walletService.purchasePropertyWithTransfer(property, buyer);
+
+    res.status(200).json({
+      message: "Yoooo",
+    });
+  }
+);

@@ -3,6 +3,8 @@ import {
   ForbiddenError,
   NotFoundError,
 } from "../handlers/responseHandlers";
+import payment from "../helpers/payment";
+import { IUserSchema } from "../interfaces/schema/auth.schema";
 import { IProperty } from "../interfaces/schema/property.schema";
 import { IWallet } from "../interfaces/schema/wallet.schema";
 import { IInitializeTransactionBody } from "../interfaces/services/wallet.body";
@@ -100,6 +102,7 @@ const purchasePropertyFromWallet = async (
     type: "payment",
     payment_gateway: "wallet",
     property: property?._id as string,
+    bidding: bidding._id,
   });
 
   // update the owner of the property
@@ -151,6 +154,13 @@ const purchasePropertyWithTransfer = async (
       "Your bidding for this property has not been accepted"
     );
   }
+
+  const response = await payment.initiatePayment(
+    (bidding.proposedBuyer as IUserSchema).email,
+    property.price
+  );
+
+  console.log(response);
 };
 
 const initializeTransaction = async (data: IInitializeTransactionBody) => {};
@@ -159,6 +169,7 @@ const walletService = {
   createWallet,
   getWallet,
   purchasePropertyFromWallet,
+  purchasePropertyWithTransfer,
 };
 
 export default walletService;
