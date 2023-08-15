@@ -26,6 +26,11 @@ const TransactionSchema = new mongoose.Schema<ITransaction>({
     type: mongoose.Types.ObjectId,
     ref: settings.mongo.collections.property,
   },
+  initiator: {
+    type: mongoose.Types.ObjectId,
+    ref: settings.mongo.collections.user,
+    required: true,
+  },
 });
 
 const TransactionModel = mongoose.model(

@@ -29,6 +29,11 @@ const TransactionSchema = new mongoose_1.default.Schema({
         type: mongoose_1.default.Types.ObjectId,
         ref: settings_1.settings.mongo.collections.property,
     },
+    initiator: {
+        type: mongoose_1.default.Types.ObjectId,
+        ref: settings_1.settings.mongo.collections.user,
+        required: true,
+    },
 });
 const TransactionModel = mongoose_1.default.model(settings_1.settings.mongo.collections.transaction, TransactionSchema);
 exports.default = TransactionModel;

@@ -3,6 +3,7 @@ import { IAgent } from "./agent.schema";
 import { ITransactionStatus, ITransactionType } from "../constant";
 import { IProperty } from "./property.schema";
 import { IBidding } from "./bidding.schema";
+import { IUserSchema } from "./auth.schema";
 
 export interface IWallet {
   _id?: string;
@@ -24,4 +25,5 @@ export interface ITransaction {
   type: ITransactionType;
   property?: IProperty | mongoose.Types.ObjectId | string;
   payment_gateway: "wallet" | "card";
+  initiator: IUserSchema | string | mongoose.Types.ObjectId;
 }

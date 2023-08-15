@@ -72,6 +72,7 @@ const purchasePropertyFromWallet = (propertyId, buyer) => __awaiter(void 0, void
         payment_gateway: "wallet",
         property: property === null || property === void 0 ? void 0 : property._id,
         bidding: bidding._id,
+        initiator: bidding.proposedBuyer,
     });
     // update the owner of the property
     const response = yield listing_service_1.default.updatePropertyOwner(property._id, buyer);
@@ -103,8 +104,40 @@ const purchasePropertyWithTransfer = (propertyId, buyer) => __awaiter(void 0, vo
         payment_gateway: "card",
         property: property._id,
         bidding: bidding._id,
+        initiator: bidding.proposedBuyer,
     });
     return response;
+});
+const initiateWithdrawal = ({ account_number, name, bank_code, user, amount, }) => __awaiter(void 0, void 0, void 0, function* () {
+    if (!account_number || !name || !bank_code || !user || !amount) {
+        throw new responseHandlers_1.BadRequestError("Provide account number, name, bank code, user and amount");
+    }
+    const agent = yield agent_service_1.default.getProfile(user);
+    const wallet = yield walletService.getWallet(agent === null || agent === void 0 ? void 0 : agent._id);
+    if (wallet.available_balance < amount) {
+        throw new responseHandlers_1.BadRequestError("This transaction can not be completed due to insufficient balance");
+    }
+    const reference = payment_1.default.generateTransferReference();
+    const response = yield payment_1.default.createTransferRecepient({
+        name,
+        account_number,
+        bank_code,
+    });
+    if (!response.status) {
+        throw new responseHandlers_1.ForbiddenError("Unable to create transfer recepient");
+    }
+    const recipient = response.data.recipient_code;
+    yield transaction_service_1.default.createTransaction({
+        reference,
+        status: "pending",
+        description: "Money to flenjo!",
+        amount,
+        type: "withdrawal",
+        payment_gateway: "wallet",
+        initiator: user,
+    });
+    const withdrawRes = yield payment_1.default.withdraw(amount, recipient, reference);
+    return withdrawRes;
 });
 const walletService = {
     createWallet,
@@ -112,5 +145,6 @@ const walletService = {
     purchasePropertyFromWallet,
     purchasePropertyWithTransfer,
     updateWalletBalance,
+    initiateWithdrawal,
 };
 exports.default = walletService;

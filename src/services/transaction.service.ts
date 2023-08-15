@@ -17,6 +17,7 @@ const createTransaction = async (
     payment_gateway: body.payment_gateway,
     property: body.property,
     bidding: body.bidding,
+    initiator: body.initiator,
   });
 
   return transaction;

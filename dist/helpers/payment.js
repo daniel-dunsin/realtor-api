@@ -20,6 +20,8 @@ const transaction_service_1 = __importDefault(require("../services/transaction.s
 const responseHandlers_1 = require("../handlers/responseHandlers");
 const wallet_service_1 = __importDefault(require("../services/wallet.service"));
 const listing_service_1 = __importDefault(require("../services/listing.service"));
+const uuid_1 = require("uuid");
+const agent_service_1 = __importDefault(require("../services/agent.service"));
 const paystack_secret = settings_1.settings.paystack.test;
 const initiatePayment = (email, amount) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -44,6 +46,8 @@ const queryPaystackEvent = (event, data) => __awaiter(void 0, void 0, void 0, fu
     const transaction = yield transaction_service_1.default.findByReference(data.reference);
     if (!transaction)
         throw new responseHandlers_1.NotFoundError("Transaction does not exist");
+    if (transaction.status !== "pending")
+        throw new responseHandlers_1.ForbiddenError("Transaction is not pending");
     switch (event) {
         case "charge.success":
             yield transaction_service_1.default.updateTransactionStatus(transaction._id, true);
@@ -56,13 +60,78 @@ const queryPaystackEvent = (event, data) => __awaiter(void 0, void 0, void 0, fu
         case "charge.failed":
             yield transaction_service_1.default.updateTransactionStatus(transaction._id, false);
             break;
+        case "transfer.success":
+            const walletOwner = yield agent_service_1.default.getProfile(transaction.initiator);
+            const wallet = yield wallet_service_1.default.getWallet(walletOwner === null || walletOwner === void 0 ? void 0 : walletOwner._id);
+            yield transaction_service_1.default.updateTransactionStatus(transaction._id, true);
+            yield wallet_service_1.default.updateWalletBalance(wallet._id, wallet.available_balance - transaction.amount);
+            break;
+        case "transfer.failed":
+            yield transaction_service_1.default.updateTransactionStatus(transaction._id, false);
+            break;
         default:
             throw new responseHandlers_1.ForbiddenError("Invalid event");
+    }
+});
+// for withdrawal
+const fetchBanks = () => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const response = yield axios_config_1.default.get("/bank?currency=NGN");
+        return response.data;
+    }
+    catch (error) {
+        throw new responseHandlers_1.ForbiddenError("Unable to fetch banks");
+    }
+});
+const verifyAccount = (account_number, bank_code) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const response = yield axios_config_1.default.get(`/bank/resolve?account_number=${account_number}&bank_code=${bank_code}`);
+        return response === null || response === void 0 ? void 0 : response.data;
+    }
+    catch (error) {
+        throw new responseHandlers_1.ForbiddenError("Unable to validate account");
+    }
+});
+const createTransferRecepient = (body) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const response = yield axios_config_1.default.post("/transferrecipient", {
+            type: "nuban",
+            name: body.name,
+            account_number: body.account_number,
+            bank_code: body.bank_code,
+            currency: "NGN",
+        });
+        return response.data;
+    }
+    catch (error) {
+        throw new responseHandlers_1.ForbiddenError("Unable to create transfer recepient");
+    }
+});
+const generateTransferReference = () => (0, uuid_1.v4)();
+const withdraw = (amount, recipient, reference) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const response = yield axios_config_1.default.post("/transfer", {
+            source: "balance",
+            amount,
+            reference,
+            recipient,
+            reason: "Mo fe lo jaye!",
+        });
+        return response === null || response === void 0 ? void 0 : response.data;
+    }
+    catch (error) {
+        // console.log(error);
+        throw new responseHandlers_1.ForbiddenError("Unable to withdraw money from wallet");
     }
 });
 const payment = {
     initiatePayment,
     validateSignature,
     queryPaystackEvent,
+    fetchBanks,
+    verifyAccount,
+    createTransferRecepient,
+    generateTransferReference,
+    withdraw,
 };
 exports.default = payment;

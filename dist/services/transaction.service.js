@@ -25,6 +25,7 @@ const createTransaction = (body) => __awaiter(void 0, void 0, void 0, function* 
         payment_gateway: body.payment_gateway,
         property: body.property,
         bidding: body.bidding,
+        initiator: body.initiator,
     });
     return transaction;
 });

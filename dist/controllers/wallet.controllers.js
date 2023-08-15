@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.handlePaystackWebhook = exports.purchaseWithTransfer = exports.purchaseWithWallet = exports.getPurcahseSession = exports.getWalletInfo = void 0;
+exports.initiateWithdrawal = exports.validateAccountDetails = exports.getAllBanks = exports.handlePaystackWebhook = exports.purchaseWithTransfer = exports.purchaseWithWallet = exports.getPurcahseSession = exports.getWalletInfo = void 0;
 const express_async_handler_1 = __importDefault(require("express-async-handler"));
 const agent_service_1 = __importDefault(require("../services/agent.service"));
 const wallet_service_1 = __importDefault(require("../services/wallet.service"));
@@ -62,4 +62,37 @@ exports.handlePaystackWebhook = (0, express_async_handler_1.default)((req, res, 
     const data = req.body.data;
     yield payment_1.default.queryPaystackEvent(event, data);
     res.status(200).json({ message: "✅" });
+}));
+exports.getAllBanks = (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const response = yield payment_1.default.fetchBanks();
+    res
+        .status(200)
+        .json({ message: "Banks fetched successfully", data: response.data });
+}));
+exports.validateAccountDetails = (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { account_number, bank_code } = req.body;
+    if (!account_number || !bank_code) {
+        throw new responseHandlers_1.BadRequestError("Provide account number and bank code");
+    }
+    const response = yield payment_1.default.verifyAccount(account_number, bank_code);
+    res.status(200).json({
+        message: "Account info fetched successfully",
+        data: {
+            account_number: response.data.account_number,
+            account_name: response.data.account_name,
+        },
+    });
+}));
+exports.initiateWithdrawal = (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    var _f;
+    const { account_number, name, bank_code, amount } = req.body;
+    const user = (_f = req.user) === null || _f === void 0 ? void 0 : _f._id;
+    const response = yield wallet_service_1.default.initiateWithdrawal({
+        account_number,
+        name,
+        bank_code,
+        user,
+        amount,
+    });
+    res.status(200).json({ message: response.message });
 }));

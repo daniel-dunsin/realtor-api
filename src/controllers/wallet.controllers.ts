@@ -4,7 +4,7 @@ import { NextFunction, Request, Response } from "express";
 import agentService from "../services/agent.service";
 import walletService from "../services/wallet.service";
 import payment from "../helpers/payment";
-import { ForbiddenError } from "../handlers/responseHandlers";
+import { BadRequestError, ForbiddenError } from "../handlers/responseHandlers";
 import { IWebhookData } from "../interfaces/response/payment.response";
 
 export const getWalletInfo = expressAsyncHandler(
@@ -78,5 +78,52 @@ export const handlePaystackWebhook = expressAsyncHandler(
     await payment.queryPaystackEvent(event, data);
 
     res.status(200).json({ message: "✅" });
+  }
+);
+
+export const getAllBanks = expressAsyncHandler(
+  async (req: IRequest, res: Response, next: NextFunction) => {
+    const response = await payment.fetchBanks();
+
+    res
+      .status(200)
+      .json({ message: "Banks fetched successfully", data: response.data });
+  }
+);
+
+export const validateAccountDetails = expressAsyncHandler(
+  async (req: IRequest, res: Response, next: NextFunction) => {
+    const { account_number, bank_code } = req.body;
+
+    if (!account_number || !bank_code) {
+      throw new BadRequestError("Provide account number and bank code");
+    }
+
+    const response = await payment.verifyAccount(account_number, bank_code);
+
+    res.status(200).json({
+      message: "Account info fetched successfully",
+      data: {
+        account_number: response.data.account_number,
+        account_name: response.data.account_name,
+      },
+    });
+  }
+);
+
+export const initiateWithdrawal = expressAsyncHandler(
+  async (req: IRequest, res: Response, next: NextFunction) => {
+    const { account_number, name, bank_code, amount } = req.body;
+    const user = req.user?._id as string;
+
+    const response = await walletService.initiateWithdrawal({
+      account_number,
+      name,
+      bank_code,
+      user,
+      amount,
+    });
+
+    res.status(200).json({ message: response.message });
   }
 );

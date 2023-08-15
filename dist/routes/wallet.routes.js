@@ -7,4 +7,7 @@ const wallet_controllers_1 = require("../controllers/wallet.controllers");
 const router = (0, express_1.Router)();
 router.get("/", isAuth_1.isAuth, isAgent_1.isAgent, wallet_controllers_1.getWalletInfo);
 router.post("/webhook", wallet_controllers_1.handlePaystackWebhook);
+router.get("/bank", isAuth_1.isAuth, isAgent_1.isAgent, wallet_controllers_1.getAllBanks);
+router.post("/account/validate", isAuth_1.isAuth, isAgent_1.isAgent, wallet_controllers_1.validateAccountDetails);
+router.post("/withdraw", isAuth_1.isAuth, isAgent_1.isAgent, wallet_controllers_1.initiateWithdrawal);
 exports.default = router;

@@ -4,11 +4,17 @@ import {
   NotFoundError,
 } from "../handlers/responseHandlers";
 import payment from "../helpers/payment";
-import { IInitiatePaymentRes } from "../interfaces/response/payment.response";
+import {
+  IInitiatePaymentRes,
+  IWithdrawRes,
+} from "../interfaces/response/payment.response";
 import { IUserSchema } from "../interfaces/schema/auth.schema";
 import { IProperty } from "../interfaces/schema/property.schema";
 import { IWallet } from "../interfaces/schema/wallet.schema";
-import { IInitializeTransactionBody } from "../interfaces/services/wallet.body";
+import {
+  IInitializeTransactionBody,
+  IInitiateWithdrawalBody,
+} from "../interfaces/services/wallet.body";
 import Property from "../models/property.model";
 import Wallet from "../models/wallet.model";
 import agentService from "./agent.service";
@@ -104,6 +110,7 @@ const purchasePropertyFromWallet = async (
     payment_gateway: "wallet",
     property: property?._id as string,
     bidding: bidding._id,
+    initiator: bidding.proposedBuyer as string,
   });
 
   // update the owner of the property
@@ -166,9 +173,62 @@ const purchasePropertyWithTransfer = async (
     payment_gateway: "card",
     property: property._id as string,
     bidding: bidding._id,
+    initiator: bidding.proposedBuyer as string,
   });
 
   return response;
+};
+
+const initiateWithdrawal = async ({
+  account_number,
+  name,
+  bank_code,
+  user,
+  amount,
+}: IInitiateWithdrawalBody): Promise<IWithdrawRes> => {
+  if (!account_number || !name || !bank_code || !user || !amount) {
+    throw new BadRequestError(
+      "Provide account number, name, bank code, user and amount"
+    );
+  }
+
+  const agent = await agentService.getProfile(user);
+
+  const wallet = await walletService.getWallet(agent?._id as string);
+
+  if (wallet.available_balance < amount) {
+    throw new BadRequestError(
+      "This transaction can not be completed due to insufficient balance"
+    );
+  }
+
+  const reference = payment.generateTransferReference();
+
+  const response = await payment.createTransferRecepient({
+    name,
+    account_number,
+    bank_code,
+  });
+
+  if (!response.status) {
+    throw new ForbiddenError("Unable to create transfer recepient");
+  }
+
+  const recipient = response.data.recipient_code;
+
+  await transactionService.createTransaction({
+    reference,
+    status: "pending",
+    description: "Money to flenjo!",
+    amount,
+    type: "withdrawal",
+    payment_gateway: "wallet",
+    initiator: user,
+  });
+
+  const withdrawRes = await payment.withdraw(amount, recipient, reference);
+
+  return withdrawRes;
 };
 
 const walletService = {
@@ -177,6 +237,7 @@ const walletService = {
   purchasePropertyFromWallet,
   purchasePropertyWithTransfer,
   updateWalletBalance,
+  initiateWithdrawal,
 };
 
 export default walletService;
