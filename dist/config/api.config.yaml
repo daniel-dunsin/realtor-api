@@ -1,0 +1,1621 @@
+openapi: 3.0.0
+info:
+  title: Realtor
+  contact:
+    name: Adejare Daniel
+    url: https://github.com/daniel-dunsin/realtor-api
+    email: adejaredaniel12@gmail.com
+  version: "1.0"
+servers:
+  - url: https://daniel-realtor.onrender.com
+    variables: {}
+paths:
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: Login
+      operationId: Login
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/LoginRequest"
+                - example:
+                    credential: adejaredaniel12@gmail.com
+                    password: brainiac12
+            example:
+              credential: adejaredaniel12@gmail.com
+              password: brainiac12
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      summary: Register
+      operationId: Register
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/RegisterRequest"
+                - example:
+                    username: daniel
+                    email: adejaredaniel12@gmail.com
+                    password: brainiac12
+                    firstname: Dunsin
+                    lastname: Joe
+            example:
+              username: daniel
+              email: adejaredaniel12@gmail.com
+              password: brainiac12
+              firstname: Dunsin
+              lastname: Joe
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /agent:
+    get:
+      tags:
+        - Agent
+      summary: Get Profile
+      operationId: GetProfile
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    post:
+      tags:
+        - Agent
+      summary: Create Agent / Become An Agent
+      operationId: CreateAgent/BecomeAnAgent
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    patch:
+      tags:
+        - Agent
+      summary: Update Agent Profile
+      operationId: UpdateAgentProfile
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/UpdateAgentProfileRequest"
+                - example:
+                    taxNumber: 1245
+            example:
+              taxNumber: 1245
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /review/property/{propertyId}:
+    parameters:
+      - in: path
+        required: true
+        name: propertyId
+        description: Property ID
+        schema:
+          type: string
+    post:
+      tags:
+        - Review
+      summary: Add Review
+      operationId: AddReview
+
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/AddReviewRequest"
+                - example:
+                    text: Very disrespectful agent
+                    stars: 1
+            example:
+              text: Very disrespectful agent
+              stars: 1
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    get:
+      tags:
+        - Review
+      summary: Get Property Reviews
+      operationId: GetPropertyReviews
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /review/{reviewId}:
+    parameters:
+      - in: path
+        required: true
+        name: reviewId
+        schema:
+          type: string
+    put:
+      tags:
+        - Review
+      summary: Update Review
+      operationId: UpdateReview
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/UpdateReviewRequest"
+                - example:
+                    text: Fake property
+                    stars: 0
+            example:
+              text: Fake property
+              stars: 0
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    delete:
+      tags:
+        - Review
+      summary: Delete Review
+      operationId: DeleteReview
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /listing/agent/{propertyId}:
+    parameters:
+      - in: path
+        required: true
+        name: propertyId
+        schema:
+          type: string
+    put:
+      tags:
+        - Listings
+      summary: Update Listing
+      operationId: UpdateListing
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/UpdateListingRequest"
+                - example:
+                    title: Spacious Family Home
+                    description: A comfortable single-family home perfect for a growing family.
+                    type: Single Family
+                    status: sale
+                    price: 450000
+                    address: 101 Maple Street
+                    country: Canada
+                    state: Ontario
+                    city: Toronto
+                    zipCode: 12345
+                    area: 250
+                    areaSuffix: sq.m
+                    bedrooms: 4
+                    bathrooms: 3
+                    garages: 2
+                    yearBuilt: "2005"
+                    amenities:
+                      - Air Conditioning
+                      - Gym
+            example:
+              title: Spacious Family Home
+              description: A comfortable single-family home perfect for a growing family.
+              type: Single Family
+              status: sale
+              price: 450000
+              address: 101 Maple Street
+              country: Canada
+              state: Ontario
+              city: Toronto
+              zipCode: 12345
+              area: 250
+              areaSuffix: sq.m
+              bedrooms: 4
+              bathrooms: 3
+              garages: 2
+              yearBuilt: "2005"
+              amenities:
+                - Air Conditioning
+                - Gym
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    delete:
+      tags:
+        - Listings
+      summary: Delete My Listing
+      operationId: DeleteMyListing
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /listing/agent:
+    post:
+      tags:
+        - Listings
+      summary: Create Listing
+      operationId: CreateListing
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding: {}
+            schema:
+              required:
+                - images
+                - title
+                - description
+                - type
+                - status
+                - price
+                - address
+                - country
+                - state
+                - city
+                - zipCode
+                - area
+                - bedrooms
+                - bathrooms
+                - garages
+                - yearBuilt
+                - amenities
+              type: object
+              properties:
+                images:
+                  type: string
+                  format: binary
+                title:
+                  type: string
+                  example: New House in UK
+                description:
+                  type: string
+                  example: Spacious and modern apartment with great city views.
+                type:
+                  type: string
+                  example: Apartment
+                status:
+                  type: string
+                  example: sale
+                price:
+                  type: integer
+                  format: int32
+                  example: 2000
+                address:
+                  type: string
+                  example: 123 Main Street
+                country:
+                  type: string
+                  example: United States
+                state:
+                  type: string
+                  example: California
+                city:
+                  type: string
+                  example: Los Angeles
+                zipCode:
+                  type: integer
+                  format: int32
+                  example: 90001
+                area:
+                  type: integer
+                  format: int32
+                  example: 100
+                bedrooms:
+                  type: integer
+                  format: int32
+                  example: 2
+                bathrooms:
+                  type: integer
+                  format: int64
+                  example: 2
+                garages:
+                  type: integer
+                  format: int32
+                  example: 1
+                yearBuilt:
+                  type: integer
+                  format: int32
+                  example: 2018
+                amenities:
+                  type: string
+                  example: Gym
+        required: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    get:
+      tags:
+        - Listings
+      summary: Get My Listing
+      operationId: GetMyListing
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /listing:
+    get:
+      tags:
+        - Listings
+      summary: Get All Listings
+      operationId: GetAllListings
+      parameters:
+        - in: query
+          name: keyword
+          schema:
+            type: string
+            example: luxury
+        - in: query
+          name: min_price
+          schema:
+            type: number
+            example: 1000
+        - in: query
+          name: max_price
+          schema:
+            type: number
+            example: 3000
+        - in: query
+          name: location
+          schema:
+            type: string
+            example: united states
+        - in: query
+          name: bathrooms
+          schema:
+            type: number
+            example: 2
+        - in: query
+          name: bedrooms
+          schema:
+            type: number
+            example: 2
+        - in: query
+          name: year
+          schema:
+            type: number
+            example: 2018
+        - in: query
+          name: area
+          description: "sq.m"
+          schema:
+            type: number
+            example: 100
+        - in: query
+          name: amenities
+          schema:
+            type: array
+            items:
+              type: string
+              example:
+                - Air Conditioning
+                - Gym
+                - Laundry
+                - Lawn
+                - Microwave
+                - Outdoor Shower
+                - Refrigerator
+                - Sauna
+                - Swimming Pool
+                - TV Cable
+                - Washer
+                - Wi-Fi
+                - Window Coverage
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /listing/{propertyId}:
+    get:
+      tags:
+        - Listings
+      summary: Get Single Listing
+      operationId: GetSingleListing
+      parameters:
+        - in: path
+          name: propertyId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /listing/compare:
+    post:
+      tags:
+        - Listings
+      summary: Compare Properties
+      operationId: CompareProperties
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/ComparePropertiesRequest"
+                - example:
+                    ids:
+                      - 64cc3f77ecd4f3341492d3ab
+                      - 64cc3fa1ecd4f3341492d3af
+            example:
+              ids:
+                - 64cc3f77ecd4f3341492d3ab
+                - 64cc3fa1ecd4f3341492d3af
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /listing/properties:
+    get:
+      tags:
+        - Listings
+      summary: Get My Properties (not for sale)
+      operationId: GetMyProperties(notforsale)
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /listing/sell/{propertyId}:
+    patch:
+      tags:
+        - Listings
+      summary: Sell My Property
+      parameters:
+        - in: path
+          name: propertyId
+          required: true
+          schema:
+            type: string
+      operationId: SellMyProperty
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /comment/article/{articleId}:
+    parameters:
+      - in: path
+        name: articleId
+        required: true
+        schema:
+          type: string
+    post:
+      tags:
+        - Comments
+      summary: Add Comment
+      operationId: AddComment
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/AddCommentRequest"
+                - example:
+                    text: Nice write-up
+            example:
+              text: Nice write-up
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    get:
+      tags:
+        - Comments
+      summary: Get Comments
+      operationId: GetComments
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /comment/{commentId}:
+    parameters:
+      - in: path
+        required: true
+        name: commentId
+        schema:
+          type: string
+    patch:
+      tags:
+        - Comments
+      summary: Edit Comment
+      operationId: EditComment
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/EditCommentRequest"
+                - example:
+                    text: Comment edited
+            example:
+              text: Comment edited
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    delete:
+      tags:
+        - Comments
+      summary: Delete Comment
+      operationId: DeleteComment
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /article/agent:
+    post:
+      tags:
+        - Article
+      summary: Create Article
+      operationId: CreateArticle
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/CreateArticleRequest"
+                - example:
+                    title: How to sell faster
+                    body: Artificial Intelligence (AI) is rapidly advancing, and its impact on society is profound. This article delves into the current state of AI and the potential it holds for the future.
+                    category: sales
+                    tags:
+                      - sales
+                      - ai
+            example:
+              title: How to sell faster
+              body: Artificial Intelligence (AI) is rapidly advancing, and its impact on society is profound. This article delves into the current state of AI and the potential it holds for the future.
+              category: sales
+              tags:
+                - sales
+                - ai
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    get:
+      tags:
+        - Article
+      summary: Get My Articles
+      operationId: GetMyArticles
+      parameters:
+        - name: page
+          in: query
+          description: ""
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+            example: 1
+        - name: hitsPerPage
+          in: query
+          description: ""
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+            example: 2
+        - name: search
+          in: query
+          description: ""
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: string
+            example: ai
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /article:
+    get:
+      tags:
+        - Article
+      summary: Get All Articles
+      operationId: GetAllArticles
+      parameters:
+        - name: page
+          in: query
+          description: ""
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+            example: 1
+        - name: hitsPerPage
+          in: query
+          description: ""
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int32
+            example: 2
+        - name: search
+          in: query
+          description: ""
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: string
+            example: ai
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /article/agent/{articleId}:
+    parameters:
+      - in: path
+        required: true
+        name: articleId
+        schema:
+          type: string
+    put:
+      tags:
+        - Article
+      summary: Update Article
+      operationId: UpdateArticle
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/UpdateArticleRequest"
+                - example:
+                    title: Edited
+                    body: Artificial Intelligence (AI) is rapidly advancing, and its impact on society is profound. This article delves into the current state of AI and the potential it holds for the future.
+                    tags:
+                      - construction
+                      - Artificial
+                    category: sales
+            example:
+              title: Edited
+              body: Artificial Intelligence (AI) is rapidly advancing, and its impact on society is profound. This article delves into the current state of AI and the potential it holds for the future.
+              tags:
+                - construction
+                - Artificial
+              category: sales
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+
+    delete:
+      tags:
+        - Article
+      summary: Delete Article
+      operationId: DeleteArticle
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /article/single/{articleId}:
+    get:
+      tags:
+        - Article
+      summary: Get Single Article
+      operationId: GetSingleArticle
+      parameters:
+        - in: path
+          name: articleId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /message/chat/{chatId}:
+    parameters:
+      - in: path
+        required: true
+        name: chatId
+        schema:
+          type: string
+    post:
+      tags:
+        - Message
+      summary: Send Message
+      operationId: SendMessage
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding: {}
+            schema:
+              required:
+                - images
+                - text
+              type: object
+              properties:
+                images:
+                  type: string
+                  format: binary
+                text:
+                  type: string
+                  example: see this player bro
+        required: false
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    get:
+      tags:
+        - Message
+      summary: Get Chat Messages
+      operationId: GetChatMessages
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /message/{messageId}:
+    parameters:
+      - in: path
+        required: true
+        name: messageId
+        schema:
+          type: string
+    delete:
+      tags:
+        - Message
+      summary: Delete Message
+      operationId: DeleteMessage
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    patch:
+      tags:
+        - Message
+      summary: Edit Message
+      operationId: EditMessage
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/EditMessageRequest"
+                - example:
+                    text: Edited message
+            example:
+              text: Edited message
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /chat:
+    post:
+      tags:
+        - Chat
+      summary: Create Conversation
+      operationId: CreateConversation
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/CreateConversationRequest"
+                - example:
+                    user: 64cc2a73ccd933cc6b692696
+            example:
+              user: 64cc2a73ccd933cc6b692696
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    get:
+      tags:
+        - Chat
+      summary: Get All Conversations
+      operationId: GetAllConversations
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /chat/{chatId}:
+    get:
+      tags:
+        - Chat
+      summary: Get Single Conversation
+      operationId: GetSingleConversation
+      parameters:
+        - in: path
+          required: true
+          name: chatId
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /bidding/property/{propertyId}:
+    parameters:
+      - in: path
+        required: true
+        name: propertyId
+        schema:
+          type: string
+    post:
+      tags:
+        - Bidding
+      summary: Create Property Bidding
+      operationId: CreatePropertyBidding
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    get:
+      tags:
+        - Bidding
+      summary: Get Property Biddings
+      operationId: GetPropertyBiddings
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /bidding/received:
+    get:
+      tags:
+        - Bidding
+      summary: Get Received Biddings
+      operationId: GetReceivedBiddings
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /bidding/sent:
+    get:
+      tags:
+        - Bidding
+      summary: Get Sent Biddings
+      operationId: GetSentBiddings
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /bidding/{biddingId}:
+    parameters:
+      - in: path
+        name: biddingId
+        required: true
+        schema:
+          type: string
+    delete:
+      tags:
+        - Bidding
+      summary: Delete Bidding
+      operationId: DeleteBidding
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    patch:
+      tags:
+        - Bidding
+      summary: Edit Bidding Status
+      operationId: EditBiddingStatus
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/EditBiddingStatusRequest"
+                - example:
+                    isAccepted: true
+            example:
+              isAccepted: true
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /wallet/bank:
+    get:
+      tags:
+        - Withdraw
+      summary: Get Banks
+      operationId: GetBanks
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /wallet/account/validate:
+    post:
+      tags:
+        - Withdraw
+      summary: Validate Account Info
+      operationId: ValidateAccountInfo
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/ValidateAccountInfoRequest"
+                - example:
+                    bank_code: "058"
+                    account_number: "0670746511"
+            example:
+              bank_code: "058"
+              account_number: "0670746511"
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /wallet/withdraw:
+    post:
+      tags:
+        - Withdraw
+      summary: Withdraw Money
+      operationId: WithdrawMoney
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/WithdrawMoneyRequest"
+                - example:
+                    account_number: "0670746511"
+                    name: ADEJARE  DANIEL  OLUWADUNSIN
+                    bank_code: "058"
+                    amount: 2000
+            example:
+              account_number: "0670746511"
+              name: ADEJARE  DANIEL  OLUWADUNSIN
+              bank_code: "058"
+              amount: 2000
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /wallet:
+    get:
+      tags:
+        - Wallet
+      summary: Get Wallet Info
+      operationId: GetWalletInfo
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /listing/buy/wallet/property/{propertyId}:
+    post:
+      tags:
+        - Wallet
+      summary: Buy Property With Wallet
+      operationId: BuyPropertyWithWallet
+      parameters:
+        - in: path
+          required: true
+          name: propertyId
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /listing/buy/transfer/property/{propertyId}:
+    post:
+      tags:
+        - Wallet
+      summary: Get Property Payment Session
+      operationId: GetPropertyPaymentSession
+      parameters:
+        - in: path
+          name: propertyId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /wallet/webhook:
+    post:
+      tags:
+        - Wallet
+      summary: Webhook Test
+      operationId: WebhookTest
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/WebhookTestRequest"
+                - example:
+                    event: transfer.success
+                    data:
+                      reference: bb70649b-59f0-446a-8c85-6bf54b836f0c
+            example:
+              event: transfer.success
+              data:
+                reference: bb70649b-59f0-446a-8c85-6bf54b836f0c
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+components:
+  schemas:
+    LoginRequest:
+      title: LoginRequest
+      required:
+        - credential
+        - password
+      type: object
+      properties:
+        credential:
+          type: string
+        password:
+          type: string
+      example:
+        credential: adejaredaniel12@gmail.com
+        password: brainiac12
+    RegisterRequest:
+      title: RegisterRequest
+      required:
+        - username
+        - email
+        - password
+        - firstname
+        - lastname
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        firstname:
+          type: string
+        lastname:
+          type: string
+      example:
+        username: daniel
+        email: adejaredaniel12@gmail.com
+        password: brainiac12
+        firstname: Dunsin
+        lastname: Joe
+    UpdateAgentProfileRequest:
+      title: UpdateAgentProfileRequest
+      required:
+        - taxNumber
+      type: object
+      properties:
+        taxNumber:
+          type: integer
+          format: int32
+      example:
+        taxNumber: 1245
+    AddReviewRequest:
+      title: AddReviewRequest
+      required:
+        - text
+        - stars
+      type: object
+      properties:
+        text:
+          type: string
+        stars:
+          type: integer
+          format: int32
+      example:
+        text: Very disrespectful agent
+        stars: 1
+    UpdateReviewRequest:
+      title: UpdateReviewRequest
+      required:
+        - text
+        - stars
+      type: object
+      properties:
+        text:
+          type: string
+        stars:
+          type: integer
+          format: int32
+      example:
+        text: Fake property
+        stars: 0
+    UpdateListingRequest:
+      title: UpdateListingRequest
+      required:
+        - title
+        - description
+        - type
+        - status
+        - price
+        - address
+        - country
+        - state
+        - city
+        - zipCode
+        - area
+        - areaSuffix
+        - bedrooms
+        - bathrooms
+        - garages
+        - yearBuilt
+        - amenities
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        type:
+          type: string
+        status:
+          type: string
+        price:
+          type: integer
+          format: int32
+        address:
+          type: string
+        country:
+          type: string
+        state:
+          type: string
+        city:
+          type: string
+        zipCode:
+          type: integer
+          format: int32
+        area:
+          type: integer
+          format: int32
+        areaSuffix:
+          type: string
+        bedrooms:
+          type: integer
+          format: int32
+        bathrooms:
+          type: integer
+          format: int32
+        garages:
+          type: integer
+          format: int32
+        yearBuilt:
+          type: string
+        amenities:
+          type: array
+          items:
+            type: string
+          description: ""
+      example:
+        title: Spacious Family Home
+        description: A comfortable single-family home perfect for a growing family.
+        type: Single Family
+        status: sale
+        price: 450000
+        address: 101 Maple Street
+        country: Canada
+        state: Ontario
+        city: Toronto
+        zipCode: 12345
+        area: 250
+        areaSuffix: sq.m
+        bedrooms: 4
+        bathrooms: 3
+        garages: 2
+        yearBuilt: "2005"
+        amenities:
+          - Air Conditioning
+          - Gym
+    ComparePropertiesRequest:
+      title: ComparePropertiesRequest
+      required:
+        - ids
+      type: object
+      properties:
+        ids:
+          type: array
+          items:
+            type: string
+          description: ""
+      example:
+        ids:
+          - 64cc3f77ecd4f3341492d3ab
+          - 64cc3fa1ecd4f3341492d3af
+    AddCommentRequest:
+      title: AddCommentRequest
+      required:
+        - text
+      type: object
+      properties:
+        text:
+          type: string
+      example:
+        text: Nice write-up
+    EditCommentRequest:
+      title: EditCommentRequest
+      required:
+        - text
+      type: object
+      properties:
+        text:
+          type: string
+      example:
+        text: Comment edited
+    CreateArticleRequest:
+      title: CreateArticleRequest
+      required:
+        - title
+        - body
+        - category
+        - tags
+      type: object
+      properties:
+        title:
+          type: string
+        body:
+          type: string
+        category:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+          description: ""
+      example:
+        title: How to sell faster
+        body: Artificial Intelligence (AI) is rapidly advancing, and its impact on society is profound. This article delves into the current state of AI and the potential it holds for the future.
+        category: sales
+        tags:
+          - sales
+          - ai
+    UpdateArticleRequest:
+      title: UpdateArticleRequest
+      required:
+        - title
+        - body
+        - tags
+        - category
+      type: object
+      properties:
+        title:
+          type: string
+        body:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+          description: ""
+        category:
+          type: string
+      example:
+        title: Edited
+        body: Artificial Intelligence (AI) is rapidly advancing, and its impact on society is profound. This article delves into the current state of AI and the potential it holds for the future.
+        tags:
+          - construction
+          - Artificial
+        category: sales
+    EditMessageRequest:
+      title: EditMessageRequest
+      required:
+        - text
+      type: object
+      properties:
+        text:
+          type: string
+      example:
+        text: Edited message
+    CreateConversationRequest:
+      title: CreateConversationRequest
+      required:
+        - user
+      type: object
+      properties:
+        user:
+          type: string
+      example:
+        user: 64cc2a73ccd933cc6b692696
+    EditBiddingStatusRequest:
+      title: EditBiddingStatusRequest
+      required:
+        - isAccepted
+      type: object
+      properties:
+        isAccepted:
+          type: boolean
+      example:
+        isAccepted: true
+    ValidateAccountInfoRequest:
+      title: ValidateAccountInfoRequest
+      required:
+        - bank_code
+        - account_number
+      type: object
+      properties:
+        bank_code:
+          type: string
+        account_number:
+          type: string
+      example:
+        bank_code: "058"
+        account_number: "0670746511"
+    WithdrawMoneyRequest:
+      title: WithdrawMoneyRequest
+      required:
+        - account_number
+        - name
+        - bank_code
+        - amount
+      type: object
+      properties:
+        account_number:
+          type: string
+        name:
+          type: string
+        bank_code:
+          type: string
+        amount:
+          type: integer
+          format: int32
+      example:
+        account_number: "0670746511"
+        name: ADEJARE  DANIEL  OLUWADUNSIN
+        bank_code: "058"
+        amount: 2000
+    WebhookTestRequest:
+      title: WebhookTestRequest
+      required:
+        - event
+        - data
+      type: object
+      properties:
+        event:
+          type: string
+        data:
+          $ref: "#/components/schemas/Data"
+      example:
+        event: transfer.success
+        data:
+          reference: bb70649b-59f0-446a-8c85-6bf54b836f0c
+    Data:
+      title: Data
+      required:
+        - reference
+      type: object
+      properties:
+        reference:
+          type: string
+      example:
+        reference: bb70649b-59f0-446a-8c85-6bf54b836f0c
+
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+  - name: Auth
+  - name: Agent
+  - name: Review
+  - name: Listings
+  - name: Comments
+  - name: Article
+  - name: Message
+  - name: Chat
+  - name: Bidding
+  - name: Withdraw
+  - name: Wallet

@@ -1,0 +1,1473 @@
+{
+  "info": {
+    "_postman_id": "8b7fabfd-3e1a-4ebf-b5b5-2f35e19fd5e6",
+    "name": "Realtor",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "25151923"
+  },
+
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"credential\":\"adejaredaniel12@gmail.com\", \"password\":\"brainiac12\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{dev}}/auth/login",
+              "host": ["{{dev}}"],
+              "path": ["auth", "login"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\":\"daniel\",\r\n    \"email\":\"adejaredaniel12@gmail.com\",\r\n    \"password\":\"brainiac12\",\r\n    \"firstname\":\"Dunsin\",\r\n    \"lastname\":\"Joe\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{dev}}/auth/register",
+              "host": ["{{dev}}"],
+              "path": ["auth", "register"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Agent",
+      "item": [
+        {
+          "name": "Get Profile",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVkYW5pZWwxMkBnbWFpbC5jb20iLCJfaWQiOiI2NGQ5NzRlZjI0NmRlNWEzZTAzNDAyYjYiLCJpYXQiOjE2OTE5NzI4ODAsImV4cCI6MTY5MjA1OTI4MH0.JUE10n9bcQDcAmQEDwAU1iXHRQiYo4yFoSqRXcWCGkw",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{dev}}/agent",
+              "host": ["{{dev}}"],
+              "path": ["agent"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Agent / Become An Agent",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVkYW5pZWwxMkBnbWFpbC5jb20iLCJfaWQiOiI2NGQ5NzRlZjI0NmRlNWEzZTAzNDAyYjYiLCJpYXQiOjE2OTE5NzI4ODAsImV4cCI6MTY5MjA1OTI4MH0.JUE10n9bcQDcAmQEDwAU1iXHRQiYo4yFoSqRXcWCGkw",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{dev}}/agent",
+              "host": ["{{dev}}"],
+              "path": ["agent"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Agent Profile",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVkYW5pZWwxMkBnbWFpbC5jb20iLCJfaWQiOiI2NGNjMmEzZmUxNDhkZGZkYTFkNzgxODciLCJpYXQiOjE2OTExMDE4MjIsImV4cCI6MTY5MTE4ODIyMn0.ez4gQGuGXUbD7H32cgX-0rUG8q_Rt6tKEMITJgA1QOU",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"taxNumber\": 1245\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{dev}}/agent",
+              "host": ["{{dev}}"],
+              "path": ["agent"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Listings",
+      "item": [
+        {
+          "name": "Review",
+          "item": [
+            {
+              "name": "Add Review",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVkYW5pZWwxMkBnbWFpbC5jb20iLCJfaWQiOiI2NGNjMmEzZmUxNDhkZGZkYTFkNzgxODciLCJpYXQiOjE2OTEyNDU4OTgsImV4cCI6MTY5MTMzMjI5OH0.w4DIrABzy_YjCMqyaGm7BpfgfHJVcI0yL1ehoQdaU4s",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"text\":\"Very disrespectful agent\",\r\n    \"stars\": 1\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{dev}}/review/property/64ce5da51b053b23cd96b35e",
+                  "host": ["{{dev}}"],
+                  "path": ["review", "property", "64ce5da51b053b23cd96b35e"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Property Reviews",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{dev}}/review/property/64ce5da51b053b23cd96b35e",
+                  "host": ["{{dev}}"],
+                  "path": ["review", "property", "64ce5da51b053b23cd96b35e"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Review",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVkYW5pZWwxMkBnbWFpbC5jb20iLCJfaWQiOiI2NGNjMmEzZmUxNDhkZGZkYTFkNzgxODciLCJpYXQiOjE2OTEyNDU4OTgsImV4cCI6MTY5MTMzMjI5OH0.w4DIrABzy_YjCMqyaGm7BpfgfHJVcI0yL1ehoQdaU4s",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"text\":\"Fake property\", \"stars\":0}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{dev}}/review/64ce5e0a1b053b23cd96b367",
+                  "host": ["{{dev}}"],
+                  "path": ["review", "64ce5e0a1b053b23cd96b367"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Review",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVkYW5pZWwxMkBnbWFpbC5jb20iLCJfaWQiOiI2NGNjMmEzZmUxNDhkZGZkYTFkNzgxODciLCJpYXQiOjE2OTEyNDU4OTgsImV4cCI6MTY5MTMzMjI5OH0.w4DIrABzy_YjCMqyaGm7BpfgfHJVcI0yL1ehoQdaU4s",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{dev}}/review/64ce5e0a1b053b23cd96b367",
+                  "host": ["{{dev}}"],
+                  "path": ["review", "64ce5e0a1b053b23cd96b367"]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Create Listing",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVkYW5pZWwxMkBnbWFpbC5jb20iLCJfaWQiOiI2NGQ5NzRlZjI0NmRlNWEzZTAzNDAyYjYiLCJpYXQiOjE2OTIwNDI2MDYsImV4cCI6MTY5MjEyOTAwNn0.Uf6gYXfSvdCUe6najDZAPS3LbBsmnJKwpFoWworaKeg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "images",
+                  "type": "file",
+                  "src": "/C:/Users/user/Downloads/prev/Red bull/Rectangle 44.png"
+                },
+                {
+                  "key": "title",
+                  "value": "New House in UK",
+                  "type": "text"
+                },
+                {
+                  "key": "description",
+                  "value": "Spacious and modern apartment with great city views.",
+                  "type": "text"
+                },
+                {
+                  "key": "type",
+                  "value": "Apartment",
+                  "type": "text"
+                },
+                {
+                  "key": "status",
+                  "value": "sale",
+                  "type": "text"
+                },
+                {
+                  "key": "price",
+                  "value": "2000",
+                  "type": "text"
+                },
+                {
+                  "key": "address",
+                  "value": "123 Main Street",
+                  "type": "text"
+                },
+                {
+                  "key": "country",
+                  "value": "United States",
+                  "type": "text"
+                },
+                {
+                  "key": "state",
+                  "value": "California",
+                  "type": "text"
+                },
+                {
+                  "key": "city",
+                  "value": "Los Angeles",
+                  "type": "text"
+                },
+                {
+                  "key": "zipCode",
+                  "value": "90001",
+                  "type": "text"
+                },
+                {
+                  "key": "area",
+                  "value": "100",
+                  "type": "text"
+                },
+                {
+                  "key": "bedrooms",
+                  "value": "2",
+                  "type": "text"
+                },
+                {
+                  "key": "bathrooms",
+                  "value": "2\n",
+                  "type": "text"
+                },
+                {
+                  "key": "garages",
+                  "value": "1",
+                  "type": "text"
+                },
+                {
+                  "key": "yearBuilt",
+                  "value": "2018",
+                  "type": "text"
+                },
+                {
+                  "key": "amenities",
+                  "value": "Gym",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{dev}}/listing/agent/64cc4637b584442c39fb4e48",
+              "host": ["{{dev}}"],
+              "path": ["listing", "agent", "64cc4637b584442c39fb4e48"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Listing",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVqb2huMjAwNEBnbWFpbC5jb20iLCJfaWQiOiI2NGQ5NzQxMTEyNGViY2VlMmJmYzUzMWMiLCJpYXQiOjE2OTIwNDI1NTUsImV4cCI6MTY5MjEyODk1NX0.qXRSkZyNE2jSib6cjccVAQZs4cGqsSbtuF34HcEkb9I",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{dev}}/listing/agent",
+              "host": ["{{dev}}"],
+              "path": ["listing", "agent"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0",
+                  "disabled": true
+                },
+                {
+                  "key": "hitsPerPage",
+                  "value": "3",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Listing",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVkYW5pZWwxMkBnbWFpbC5jb20iLCJfaWQiOiI2NGNjMmEzZmUxNDhkZGZkYTFkNzgxODciLCJpYXQiOjE2OTExMDE4MjIsImV4cCI6MTY5MTE4ODIyMn0.ez4gQGuGXUbD7H32cgX-0rUG8q_Rt6tKEMITJgA1QOU",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Spacious Family Home\",\r\n    \"description\": \"A comfortable single-family home perfect for a growing family.\",\r\n    \"type\": \"Single Family\",\r\n    \"status\": \"sale\",\r\n    \"price\": 450000,\r\n    \"address\": \"101 Maple Street\",\r\n    \"country\": \"Canada\",\r\n    \"state\": \"Ontario\",\r\n    \"city\": \"Toronto\",\r\n    \"zipCode\": 12345,\r\n    \"area\": 250,\r\n    \"areaSuffix\": \"sq.m\",\r\n    \"bedrooms\": 4,\r\n    \"bathrooms\": 3,\r\n    \"garages\": 2,\r\n    \"yearBuilt\": \"2005\",\r\n    \"amenities\": [\"Air Conditioning\", \"Gym\"]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{dev}}/listing/agent/64cc4637b584442c39fb4e48",
+              "host": ["{{dev}}"],
+              "path": ["listing", "agent", "64cc4637b584442c39fb4e48"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Listings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{dev}}/listing",
+              "host": ["{{dev}}"],
+              "path": ["listing"],
+              "query": [
+                {
+                  "key": "keyword",
+                  "value": "luxury",
+                  "disabled": true
+                },
+                {
+                  "key": "min_price",
+                  "value": "1999",
+                  "disabled": true
+                },
+                {
+                  "key": "max_price",
+                  "value": "2001",
+                  "disabled": true
+                },
+                {
+                  "key": "location",
+                  "value": "united states",
+                  "disabled": true
+                },
+                {
+                  "key": "bathrooms",
+                  "value": "2",
+                  "disabled": true
+                },
+                {
+                  "key": "bedrooms",
+                  "value": "2",
+                  "disabled": true
+                },
+                {
+                  "key": "year",
+                  "value": "2018",
+                  "disabled": true
+                },
+                {
+                  "key": "area",
+                  "value": "100",
+                  "disabled": true
+                },
+                {
+                  "key": "status",
+                  "value": "sale",
+                  "disabled": true
+                },
+                {
+                  "key": "amenities",
+                  "value": "Air Conditioning",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete My Listing",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVkYW5pZWwxMkBnbWFpbC5jb20iLCJfaWQiOiI2NGNjMmEzZmUxNDhkZGZkYTFkNzgxODciLCJpYXQiOjE2OTExMDE4MjIsImV4cCI6MTY5MTE4ODIyMn0.ez4gQGuGXUbD7H32cgX-0rUG8q_Rt6tKEMITJgA1QOU",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{dev}}/listing/agent/64cc4637b584442c39fb4e48",
+              "host": ["{{dev}}"],
+              "path": ["listing", "agent", "64cc4637b584442c39fb4e48"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Single Listing",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVkYW5pZWwxMkBnbWFpbC5jb20iLCJfaWQiOiI2NGQ5NzRlZjI0NmRlNWEzZTAzNDAyYjYiLCJpYXQiOjE2OTE5NzI4ODAsImV4cCI6MTY5MjA1OTI4MH0.JUE10n9bcQDcAmQEDwAU1iXHRQiYo4yFoSqRXcWCGkw",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{dev}}/listing/64da872d43e0821b73d29a24",
+              "host": ["{{dev}}"],
+              "path": ["listing", "64da872d43e0821b73d29a24"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Compare Properties",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"ids\" : [\"64cc3f77ecd4f3341492d3ab\", \"64cc3fa1ecd4f3341492d3af\"]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{dev}}/listing/compare",
+              "host": ["{{dev}}"],
+              "path": ["listing", "compare"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Properties (not for sale)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVqb2huMjAwNEBnbWFpbC5jb20iLCJfaWQiOiI2NGQ5NzQxMTEyNGViY2VlMmJmYzUzMWMiLCJpYXQiOjE2OTIwNDM3NjIsImV4cCI6MTY5MjEzMDE2Mn0.74TkImbAj4CSxTHqtpaFiUo9Ttlb_xS5eybENP6CsXE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{dev}}/listing/properties",
+              "host": ["{{dev}}"],
+              "path": ["listing", "properties"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Sell My Property",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVqb2huMjAwNEBnbWFpbC5jb20iLCJfaWQiOiI2NGQ5NzQxMTEyNGViY2VlMmJmYzUzMWMiLCJpYXQiOjE2OTIwMTk2MDQsImV4cCI6MTY5MjEwNjAwNH0.wuM5Vze5wI9Pe8esdFT74vW-jc5cuo4L9P7eUV1zWec",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{dev}}/listing/sell/64d9744e124ebcee2bfc532f",
+              "host": ["{{dev}}"],
+              "path": ["listing", "sell", "64d9744e124ebcee2bfc532f"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Article",
+      "item": [
+        {
+          "name": "Comments",
+          "item": [
+            {
+              "name": "Add Comment",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVkYW5pZWwxMkBnbWFpbC5jb20iLCJfaWQiOiI2NGNjMmEzZmUxNDhkZGZkYTFkNzgxODciLCJpYXQiOjE2OTExODk0NzQsImV4cCI6MTY5MTI3NTg3NH0.Q02dKeLHOLClpLqGdJgD7qaF13keGynMxl2D9ITolVw",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"text\":\"Nice write-up\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{dev}}/comment/article/64ccc5c7d7c952f9670b38dc",
+                  "host": ["{{dev}}"],
+                  "path": ["comment", "article", "64ccc5c7d7c952f9670b38dc"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Comments",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{dev}}/comment/article/64ccc5c7d7c952f9670b38dc",
+                  "host": ["{{dev}}"],
+                  "path": ["comment", "article", "64ccc5c7d7c952f9670b38dc"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Edit Comment",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVkYW5pZWwxMkBnbWFpbC5jb20iLCJfaWQiOiI2NGNjMmEzZmUxNDhkZGZkYTFkNzgxODciLCJpYXQiOjE2OTExODk0NzQsImV4cCI6MTY5MTI3NTg3NH0.Q02dKeLHOLClpLqGdJgD7qaF13keGynMxl2D9ITolVw",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"text\":\"Comment edited\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{dev}}/comment/64cd81c1da281319cc492db7",
+                  "host": ["{{dev}}"],
+                  "path": ["comment", "64cd81c1da281319cc492db7"]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Create Article",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVkYW5pZWwxMkBnbWFpbC5jb20iLCJfaWQiOiI2NGNjMmEzZmUxNDhkZGZkYTFkNzgxODciLCJpYXQiOjE2OTExMDE4MjIsImV4cCI6MTY5MTE4ODIyMn0.ez4gQGuGXUbD7H32cgX-0rUG8q_Rt6tKEMITJgA1QOU",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"How to sell faster\", \r\n    \"body\": \"Artificial Intelligence (AI) is rapidly advancing, and its impact on society is profound. This article delves into the current state of AI and the potential it holds for the future.\",\r\n    \"category\": \"sales\",\r\n    \"tags\": [\"sales\", \"ai\"]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{dev}}/article/agent",
+              "host": ["{{dev}}"],
+              "path": ["article", "agent"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Article",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVkYW5pZWwxMkBnbWFpbC5jb20iLCJfaWQiOiI2NGNjMmEzZmUxNDhkZGZkYTFkNzgxODciLCJpYXQiOjE2OTExMDE4MjIsImV4cCI6MTY5MTE4ODIyMn0.ez4gQGuGXUbD7H32cgX-0rUG8q_Rt6tKEMITJgA1QOU",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Edited\",\r\n    \"body\":\"Artificial Intelligence (AI) is rapidly advancing, and its impact on society is profound. This article delves into the current state of AI and the potential it holds for the future.\",\r\n    \"tags\": [\"construction\", \"Artificial\"],\r\n    \"category\":\"sales\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{dev}}/article/agent/64ccc5c7d7c952f9670b38dc",
+              "host": ["{{dev}}"],
+              "path": ["article", "agent", "64ccc5c7d7c952f9670b38dc"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Articles",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVkYW5pZWwxMkBnbWFpbC5jb20iLCJfaWQiOiI2NGNjMmEzZmUxNDhkZGZkYTFkNzgxODciLCJpYXQiOjE2OTExMDE4MjIsImV4cCI6MTY5MTE4ODIyMn0.ez4gQGuGXUbD7H32cgX-0rUG8q_Rt6tKEMITJgA1QOU",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{dev}}/article/agent?page=1&hitsPerPage=2&search=ai",
+              "host": ["{{dev}}"],
+              "path": ["article", "agent"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "hitsPerPage",
+                  "value": "2"
+                },
+                {
+                  "key": "search",
+                  "value": "ai"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Articles",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{dev}}/article?page=1&hitsPerPage=2&search=ai",
+              "host": ["{{dev}}"],
+              "path": ["article"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "hitsPerPage",
+                  "value": "2"
+                },
+                {
+                  "key": "search",
+                  "value": "ai"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Article",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVkYW5pZWwxMkBnbWFpbC5jb20iLCJfaWQiOiI2NGNjMmEzZmUxNDhkZGZkYTFkNzgxODciLCJpYXQiOjE2OTExMDE4MjIsImV4cCI6MTY5MTE4ODIyMn0.ez4gQGuGXUbD7H32cgX-0rUG8q_Rt6tKEMITJgA1QOU",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{dev}}/article/agent/64ccc589d7c952f9670b38d7",
+              "host": ["{{dev}}"],
+              "path": ["article", "agent", "64ccc589d7c952f9670b38d7"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Single Article",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{dev}}/article/single/64ccc5c7d7c952f9670b38dc",
+              "host": ["{{dev}}"],
+              "path": ["article", "single", "64ccc5c7d7c952f9670b38dc"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Comment",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVkYW5pZWwxMkBnbWFpbC5jb20iLCJfaWQiOiI2NGNjMmEzZmUxNDhkZGZkYTFkNzgxODciLCJpYXQiOjE2OTExODk0NzQsImV4cCI6MTY5MTI3NTg3NH0.Q02dKeLHOLClpLqGdJgD7qaF13keGynMxl2D9ITolVw",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{dev}}/comment/64cd81c1da281319cc492db7",
+              "host": ["{{dev}}"],
+              "path": ["comment", "64cd81c1da281319cc492db7"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Chat",
+      "item": [
+        {
+          "name": "Message",
+          "item": [
+            {
+              "name": "Send Message",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVkYW5pZWwxMkBnbWFpbC5jb20iLCJfaWQiOiI2NGNjMmEzZmUxNDhkZGZkYTFkNzgxODciLCJpYXQiOjE2OTE2ODEyMDMsImV4cCI6MTY5MTc2NzYwM30.qCtUkFWhrGFf-W-aTLsIYGf3myN5JiD-bxPVByRgPMY",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "images",
+                      "type": "file",
+                      "src": "/C:/Users/user/Downloads/prev/Red bull/Group 51.png"
+                    },
+                    {
+                      "key": "text",
+                      "value": "see this player bro",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{dev}}/message/chat/64ce6b53121323f8c617495f",
+                  "host": ["{{dev}}"],
+                  "path": ["message", "chat", "64ce6b53121323f8c617495f"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Chat Messages",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVkYW5pZWwxMkBnbWFpbC5jb20iLCJfaWQiOiI2NGNjMmEzZmUxNDhkZGZkYTFkNzgxODciLCJpYXQiOjE2OTE2ODEyMDMsImV4cCI6MTY5MTc2NzYwM30.qCtUkFWhrGFf-W-aTLsIYGf3myN5JiD-bxPVByRgPMY",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{dev}}/message/chat/64ce6b53121323f8c617495f",
+                  "host": ["{{dev}}"],
+                  "path": ["message", "chat", "64ce6b53121323f8c617495f"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Message",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVkYW5pZWwxMkBnbWFpbC5jb20iLCJfaWQiOiI2NGNjMmEzZmUxNDhkZGZkYTFkNzgxODciLCJpYXQiOjE2OTEyNTAzMjQsImV4cCI6MTY5MTMzNjcyNH0.bMFWOqwTDmx6SQA8KAHkQmm5VGHe0lr2a86S6N1dc9M",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{dev}}/message/64ce7bf53dd4d0da4acab3d6",
+                  "host": ["{{dev}}"],
+                  "path": ["message", "64ce7bf53dd4d0da4acab3d6"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Edit Message",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVkYW5pZWwxMkBnbWFpbC5jb20iLCJfaWQiOiI2NGNjMmEzZmUxNDhkZGZkYTFkNzgxODciLCJpYXQiOjE2OTEyNTAzMjQsImV4cCI6MTY5MTMzNjcyNH0.bMFWOqwTDmx6SQA8KAHkQmm5VGHe0lr2a86S6N1dc9M",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"text\":\"Edited message\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{dev}}/message/64ce788564303ef3e2c37367",
+                  "host": ["{{dev}}"],
+                  "path": ["message", "64ce788564303ef3e2c37367"]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Create Conversation",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVkYW5pZWwxMkBnbWFpbC5jb20iLCJfaWQiOiI2NGNjMmEzZmUxNDhkZGZkYTFkNzgxODciLCJpYXQiOjE2OTEyNTAzMjQsImV4cCI6MTY5MTMzNjcyNH0.bMFWOqwTDmx6SQA8KAHkQmm5VGHe0lr2a86S6N1dc9M",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"user\": \"64cc2a73ccd933cc6b692696\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{dev}}/chat",
+              "host": ["{{dev}}"],
+              "path": ["chat"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Conversations",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVkYW5pZWwxMkBnbWFpbC5jb20iLCJfaWQiOiI2NGNjMmEzZmUxNDhkZGZkYTFkNzgxODciLCJpYXQiOjE2OTE2ODEyMDMsImV4cCI6MTY5MTc2NzYwM30.qCtUkFWhrGFf-W-aTLsIYGf3myN5JiD-bxPVByRgPMY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{dev}}/chat",
+              "host": ["{{dev}}"],
+              "path": ["chat"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Single Conversation",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVkYW5pZWwxMkBnbWFpbC5jb20iLCJfaWQiOiI2NGNjMmEzZmUxNDhkZGZkYTFkNzgxODciLCJpYXQiOjE2OTEyNTAzMjQsImV4cCI6MTY5MTMzNjcyNH0.bMFWOqwTDmx6SQA8KAHkQmm5VGHe0lr2a86S6N1dc9M",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{dev}}/chat/64ce6b53121323f8c617495f",
+              "host": ["{{dev}}"],
+              "path": ["chat", "64ce6b53121323f8c617495f"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Bidding",
+      "item": [
+        {
+          "name": "Create Property Bidding",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVqb2huMjAwNEBnbWFpbC5jb20iLCJfaWQiOiI2NGQ5NzQxMTEyNGViY2VlMmJmYzUzMWMiLCJpYXQiOjE2OTIwNDMxNzcsImV4cCI6MTY5MjEyOTU3N30.2pCFN_WPSACT6AHXUfa1GmL80s41S6fhchj1QV33LuE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": []
+            },
+            "url": {
+              "raw": "{{dev}}/bidding/property/64da872d43e0821b73d29a24",
+              "host": ["{{dev}}"],
+              "path": ["bidding", "property", "64da872d43e0821b73d29a24"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Property Biddings",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVkYW5pZWwxMkBnbWFpbC5jb20iLCJfaWQiOiI2NGQ5NzRlZjI0NmRlNWEzZTAzNDAyYjYiLCJpYXQiOjE2OTIwNDI2MDYsImV4cCI6MTY5MjEyOTAwNn0.Uf6gYXfSvdCUe6najDZAPS3LbBsmnJKwpFoWworaKeg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{dev}}/bidding/property/64da872d43e0821b73d29a24",
+              "host": ["{{dev}}"],
+              "path": ["bidding", "property", "64da872d43e0821b73d29a24"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Received Biddings",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVkYW5pZWwxMkBnbWFpbC5jb20iLCJfaWQiOiI2NGQ5NzRlZjI0NmRlNWEzZTAzNDAyYjYiLCJpYXQiOjE2OTE5NzYxMTcsImV4cCI6MTY5MjA2MjUxN30.FsVHdh_IcrcXFLHrciRLkmu8jCYj12eET9K15uVjTXI",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{dev}}/bidding/received",
+              "host": ["{{dev}}"],
+              "path": ["bidding", "received"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "hitsPerPage",
+                  "value": "1",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Sent Biddings",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVkYW5pZWwxMkBnbWFpbC5jb20iLCJfaWQiOiI2NGQ5NzRlZjI0NmRlNWEzZTAzNDAyYjYiLCJpYXQiOjE2OTE5NzYxMTcsImV4cCI6MTY5MjA2MjUxN30.FsVHdh_IcrcXFLHrciRLkmu8jCYj12eET9K15uVjTXI",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{dev}}/bidding/sent",
+              "host": ["{{dev}}"],
+              "path": ["bidding", "sent"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "hitsPerPage",
+                  "value": "1",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Bidding",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVkYW5pZWwxMkBnbWFpbC5jb20iLCJfaWQiOiI2NGQ5NzRlZjI0NmRlNWEzZTAzNDAyYjYiLCJpYXQiOjE2OTE5NzYxMTcsImV4cCI6MTY5MjA2MjUxN30.FsVHdh_IcrcXFLHrciRLkmu8jCYj12eET9K15uVjTXI",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{dev}}/bidding/64d9811b0f969d5c56fb01da",
+              "host": ["{{dev}}"],
+              "path": ["bidding", "64d9811b0f969d5c56fb01da"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Edit Bidding Status",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVkYW5pZWwxMkBnbWFpbC5jb20iLCJfaWQiOiI2NGQ5NzRlZjI0NmRlNWEzZTAzNDAyYjYiLCJpYXQiOjE2OTIwNDI2MDYsImV4cCI6MTY5MjEyOTAwNn0.Uf6gYXfSvdCUe6najDZAPS3LbBsmnJKwpFoWworaKeg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"isAccepted\": true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{dev}}/bidding/64da87b743e0821b73d29a40",
+              "host": ["{{dev}}"],
+              "path": ["bidding", "64da87b743e0821b73d29a40"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Wallet",
+      "item": [
+        {
+          "name": "Withdraw",
+          "item": [
+            {
+              "name": "Get Banks",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVkYW5pZWwxMkBnbWFpbC5jb20iLCJfaWQiOiI2NGQ5NzRlZjI0NmRlNWEzZTAzNDAyYjYiLCJpYXQiOjE2OTIwNjI4MDYsImV4cCI6MTY5MjE0OTIwNn0.FcuaOjkZQO4ineLshBpUKfSAjW6mrFPkNFTIlcgYxYM",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{dev}}/wallet/bank",
+                  "host": ["{{dev}}"],
+                  "path": ["wallet", "bank"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Validate Account Info",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVkYW5pZWwxMkBnbWFpbC5jb20iLCJfaWQiOiI2NGQ5NzRlZjI0NmRlNWEzZTAzNDAyYjYiLCJpYXQiOjE2OTIwNjI4MDYsImV4cCI6MTY5MjE0OTIwNn0.FcuaOjkZQO4ineLshBpUKfSAjW6mrFPkNFTIlcgYxYM",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"bank_code\": \"058\",\r\n    \"account_number\": \"0670746511\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{dev}}/wallet/account/validate",
+                  "host": ["{{dev}}"],
+                  "path": ["wallet", "account", "validate"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Withdraw Money",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVkYW5pZWwxMkBnbWFpbC5jb20iLCJfaWQiOiI2NGQ5NzRlZjI0NmRlNWEzZTAzNDAyYjYiLCJpYXQiOjE2OTIwNjI4MDYsImV4cCI6MTY5MjE0OTIwNn0.FcuaOjkZQO4ineLshBpUKfSAjW6mrFPkNFTIlcgYxYM",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"account_number\":\"0670746511\",\r\n    \"name\":\"ADEJARE  DANIEL  OLUWADUNSIN\",\r\n    \"bank_code\":\"058\",\r\n    \"amount\": 2000\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{dev}}/wallet/withdraw",
+                  "host": ["{{dev}}"],
+                  "path": ["wallet", "withdraw"]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Get Wallet Info",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVkYW5pZWwxMkBnbWFpbC5jb20iLCJfaWQiOiI2NGQ5NzRlZjI0NmRlNWEzZTAzNDAyYjYiLCJpYXQiOjE2OTIwNjI4MDYsImV4cCI6MTY5MjE0OTIwNn0.FcuaOjkZQO4ineLshBpUKfSAjW6mrFPkNFTIlcgYxYM",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{dev}}/wallet/",
+              "host": ["{{dev}}"],
+              "path": ["wallet", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Buy Property With Wallet",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVqb2huMjAwNEBnbWFpbC5jb20iLCJfaWQiOiI2NGQ5NzQxMTEyNGViY2VlMmJmYzUzMWMiLCJpYXQiOjE2OTE5NzYwNzksImV4cCI6MTY5MjA2MjQ3OX0.4RZHbStwxOD2NUKgbsHAm-sdD0LSz7vHarAttXeNrJQ",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{dev}}/listing/buy/wallet/property/64d9744e124ebcee2bfc532f",
+              "host": ["{{dev}}"],
+              "path": [
+                "listing",
+                "buy",
+                "wallet",
+                "property",
+                "64d9744e124ebcee2bfc532f"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Property Payment Session",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkZWphcmVqb2huMjAwNEBnbWFpbC5jb20iLCJfaWQiOiI2NGQ5NzQxMTEyNGViY2VlMmJmYzUzMWMiLCJpYXQiOjE2OTIwNDMxNzcsImV4cCI6MTY5MjEyOTU3N30.2pCFN_WPSACT6AHXUfa1GmL80s41S6fhchj1QV33LuE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{dev}}/listing/buy/transfer/property/64da872d43e0821b73d29a24",
+              "host": ["{{dev}}"],
+              "path": [
+                "listing",
+                "buy",
+                "transfer",
+                "property",
+                "64da872d43e0821b73d29a24"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Webhook Test",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"event\":\"transfer.success\",\r\n    \"data\":{\r\n        \"reference\": \"bb70649b-59f0-446a-8c85-6bf54b836f0c\"\r\n    }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{dev}}/wallet/webhook",
+              "host": ["{{dev}}"],
+              "path": ["wallet", "webhook"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

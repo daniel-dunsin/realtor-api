@@ -1,4 +1,4 @@
-import express from "express";
+import express, { NextFunction } from "express";
 import cors from "cors";
 import helmet from "helmet";
 import rateLimiter from "express-rate-limit";
@@ -9,6 +9,10 @@ import { settings } from "./constants/settings";
 import routes from "./routes";
 import { setCache } from "./helpers/cache";
 import socketImplementation from "./services/socket.service";
+import yaml from "yamljs";
+import swagger from "swagger-ui-express";
+import path from "path";
+const api_doc = require("./config/api.config.json");
 
 const app: express.Application = express();
 
@@ -23,7 +27,11 @@ app.use(
   })
 );
 // Helps to secure requests by setting headers
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -32,10 +40,8 @@ app.use(setCache);
 /**
  * Routes
  */
-app.get("/", (req: express.Request, res: express.Response) => {
-  res.status(200).json({ message: "Welcome to realtor API" });
-});
 
+app.get("/", swagger.serve, swagger.setup(api_doc));
 app.use("/auth", routes.auth);
 app.use("/agent", routes.agent);
 app.use("/listing", routes.listings);

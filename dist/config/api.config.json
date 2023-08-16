@@ -1,0 +1,2437 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Realtor",
+    "contact": {
+      "name": "Adejare Daniel",
+      "url": "https://github.com/daniel-dunsin/realtor-api",
+      "email": "adejaredaniel12@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://daniel-realtor.onrender.com"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Auth"
+    },
+    {
+      "name": "Agent"
+    },
+    {
+      "name": "Review"
+    },
+    {
+      "name": "Listings"
+    },
+    {
+      "name": "Comments"
+    },
+    {
+      "name": "Article"
+    },
+    {
+      "name": "Message"
+    },
+    {
+      "name": "Chat"
+    },
+    {
+      "name": "Bidding"
+    },
+    {
+      "name": "Withdraw"
+    },
+    {
+      "name": "Wallet"
+    }
+  ],
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Login",
+        "operationId": "Login",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/auth_login_body"
+              },
+              "example": {
+                "credential": "adejaredaniel12@gmail.com",
+                "password": "brainiac12"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": []
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Register",
+        "operationId": "Register",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/auth_register_body"
+              },
+              "example": {
+                "username": "daniel",
+                "email": "adejaredaniel12@gmail.com",
+                "password": "brainiac12",
+                "firstname": "Dunsin",
+                "lastname": "Joe"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/agent": {
+      "get": {
+        "tags": ["Agent"],
+        "summary": "Get Profile",
+        "operationId": "GetProfile",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": ["Agent"],
+        "summary": "Create Agent / Become An Agent",
+        "operationId": "CreateAgent/BecomeAnAgent",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": ["Agent"],
+        "summary": "Update Agent Profile",
+        "operationId": "UpdateAgentProfile",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/agent_body"
+              },
+              "example": {
+                "taxNumber": 1245
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/review/property/{propertyId}": {
+      "get": {
+        "tags": ["Review"],
+        "summary": "Get Property Reviews",
+        "operationId": "GetPropertyReviews",
+        "parameters": [
+          {
+            "name": "propertyId",
+            "in": "path",
+            "description": "Property ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": ["Review"],
+        "summary": "Add Review",
+        "operationId": "AddReview",
+        "parameters": [
+          {
+            "name": "propertyId",
+            "in": "path",
+            "description": "Property ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/property_propertyId_body"
+              },
+              "example": {
+                "text": "Very disrespectful agent",
+                "stars": 1
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/review/{reviewId}": {
+      "put": {
+        "tags": ["Review"],
+        "summary": "Update Review",
+        "operationId": "UpdateReview",
+        "parameters": [
+          {
+            "name": "reviewId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/review_reviewId_body"
+              },
+              "example": {
+                "text": "Fake property",
+                "stars": 0
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": ["Review"],
+        "summary": "Delete Review",
+        "operationId": "DeleteReview",
+        "parameters": [
+          {
+            "name": "reviewId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/listing/agent/{propertyId}": {
+      "put": {
+        "tags": ["Listings"],
+        "summary": "Update Listing",
+        "operationId": "UpdateListing",
+        "parameters": [
+          {
+            "name": "propertyId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/agent_propertyId_body"
+              },
+              "example": {
+                "title": "Spacious Family Home",
+                "description": "A comfortable single-family home perfect for a growing family.",
+                "type": "Single Family",
+                "status": "sale",
+                "price": 450000,
+                "address": "101 Maple Street",
+                "country": "Canada",
+                "state": "Ontario",
+                "city": "Toronto",
+                "zipCode": 12345,
+                "area": 250,
+                "areaSuffix": "sq.m",
+                "bedrooms": 4,
+                "bathrooms": 3,
+                "garages": 2,
+                "yearBuilt": "2005",
+                "amenities": ["Air Conditioning", "Gym"]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": ["Listings"],
+        "summary": "Delete My Listing",
+        "operationId": "DeleteMyListing",
+        "parameters": [
+          {
+            "name": "propertyId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/listing/agent": {
+      "get": {
+        "tags": ["Listings"],
+        "summary": "Get My Listing",
+        "operationId": "GetMyListing",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": ["Listings"],
+        "summary": "Create Listing",
+        "operationId": "CreateListing",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/listing_agent_body"
+              },
+              "encoding": {}
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/listing": {
+      "get": {
+        "tags": ["Listings"],
+        "summary": "Get All Listings",
+        "operationId": "GetAllListings",
+        "parameters": [
+          {
+            "name": "keyword",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "luxury"
+            }
+          },
+          {
+            "name": "min_price",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "number",
+              "example": 1000
+            }
+          },
+          {
+            "name": "max_price",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "number",
+              "example": 3000
+            }
+          },
+          {
+            "name": "location",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "united states"
+            }
+          },
+          {
+            "name": "bathrooms",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "number",
+              "example": 2
+            }
+          },
+          {
+            "name": "bedrooms",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "number",
+              "example": 2
+            }
+          },
+          {
+            "name": "year",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "number",
+              "example": 2018
+            }
+          },
+          {
+            "name": "area",
+            "in": "query",
+            "description": "sq.m",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "number",
+              "example": 100
+            }
+          },
+          {
+            "name": "amenities",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "example": "[\"Air Conditioning\",\"Gym\",\"Laundry\",\"Lawn\",\"Microwave\",\"Outdoor Shower\",\"Refrigerator\",\"Sauna\",\"Swimming Pool\",\"TV Cable\",\"Washer\",\"Wi-Fi\",\"Window Coverage\"]"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/listing/{propertyId}": {
+      "get": {
+        "tags": ["Listings"],
+        "summary": "Get Single Listing",
+        "operationId": "GetSingleListing",
+        "parameters": [
+          {
+            "name": "propertyId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/listing/compare": {
+      "post": {
+        "tags": ["Listings"],
+        "summary": "Compare Properties",
+        "operationId": "CompareProperties",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/listing_compare_body"
+              },
+              "example": {
+                "ids": ["64cc3f77ecd4f3341492d3ab", "64cc3fa1ecd4f3341492d3af"]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/listing/properties": {
+      "get": {
+        "tags": ["Listings"],
+        "summary": "Get My Properties (not for sale)",
+        "operationId": "GetMyProperties(notforsale)",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/listing/sell/{propertyId}": {
+      "patch": {
+        "tags": ["Listings"],
+        "summary": "Sell My Property",
+        "operationId": "SellMyProperty",
+        "parameters": [
+          {
+            "name": "propertyId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/comment/article/{articleId}": {
+      "get": {
+        "tags": ["Comments"],
+        "summary": "Get Comments",
+        "operationId": "GetComments",
+        "parameters": [
+          {
+            "name": "articleId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": ["Comments"],
+        "summary": "Add Comment",
+        "operationId": "AddComment",
+        "parameters": [
+          {
+            "name": "articleId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/article_articleId_body"
+              },
+              "example": {
+                "text": "Nice write-up"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/comment/{commentId}": {
+      "delete": {
+        "tags": ["Comments"],
+        "summary": "Delete Comment",
+        "operationId": "DeleteComment",
+        "parameters": [
+          {
+            "name": "commentId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": ["Comments"],
+        "summary": "Edit Comment",
+        "operationId": "EditComment",
+        "parameters": [
+          {
+            "name": "commentId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/comment_commentId_body"
+              },
+              "example": {
+                "text": "Comment edited"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/article/agent": {
+      "get": {
+        "tags": ["Article"],
+        "summary": "Get My Articles",
+        "operationId": "GetMyArticles",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "example": 1
+            }
+          },
+          {
+            "name": "hitsPerPage",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "example": 2
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "ai"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": ["Article"],
+        "summary": "Create Article",
+        "operationId": "CreateArticle",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/article_agent_body"
+              },
+              "example": {
+                "title": "How to sell faster",
+                "body": "Artificial Intelligence (AI) is rapidly advancing, and its impact on society is profound. This article delves into the current state of AI and the potential it holds for the future.",
+                "category": "sales",
+                "tags": ["sales", "ai"]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/article": {
+      "get": {
+        "tags": ["Article"],
+        "summary": "Get All Articles",
+        "operationId": "GetAllArticles",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "example": 1
+            }
+          },
+          {
+            "name": "hitsPerPage",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "example": 2
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "ai"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/article/agent/{articleId}": {
+      "put": {
+        "tags": ["Article"],
+        "summary": "Update Article",
+        "operationId": "UpdateArticle",
+        "parameters": [
+          {
+            "name": "articleId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/agent_articleId_body"
+              },
+              "example": {
+                "title": "Edited",
+                "body": "Artificial Intelligence (AI) is rapidly advancing, and its impact on society is profound. This article delves into the current state of AI and the potential it holds for the future.",
+                "tags": ["construction", "Artificial"],
+                "category": "sales"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": ["Article"],
+        "summary": "Delete Article",
+        "operationId": "DeleteArticle",
+        "parameters": [
+          {
+            "name": "articleId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/article/single/{articleId}": {
+      "get": {
+        "tags": ["Article"],
+        "summary": "Get Single Article",
+        "operationId": "GetSingleArticle",
+        "parameters": [
+          {
+            "name": "articleId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/message/chat/{chatId}": {
+      "get": {
+        "tags": ["Message"],
+        "summary": "Get Chat Messages",
+        "operationId": "GetChatMessages",
+        "parameters": [
+          {
+            "name": "chatId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": ["Message"],
+        "summary": "Send Message",
+        "operationId": "SendMessage",
+        "parameters": [
+          {
+            "name": "chatId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/chat_chatId_body"
+              },
+              "encoding": {}
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/message/{messageId}": {
+      "delete": {
+        "tags": ["Message"],
+        "summary": "Delete Message",
+        "operationId": "DeleteMessage",
+        "parameters": [
+          {
+            "name": "messageId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": ["Message"],
+        "summary": "Edit Message",
+        "operationId": "EditMessage",
+        "parameters": [
+          {
+            "name": "messageId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/message_messageId_body"
+              },
+              "example": {
+                "text": "Edited message"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/chat": {
+      "get": {
+        "tags": ["Chat"],
+        "summary": "Get All Conversations",
+        "operationId": "GetAllConversations",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": ["Chat"],
+        "summary": "Create Conversation",
+        "operationId": "CreateConversation",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/chat_body"
+              },
+              "example": {
+                "user": "64cc2a73ccd933cc6b692696"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/chat/{chatId}": {
+      "get": {
+        "tags": ["Chat"],
+        "summary": "Get Single Conversation",
+        "operationId": "GetSingleConversation",
+        "parameters": [
+          {
+            "name": "chatId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/bidding/property/{propertyId}": {
+      "get": {
+        "tags": ["Bidding"],
+        "summary": "Get Property Biddings",
+        "operationId": "GetPropertyBiddings",
+        "parameters": [
+          {
+            "name": "propertyId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": ["Bidding"],
+        "summary": "Create Property Bidding",
+        "operationId": "CreatePropertyBidding",
+        "parameters": [
+          {
+            "name": "propertyId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/bidding/received": {
+      "get": {
+        "tags": ["Bidding"],
+        "summary": "Get Received Biddings",
+        "operationId": "GetReceivedBiddings",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/bidding/sent": {
+      "get": {
+        "tags": ["Bidding"],
+        "summary": "Get Sent Biddings",
+        "operationId": "GetSentBiddings",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/bidding/{biddingId}": {
+      "delete": {
+        "tags": ["Bidding"],
+        "summary": "Delete Bidding",
+        "operationId": "DeleteBidding",
+        "parameters": [
+          {
+            "name": "biddingId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": ["Bidding"],
+        "summary": "Edit Bidding Status",
+        "operationId": "EditBiddingStatus",
+        "parameters": [
+          {
+            "name": "biddingId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/bidding_biddingId_body"
+              },
+              "example": {
+                "isAccepted": true
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/wallet/bank": {
+      "get": {
+        "tags": ["Withdraw"],
+        "summary": "Get Banks",
+        "operationId": "GetBanks",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/wallet/account/validate": {
+      "post": {
+        "tags": ["Withdraw"],
+        "summary": "Validate Account Info",
+        "operationId": "ValidateAccountInfo",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/account_validate_body"
+              },
+              "example": {
+                "bank_code": "058",
+                "account_number": "0670746511"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/wallet/withdraw": {
+      "post": {
+        "tags": ["Withdraw"],
+        "summary": "Withdraw Money",
+        "operationId": "WithdrawMoney",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/wallet_withdraw_body"
+              },
+              "example": {
+                "account_number": "0670746511",
+                "name": "ADEJARE  DANIEL  OLUWADUNSIN",
+                "bank_code": "058",
+                "amount": 2000
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/wallet": {
+      "get": {
+        "tags": ["Wallet"],
+        "summary": "Get Wallet Info",
+        "operationId": "GetWalletInfo",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/listing/buy/wallet/property/{propertyId}": {
+      "post": {
+        "tags": ["Wallet"],
+        "summary": "Buy Property With Wallet",
+        "operationId": "BuyPropertyWithWallet",
+        "parameters": [
+          {
+            "name": "propertyId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/listing/buy/transfer/property/{propertyId}": {
+      "post": {
+        "tags": ["Wallet"],
+        "summary": "Get Property Payment Session",
+        "operationId": "GetPropertyPaymentSession",
+        "parameters": [
+          {
+            "name": "propertyId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/wallet/webhook": {
+      "post": {
+        "tags": ["Wallet"],
+        "summary": "Webhook Test",
+        "operationId": "WebhookTest",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/wallet_webhook_body"
+              },
+              "example": {
+                "event": "transfer.success",
+                "data": {
+                  "reference": "bb70649b-59f0-446a-8c85-6bf54b836f0c"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "LoginRequest": {
+        "title": "LoginRequest",
+        "required": ["credential", "password"],
+        "type": "object",
+        "properties": {
+          "credential": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "credential": "adejaredaniel12@gmail.com",
+          "password": "brainiac12"
+        }
+      },
+      "RegisterRequest": {
+        "title": "RegisterRequest",
+        "required": ["email", "firstname", "lastname", "password", "username"],
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "firstname": {
+            "type": "string"
+          },
+          "lastname": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "username": "daniel",
+          "email": "adejaredaniel12@gmail.com",
+          "password": "brainiac12",
+          "firstname": "Dunsin",
+          "lastname": "Joe"
+        }
+      },
+      "UpdateAgentProfileRequest": {
+        "title": "UpdateAgentProfileRequest",
+        "required": ["taxNumber"],
+        "type": "object",
+        "properties": {
+          "taxNumber": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "example": {
+          "taxNumber": 1245
+        }
+      },
+      "AddReviewRequest": {
+        "title": "AddReviewRequest",
+        "required": ["stars", "text"],
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "stars": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "example": {
+          "text": "Very disrespectful agent",
+          "stars": 1
+        }
+      },
+      "UpdateReviewRequest": {
+        "title": "UpdateReviewRequest",
+        "required": ["stars", "text"],
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "stars": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "example": {
+          "text": "Fake property",
+          "stars": 0
+        }
+      },
+      "UpdateListingRequest": {
+        "title": "UpdateListingRequest",
+        "required": [
+          "address",
+          "amenities",
+          "area",
+          "areaSuffix",
+          "bathrooms",
+          "bedrooms",
+          "city",
+          "country",
+          "description",
+          "garages",
+          "price",
+          "state",
+          "status",
+          "title",
+          "type",
+          "yearBuilt",
+          "zipCode"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "price": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "address": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "zipCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "area": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "areaSuffix": {
+            "type": "string"
+          },
+          "bedrooms": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bathrooms": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "garages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "yearBuilt": {
+            "type": "string"
+          },
+          "amenities": {
+            "type": "array",
+            "description": "",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "example": {
+          "title": "Spacious Family Home",
+          "description": "A comfortable single-family home perfect for a growing family.",
+          "type": "Single Family",
+          "status": "sale",
+          "price": 450000,
+          "address": "101 Maple Street",
+          "country": "Canada",
+          "state": "Ontario",
+          "city": "Toronto",
+          "zipCode": 12345,
+          "area": 250,
+          "areaSuffix": "sq.m",
+          "bedrooms": 4,
+          "bathrooms": 3,
+          "garages": 2,
+          "yearBuilt": "2005",
+          "amenities": ["Air Conditioning", "Gym"]
+        }
+      },
+      "ComparePropertiesRequest": {
+        "title": "ComparePropertiesRequest",
+        "required": ["ids"],
+        "type": "object",
+        "properties": {
+          "ids": {
+            "type": "array",
+            "description": "",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "example": {
+          "ids": ["64cc3f77ecd4f3341492d3ab", "64cc3fa1ecd4f3341492d3af"]
+        }
+      },
+      "AddCommentRequest": {
+        "title": "AddCommentRequest",
+        "required": ["text"],
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "text": "Nice write-up"
+        }
+      },
+      "EditCommentRequest": {
+        "title": "EditCommentRequest",
+        "required": ["text"],
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "text": "Comment edited"
+        }
+      },
+      "CreateArticleRequest": {
+        "title": "CreateArticleRequest",
+        "required": ["body", "category", "tags", "title"],
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "description": "",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "example": {
+          "title": "How to sell faster",
+          "body": "Artificial Intelligence (AI) is rapidly advancing, and its impact on society is profound. This article delves into the current state of AI and the potential it holds for the future.",
+          "category": "sales",
+          "tags": ["sales", "ai"]
+        }
+      },
+      "UpdateArticleRequest": {
+        "title": "UpdateArticleRequest",
+        "required": ["body", "category", "tags", "title"],
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "description": "",
+            "items": {
+              "type": "string"
+            }
+          },
+          "category": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "title": "Edited",
+          "body": "Artificial Intelligence (AI) is rapidly advancing, and its impact on society is profound. This article delves into the current state of AI and the potential it holds for the future.",
+          "tags": ["construction", "Artificial"],
+          "category": "sales"
+        }
+      },
+      "EditMessageRequest": {
+        "title": "EditMessageRequest",
+        "required": ["text"],
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "text": "Edited message"
+        }
+      },
+      "CreateConversationRequest": {
+        "title": "CreateConversationRequest",
+        "required": ["user"],
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "user": "64cc2a73ccd933cc6b692696"
+        }
+      },
+      "EditBiddingStatusRequest": {
+        "title": "EditBiddingStatusRequest",
+        "required": ["isAccepted"],
+        "type": "object",
+        "properties": {
+          "isAccepted": {
+            "type": "boolean"
+          }
+        },
+        "example": {
+          "isAccepted": true
+        }
+      },
+      "ValidateAccountInfoRequest": {
+        "title": "ValidateAccountInfoRequest",
+        "required": ["account_number", "bank_code"],
+        "type": "object",
+        "properties": {
+          "bank_code": {
+            "type": "string"
+          },
+          "account_number": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "bank_code": "058",
+          "account_number": "0670746511"
+        }
+      },
+      "WithdrawMoneyRequest": {
+        "title": "WithdrawMoneyRequest",
+        "required": ["account_number", "amount", "bank_code", "name"],
+        "type": "object",
+        "properties": {
+          "account_number": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "bank_code": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "example": {
+          "account_number": "0670746511",
+          "name": "ADEJARE  DANIEL  OLUWADUNSIN",
+          "bank_code": "058",
+          "amount": 2000
+        }
+      },
+      "WebhookTestRequest": {
+        "title": "WebhookTestRequest",
+        "required": ["data", "event"],
+        "type": "object",
+        "properties": {
+          "event": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Data"
+          }
+        },
+        "example": {
+          "event": "transfer.success",
+          "data": {
+            "reference": "bb70649b-59f0-446a-8c85-6bf54b836f0c"
+          }
+        }
+      },
+      "Data": {
+        "title": "Data",
+        "required": ["reference"],
+        "type": "object",
+        "properties": {
+          "reference": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "reference": "bb70649b-59f0-446a-8c85-6bf54b836f0c"
+        }
+      },
+      "auth_login_body": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/LoginRequest"
+          },
+          {
+            "example": {
+              "credential": "adejaredaniel12@gmail.com",
+              "password": "brainiac12"
+            }
+          }
+        ]
+      },
+      "auth_register_body": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RegisterRequest"
+          },
+          {
+            "example": {
+              "username": "daniel",
+              "email": "adejaredaniel12@gmail.com",
+              "password": "brainiac12",
+              "firstname": "Dunsin",
+              "lastname": "Joe"
+            }
+          }
+        ]
+      },
+      "agent_body": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/UpdateAgentProfileRequest"
+          },
+          {
+            "example": {
+              "taxNumber": 1245
+            }
+          }
+        ]
+      },
+      "property_propertyId_body": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AddReviewRequest"
+          },
+          {
+            "example": {
+              "text": "Very disrespectful agent",
+              "stars": 1
+            }
+          }
+        ]
+      },
+      "review_reviewId_body": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/UpdateReviewRequest"
+          },
+          {
+            "example": {
+              "text": "Fake property",
+              "stars": 0
+            }
+          }
+        ]
+      },
+      "agent_propertyId_body": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/UpdateListingRequest"
+          },
+          {
+            "example": {
+              "title": "Spacious Family Home",
+              "description": "A comfortable single-family home perfect for a growing family.",
+              "type": "Single Family",
+              "status": "sale",
+              "price": 450000,
+              "address": "101 Maple Street",
+              "country": "Canada",
+              "state": "Ontario",
+              "city": "Toronto",
+              "zipCode": 12345,
+              "area": 250,
+              "areaSuffix": "sq.m",
+              "bedrooms": 4,
+              "bathrooms": 3,
+              "garages": 2,
+              "yearBuilt": "2005",
+              "amenities": ["Air Conditioning", "Gym"]
+            }
+          }
+        ]
+      },
+      "listing_agent_body": {
+        "required": [
+          "address",
+          "amenities",
+          "area",
+          "bathrooms",
+          "bedrooms",
+          "city",
+          "country",
+          "description",
+          "garages",
+          "images",
+          "price",
+          "state",
+          "status",
+          "title",
+          "type",
+          "yearBuilt",
+          "zipCode"
+        ],
+        "type": "object",
+        "properties": {
+          "images": {
+            "type": "string",
+            "format": "binary"
+          },
+          "title": {
+            "type": "string",
+            "example": "New House in UK"
+          },
+          "description": {
+            "type": "string",
+            "example": "Spacious and modern apartment with great city views."
+          },
+          "type": {
+            "type": "string",
+            "example": "Apartment"
+          },
+          "status": {
+            "type": "string",
+            "example": "sale"
+          },
+          "price": {
+            "type": "integer",
+            "format": "int32",
+            "example": 2000
+          },
+          "address": {
+            "type": "string",
+            "example": "123 Main Street"
+          },
+          "country": {
+            "type": "string",
+            "example": "United States"
+          },
+          "state": {
+            "type": "string",
+            "example": "California"
+          },
+          "city": {
+            "type": "string",
+            "example": "Los Angeles"
+          },
+          "zipCode": {
+            "type": "integer",
+            "format": "int32",
+            "example": 90001
+          },
+          "area": {
+            "type": "integer",
+            "format": "int32",
+            "example": 100
+          },
+          "bedrooms": {
+            "type": "integer",
+            "format": "int32",
+            "example": 2
+          },
+          "bathrooms": {
+            "type": "integer",
+            "format": "int64",
+            "example": 2
+          },
+          "garages": {
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "yearBuilt": {
+            "type": "integer",
+            "format": "int32",
+            "example": 2018
+          },
+          "amenities": {
+            "type": "string",
+            "example": "Gym"
+          }
+        }
+      },
+      "listing_compare_body": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ComparePropertiesRequest"
+          },
+          {
+            "example": {
+              "ids": ["64cc3f77ecd4f3341492d3ab", "64cc3fa1ecd4f3341492d3af"]
+            }
+          }
+        ]
+      },
+      "article_articleId_body": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AddCommentRequest"
+          },
+          {
+            "example": {
+              "text": "Nice write-up"
+            }
+          }
+        ]
+      },
+      "comment_commentId_body": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EditCommentRequest"
+          },
+          {
+            "example": {
+              "text": "Comment edited"
+            }
+          }
+        ]
+      },
+      "article_agent_body": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CreateArticleRequest"
+          },
+          {
+            "example": {
+              "title": "How to sell faster",
+              "body": "Artificial Intelligence (AI) is rapidly advancing, and its impact on society is profound. This article delves into the current state of AI and the potential it holds for the future.",
+              "category": "sales",
+              "tags": ["sales", "ai"]
+            }
+          }
+        ]
+      },
+      "agent_articleId_body": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/UpdateArticleRequest"
+          },
+          {
+            "example": {
+              "title": "Edited",
+              "body": "Artificial Intelligence (AI) is rapidly advancing, and its impact on society is profound. This article delves into the current state of AI and the potential it holds for the future.",
+              "tags": ["construction", "Artificial"],
+              "category": "sales"
+            }
+          }
+        ]
+      },
+      "chat_chatId_body": {
+        "required": ["images", "text"],
+        "type": "object",
+        "properties": {
+          "images": {
+            "type": "string",
+            "format": "binary"
+          },
+          "text": {
+            "type": "string",
+            "example": "see this player bro"
+          }
+        }
+      },
+      "message_messageId_body": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EditMessageRequest"
+          },
+          {
+            "example": {
+              "text": "Edited message"
+            }
+          }
+        ]
+      },
+      "chat_body": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CreateConversationRequest"
+          },
+          {
+            "example": {
+              "user": "64cc2a73ccd933cc6b692696"
+            }
+          }
+        ]
+      },
+      "bidding_biddingId_body": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EditBiddingStatusRequest"
+          },
+          {
+            "example": {
+              "isAccepted": true
+            }
+          }
+        ]
+      },
+      "account_validate_body": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ValidateAccountInfoRequest"
+          },
+          {
+            "example": {
+              "bank_code": "058",
+              "account_number": "0670746511"
+            }
+          }
+        ]
+      },
+      "wallet_withdraw_body": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/WithdrawMoneyRequest"
+          },
+          {
+            "example": {
+              "account_number": "0670746511",
+              "name": "ADEJARE  DANIEL  OLUWADUNSIN",
+              "bank_code": "058",
+              "amount": 2000
+            }
+          }
+        ]
+      },
+      "wallet_webhook_body": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/WebhookTestRequest"
+          },
+          {
+            "example": {
+              "event": "transfer.success",
+              "data": {
+                "reference": "bb70649b-59f0-446a-8c85-6bf54b836f0c"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}
