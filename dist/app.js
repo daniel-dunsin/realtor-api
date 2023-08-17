@@ -12,9 +12,9 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const errorHandlers_1 = require("./handlers/errorHandlers");
 const settings_1 = require("./constants/settings");
 const routes_1 = __importDefault(require("./routes"));
-const cache_1 = require("./helpers/cache");
 const socket_service_1 = __importDefault(require("./services/socket.service"));
 const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
+const path_1 = __importDefault(require("path"));
 const api_doc = require("./config/api.config.json");
 const app = (0, express_1.default)();
 /**
@@ -23,8 +23,9 @@ const app = (0, express_1.default)();
 // Max of 20 requests per minute
 app.use((0, express_rate_limit_1.default)({
     windowMs: 60000,
-    max: 20,
+    max: 200,
 }));
+app.use(express_1.default.static(path_1.default.join(__dirname, "./public")));
 // Helps to secure requests by setting headers
 app.use((0, helmet_1.default)({
     contentSecurityPolicy: false,
@@ -32,11 +33,13 @@ app.use((0, helmet_1.default)({
 app.use((0, cors_1.default)());
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: false }));
-app.use(cache_1.setCache);
 /**
  * Routes
  */
-app.get("/", swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(api_doc));
+app.get("/", (req, res, next) => {
+    res.status(200).sendFile(path_1.default.join(__dirname, "./public/index.html"));
+});
+app.use("/api", swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(api_doc));
 app.use("/auth", routes_1.default.auth);
 app.use("/agent", routes_1.default.agent);
 app.use("/listing", routes_1.default.listings);

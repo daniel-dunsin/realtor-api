@@ -12,6 +12,7 @@ import socketImplementation from "./services/socket.service";
 import yaml from "yamljs";
 import swagger from "swagger-ui-express";
 import path from "path";
+
 const api_doc = require("./config/api.config.json");
 
 const app: express.Application = express();
@@ -23,9 +24,10 @@ const app: express.Application = express();
 app.use(
   rateLimiter({
     windowMs: 60000,
-    max: 20,
+    max: 200,
   })
 );
+app.use(express.static(path.join(__dirname, "./public")));
 // Helps to secure requests by setting headers
 app.use(
   helmet({
@@ -35,13 +37,14 @@ app.use(
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(setCache);
 
 /**
  * Routes
  */
-
-app.get("/", swagger.serve, swagger.setup(api_doc));
+app.get("/", (req, res, next) => {
+  res.status(200).sendFile(path.join(__dirname, "./public/index.html"));
+});
+app.use("/api", swagger.serve, swagger.setup(api_doc));
 app.use("/auth", routes.auth);
 app.use("/agent", routes.agent);
 app.use("/listing", routes.listings);
