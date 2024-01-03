@@ -62,21 +62,4 @@ app.use("/wallet", routes.wallet);
 app.use(errorHandler);
 app.all("*", notFound);
 
-/**
- * Connection
- */
-
-const port: string | number | undefined = settings.port || 3001;
-
-mongoose
-  .connect(settings.mongo.url as string, { socketTimeoutMS: 100000 })
-  .then(() => {
-    const server = app.listen(port, () => {
-      console.log(`Server is listening on port ${port}`);
-    });
-
-    socketImplementation(server);
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+export default app;
