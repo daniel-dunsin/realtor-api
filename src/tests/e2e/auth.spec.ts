@@ -82,3 +82,68 @@ describe("registration", () => {
 });
 
 // login
+describe("login", () => {
+    describe("given credentials are not provided", () => {
+        it("should throw an error", async () => {
+            await api
+                .post("/auth/login")
+                .send({ credential: undefined, password: undefined })
+                .expect(400)
+                .then(({ error }) => {
+                    // @ts-ignore
+                    expect(error.text).toContain("Provide credential and password");
+                });
+        });
+    });
+
+    describe("given credentials are provided", () => {
+        describe("given user does not exist", () => {
+            it("should throw a 404 error", async () => {
+                User.findOne = jest.fn().mockResolvedValueOnce(null);
+                await api
+                    .post("/")
+                    .send({ credential: authFixtures.request.email, password: authFixtures.request.password })
+                    .expect(404);
+            });
+        });
+
+        describe("given user exists", () => {
+            beforeEach(() => {
+                User.findOne = jest.fn().mockResolvedValue(authFixtures.userResponse);
+                UserAuth.findOne = jest.fn().mockResolvedValue(authFixtures.authResponse);
+            });
+
+            describe("given password is incorrect", () => {
+                it("should return an error", async () => {
+                    bcrypt.compare = jest.fn().mockResolvedValueOnce(false);
+
+                    const { error, statusCode } = await api
+                        .post("/auth/login")
+                        .send({ credential: authFixtures.request.email, password: authFixtures.request.password });
+
+                    expect(statusCode).toBe(400);
+                    // @ts-ignore
+                    expect(error.text).toContain("Password is incorrect");
+                });
+            });
+
+            describe("given password is correct", () => {
+                it("should return signed accessToken and user info", async () => {
+                    bcrypt.compare = jest.fn().mockResolvedValueOnce(true);
+                    jwt.sign = jest.fn().mockReturnValueOnce(authFixtures.token);
+
+                    const { body, statusCode } = await api
+                        .post("/auth/login")
+                        .send({ credential: authFixtures.request.email, password: authFixtures.request.password });
+
+                    expect(statusCode).toBe(200);
+                    expect(body).toEqual({
+                        message: expect.any(String),
+                        user: authFixtures.userResponse,
+                        token: authFixtures.token,
+                    });
+                });
+            });
+        });
+    });
+});
